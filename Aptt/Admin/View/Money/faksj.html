@@ -1,0 +1,51 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">发放快速奖</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>周数</th>
+        <th>符合条件人数/已发放人数</th>
+        <th>发放总额/已发放总额</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.uid}</td>
+            <td align='center'><php>echo $v["nodone"]["gu"]."/".$v["done"]["gu"];</php></td>
+            <td align='center'><php>echo $v["nodone"]["coin"]."/".$v["done"]["coin"];</php></td>
+            <td align='center'>
+            <php>
+                if($v["nodone"]["gu"]==$v["done"]["gu"]){
+                    echo "<span style='color:red'>发放完成</span>";
+                }else{
+                    echo "<span style='color:green'>未发放完成</span>";
+                }
+            </php>
+            </td>
+            <td align='center'>
+                <php>
+                if($v["nodone"]["gu"]>$v["done"]["gu"]){
+            </php>
+                [<a href="{:U(C('FILE_IN').'/Money/doksj',array('id'=>$v['uid']))}" target='hidden_frame'>一键发放奖金</a>]
+                <PHP>}</PHP>
+                 [<a href="{:U(C('FILE_IN').'/Money/ksjdetail',array('id'=>$v['uid']))}">发放列表</a>]
+                </td>
+        </tr>
+    </foreach>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

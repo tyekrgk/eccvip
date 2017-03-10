@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              审核记录
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                            <div class="fx1">编号:</div>
+                            <div class="fx2">{$data.username}</div>
+                        </div>
+                        <div class="fma">
+                            <div class="fx1">购买日期:</div>
+                            <div class="fx2">{$data.regdate}</div>
+                        </div>
+                        <div class="fma">
+                            <div class="fx1">到款日期:</div>
+                            <div class="fx2">{$data.actdate}</div>
+                        </div>
+                        <!-- <div class="fma">
+                            <div class="fx1">报单中心:</div>
+                            <div class="fx2">{$data.aid|gettableinfo="id=".###}</div>
+                        </div> 
+                        <div class="fma">
+                            <div class="fx1">报单状态:</div>
+                            <div class="fx2">{:$data['status']?"已确定":"未确定"}</div>
+                        </div> -->
+                        <div class="fma">
+                            <div class="fx1">报单金额:</div>
+                            <div class="fx2">{:numberformat($bonus[$data['utype']]['money'])}</div>
+                        </div>
+                        <div class="fma">
+                            <div class="fx1">实付款:</div>
+                            <div class="fx2">{:numberformat($bonus[$data['utype']]['money'])}</div>
+                        </div>
+                        <div class="form-actions center">
+                            <button class="btn btn-primary" type="button" id="reg">返回</button>
+                        </div>
+                    </form>
+                </div>
+          <div class="panel-footer" style="color:Red"><ul class="recent-posts">
+            <li style='text-align:center'>{$page}</li>
+                                
+        </ul></div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Member/reg')}">注册新能量</a>
+          <a class="list-group-item" href="{:U('index.php/user/update')}">升级帐户</a>
+          <a class="list-group-item" href="{:U('index.php/User/futou')}">复投帐户</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agent')}">注册审核</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agentlist')}">审核记录</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>              
+    <script>
+    function agentdel(id){
+        str="{:U(C('FILE_IN').'/member/agent',array('b'=>'del','id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    </script>
+</body>
+</html>

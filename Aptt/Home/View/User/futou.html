@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              复投帐户
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                            <div class="fx1">能量编号:</div>
+                            <div class="fx2">
+                                <span id="cname">{$uinfo.username}</span>
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">复投ECF余额:</div>
+                            <div class="fx2">
+                                {$uinfo.coinc}
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">可用ECF余额:</div>
+                            <div class="fx2">
+                                {$uinfo.coina}
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">当前级别:</div>
+                            <div class="fx2">
+                                {:$bonus[$uinfo['utype']]['title']}
+                            </div>
+                        </div><br>
+                        
+                                <php>
+                                    $s='<div class="input-group input-group-sm">
+                            <label class="input-group-addon">复投级别:</label><select name="utype" id="utype" class="form-control" class="form-control">';
+                                    foreach($bonus as $v){
+                                        if($v['id']>=$uinfo['utype']){
+                                            $s.="<option value='".$v['id']."'>".$v['title']." [<!-- $:".$v['money']."  -->ECF:".money2coin($v['money'])."]</option>";
+                                        }
+                                    }
+                                    $s.="</select>
+                        </div>";
+                                    echo $s;
+                                </php>
+                            <br>
+                        <if condition="$iplan['period']==0">
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+                        </div>
+                        </if>
+                    </form>
+                    </div>
+          <div class="panel-footer" style="color:Red">{$iplan['period']>0?'提示：当前投资计划正在执行,无法复投！':''}</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Member/reg')}">注册新能量</a>
+          <a class="list-group-item" href="{:U('index.php/User/update')}">升级帐户</a>
+          <a class="list-group-item" href="{:U('index.php/User/futou')}">复投帐户</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agent')}">注册审核</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agentlist')}">审核记录</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                var utype=$("#utype").val();
+                $.post("{:U(C('FILE_IN').'/User/futousave')}", { utype:utype}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

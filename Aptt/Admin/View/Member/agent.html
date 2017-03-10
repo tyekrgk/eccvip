@@ -1,0 +1,66 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">会员管理</a> <span class="divider">/</span></li>
+            <li class="active">报单中心列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        添加报单中心:<input type="text" id="username" value=""> <input type="button" value="确定添加" onclick="var url='{:U(\C("FILE_IN").'/Member/agent\',array('t'=>$t,'p'=>$p,'username'=>'uxx','b'=>'addagent'))}';url=url.replace('uxx',document.getElementById('username').value);location.href=url;">
+    </div>
+    <div class="well">
+        会员查询:<input type="text" id="un" value="{$un}" title="模糊查询会员编号和真实姓名" alt="模糊查询会员编号和真实姓名"> <input type="button" value="查询" onclick="var url='{:U(\C("FILE_IN").'/Member/agent\',array('t'=>$t,'p'=>$p,'un'=>'uxx'))}';url=url.replace('uxx',document.getElementById('un').value);location.href=url;">
+    </div>
+    <table class="table table-bordered table-hover definewidth m10" style="font-size:12px;">
+    <thead>
+    <tr>
+        <th>会员编号</th>
+        <th>昵称</th>
+        <th>推荐人数</th>
+        <th>小区业绩</th>
+        <th>真实姓名</th>
+        <th>手机号码</th>
+        <th>QQ</th>
+        <th>注册时间</th>
+        <th>操作</th>
+    </tr>
+            <notempty  name="list">
+                <foreach name="list"  item="v">
+                    <tr class='ce'>
+                        <td>{$v.username}</td>
+                        <td>{$v.nick}</td>
+                        <td>{$v.renum}</td>
+                        <td>{$v.areasum}</td>
+                        <td><php>echo $r["realname"];</php></td>
+                        <td><php>echo $r["tel"];</php></td>
+                        <td>{$v.qq}</td>
+                        <td>{$v.regdate}</td>
+                        <td>
+                            <php>
+                                if($v['id']>1){
+                                    echo "[<a href='".U(C("FILE_IN").'/Member/agent',array('id'=>$v['id'],'b'=>'can','p'=>$p))."'>撤消报单中心</a>]";
+                                 }else{
+                                    echo "不可操作";
+                                }
+                            </php>
+                        </td>
+                    </tr>
+                </foreach>
+                <else/>
+                <tr>
+                    <td colspan="9">没有找到相关数据。</td>
+                </tr>
+
+            </notempty>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

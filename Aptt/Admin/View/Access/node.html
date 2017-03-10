@@ -1,0 +1,45 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">管理员管理</a> <span class="divider">/</span></li>
+            <li class="active">节点</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+	<div class="well">
+		<a class="btn btn-default" href="{:U(C("FILE_IN").'/Access/add_node')}" >添加节点</a>
+	</div>
+    <div class="well">
+    	<foreach name="data" item="v">
+			<div style="margin:5px;border-bottom:1px dotted #ccc">
+				<button type="button" class="btn btn-primary">{$v['title']}</button>
+				<a href="{:U(C("FILE_IN").'/Access/add_node',array('pid'=>$v['id'],'level'=>$v['level'] + 1))}">添加</a>
+				<a href="{:U(C("FILE_IN").'/Access/del_node',array('id'=>$v['id']))}" target="hidden_frame">删除</a>
+			</div>
+			<foreach name="v['child']" item="con">
+				<div style="margin:5px;padding:5px 0 0 0;border-top:1px solid #555">
+					<button type="button" class="btn btn-success">{$con['title']}</button>
+					<a href="{:U(C("FILE_IN").'/Access/add_node',array('pid'=>$con['id'],'level'=>$con['level'] + 1))}">添加</a>
+					<a href="{:U(C("FILE_IN").'/Access/del_node',array('id'=>$con['id']))}" target="hidden_frame">删除</a>
+				</div>
+				<div style="margin:5px;">
+					<ul>
+					<foreach name="con['child']" item="act">
+						<li style="width:140px;padding:5px 5px 0 0;float:left;"><button type="button" class="btn btn-info" >{$act['title']}</button>
+						<a style="margin-right:10px" href="{:U(C("FILE_IN").'/Access/del_node',array('id'=>$act['id']))}" target="hidden_frame">删除</a></li>
+					</foreach>
+					<li class="clear"></li>
+				</ul>
+				</div>
+				
+			</foreach>
+		</foreach>
+
+    </div>
+</div>            
+   <include file="Footer:index" />

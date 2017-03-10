@@ -1,0 +1,112 @@
+  <div class="head">
+    <div class="header">
+      <div class="logo"><img src="__ROOT__/Uploads/{$web.logo}"></div>
+      <div class="topsms">
+        <div class="menu" id="menu">
+          <nav class="navbar navbar-inverse" role="navigation" id='setbgcoloronone'>
+             
+             <div>
+                <ul class="nav navbar-nav">
+                  <li class="dropdown menudborder" >
+                      <a class="dropdown-toggle" href="{:U('index.php/Index/index')}" id='setcolorwhite'>系统首页</a>
+                   </li>
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>个人信息<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/User/index')}">信息更新</a></li>
+                        <li role="presentation"><a href="{:U('index.php/User/password')}">更改密码</a></li>
+                      </ul>
+                   </li>
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>能量管理<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/Member/reg')}">注册新能量</a></li>
+                        <li role="presentation"><a href="{:U('index.php/User/update')}">升级帐户</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Member/agent')}">注册审核</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Member/agentlist')}">审核记录</a></li>
+                      </ul>
+                   </li>
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>网络图谱<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/Member/team')}">组织图谱</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Member/recommand')}">推荐图谱</a></li>
+                      </ul>
+                   </li>
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>资产管理<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/Money/bonus')}">我的佣金</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Coin/acca')}">可用ECF帐户</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Coin/accb')}">消费ECF帐户</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Coin/accc')}">复投ECF帐户</a></li>
+                        <li role="presentation"><a href="{:U('index.php/Coin/kuang')}">查看能量</a></li>
+                      </ul>
+                   </li>
+                   <!-- <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>CT交易市场<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U(C('FILE_IN').'/btmarket/index')}">CT市场</a></li>
+                      </ul>
+                   </li>
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>AD交易市场<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/Gtmarket/index')}">AD市场</a></li>
+                      </ul>
+                   </li> -->
+                   <li class="dropdown menudborder">
+                      <a href="#" class="dropdown-toggle" data-toggle="dropdown" id='setbgcoloronone'>信息中心<b class="caret"></b>
+                      </a>
+                      <ul class="dropdown-menu">
+                        <li role="presentation"><a href="{:U('index.php/Message/index')}">站内邮件</a></li>
+                        <li role="presentation"><a href="{:U('index.php/News/index')}">系统公告</a></li>
+                      </ul>
+                   </li>
+                    <li class="dropdown menudborder">
+                        <a class="dropdown-toggle" href="{:$coinset['epstatus']==0?"javascript:alert('ECF商城正常开发中，近期上线。。。。')":U('index.php/Product/index')}" id='setcolorwhite'>ECF商城</a>
+                   </li>
+                    <li class="dropdown menudborder">
+                      <a class="dropdown-toggle" href="{:U('index.php/Index/logout')}" id='setcolorwhite'>退出系统</a>
+                   </li>
+                </ul>
+             </div>
+          </nav>
+        </div>
+        <div class="menutitle">
+            <span class="menusp" id="menusp" onclick="location.href='{:U('index.php/Index/index')}'"><i class="fa fa-home"></i></span>
+            <a href="javascript:void(0)" title="{$web.webtitle}">{$web.webtitle}</a>
+            <span class="menuspan" id="menuspan"></span>
+        </div>
+      </div>
+    </div><!--容器end--> 
+  </div><!--head end--> 
+
+
+  <div class="head_h">
+    <div class="menu_h">
+      <div class="menu_nav mlo"><img src="__ROOT__/Uploads/{$web.logo}" style="width:75px;"></div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Index/index')}'"><i class="fa fa-home"></i><br>系统首页</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/User/index')}'"><i class="fa fa-edit"></i><br>个人信息</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Member/reg')}'"><i class="fa fa-diamond"></i><br>能量管理</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Member/team')}'"><i class="fa fa-users"></i><br>网络图谱</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Money/bonus')}'"><i class="fa fa-user"></i><br>资产管理</div>
+      <!-- <div class="menu_nav mh" onclick="location.href='{:U('index.php/btmarket/index')}'"><i class="fa fa-bar-chart"></i><br>CT交易</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Gtmarket/index')}'"><i class="fa fa-tachometer"></i><br>AD交易</div> -->
+      <div class="menu_nav mh" onclick="{:$coinset['epstatus']==0?"javascript:alert('ECF商城正常开发中，近期上线。。。。')":"location.href='".U('index.php/Product/index')."'"}"><i class="fa fa-calendar-o"></i><br>ECF商城</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Message/index')}'"><i class="fa fa-calendar-o"></i><br>信息中心</div>
+      <div class="menu_nav mh" onclick="location.href='{:U('index.php/Index/logout')}'"><i class="fa fa-power-off"></i><br>退出系统</div>
+      <div class="clear"></div>
+    </div>
+    <div class="menu_t">
+      <div class="mt_left">推广链接:{:U(C("FILE_IN")."/Promote/index",array("id"=>$uid),"html",$_SERVER['HTTP_HOST'])}</div>
+      <div class="mt_right">帐户:{$uinfo.username} 推荐人:{:$uinfo["rid"]?gettableinfo("id=".$uinfo["rid"]):"无"} 团队人数:{$uinfo.drsum} </div>
+      <div class="clear"></div>
+    </div>
+  </div>

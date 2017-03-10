@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">CT交易记录
+                <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/index')}'">返回交易市场</button>
+                </div>
+            </div>
+            <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                                    <div class="fx1">订单编号:</div>
+                                    <div class="fx2">
+                                <span id="cname">{$data.sn}</span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">交易数量:</div>
+                                    <div class="fx2">
+                                <span>
+                                    {$data.coin|floor=###}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">交易总额:</div>
+                                    <div class="fx2">
+                                <span>
+                                    {$data.coin}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">汇款金额</div>
+                                    <div class="fx2">
+                                <span>
+                                    {$data.coin}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">买家编号:</div>
+                                    <div class="fx2">
+                                <php>
+                                $u=M('member')->field("tel,star,username")->where('id='.$data['buyid'])->find();
+                            </php>
+                                <span>
+                                    {$u.username}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">汇款截止时间:</div>
+                                    <div class="fx2">
+                                <span>
+                                    {:$data['buyid']?date("Y-m-d H:i:s",$data['lockdate']):""}
+                                </span>
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">信誉星级:</div>
+                                    <div class="fx2">
+                                {:$u['star']?showstar($u['star']):showstar(0)}
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">联系方式:</div>
+                                    <div class="fx2">
+                                {$u.tel}
+                            </div>
+                        </div>
+                        <div class="fma">
+                                    <div class="fx1">订单状态:</div>
+                                    <div class="fx2">
+                                {:$status[$data['status']]}
+                            </div>
+                        </div>
+                        <div class="form-actions center">
+                            <button class="btn btn-primary" type="button" id="reg" onclick="javascript:window.opener=null;window.close();">关闭窗口</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/btmarket/index')}">CT市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

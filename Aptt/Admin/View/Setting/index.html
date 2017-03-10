@@ -1,0 +1,68 @@
+
+    <include file="Header:index" />
+    <div class="content">
+         
+        
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">网站设置</a> <span class="divider">/</span></li>
+            <li class="active">基本设置</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    
+            <div class="well">
+              <form id='f' method='POST' action="{:U(C("FILE_IN").'/Setting/save')}" enctype="multipart/form-data" target='hidden_frame'>
+              <table class="table table-bordered table-hover definewidth m10"> 
+                <tbody>
+                  <tr>
+                    <td align='right' width='150'>网站标题</td>
+                    <td><input type="text" name='webtitle' id='webtitle' value='{$web.webtitle}' class="input-xlarge" ></td>
+                  </tr>
+                  
+                  <tr>
+                    <td align='right' width='150'>网站状态</td>
+                    <td>
+                     <if condition='$web["status"]'>
+                        <input name="status" type="radio" id="status_0" value="0"  />
+                              开启 <input type="radio" name="status" value="1" id="status_1" checked='checked'/> 关闭
+                              <else/>
+                              <input name="status" type="radio" id="status_0" value="0" checked='checked' />
+                              开启 <input type="radio" name="status" value="1" id="status_1"/> 关闭
+                      </if>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>网站LOGO</td>
+                    <td><input type="file" name='logo' id='logo' value='' class="input-xlarge" > 
+                        <if condition="$web['logo']">
+                            <img src='__ROOT__/Uploads{$web.logo}' style='height:20px;'>
+                        </if>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>商城外链</td>
+                    <td><input type="text" name='huitext' id='huitext' value='{$web.huitext}' class="input-xlarge" >请填写完整地址,如:http://www.qq.com
+                    </td>
+                  </tr>
+                  <tr sstyle="display:none">
+                    <td align='right' width='150'>网站版权</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='copyright' name='copyright'>{$web.copyright}</textarea>
+                    </td>
+                  </tr>
+                   <tr>
+                    <td align='right' width='150'></td>
+                    <td><input type="submit" id="button" value='提 交'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+          
+</div>            
+   <include file="Footer:index" />

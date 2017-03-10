@@ -1,0 +1,41 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">财务报表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日 期</th>
+        <th>注册人数</th>
+        <th>激活人数</th>
+        <th>本期收入</th> 
+        <th>本期支出</th>
+        <th>盈利</th>
+        <th>拨比</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr style='text-align:center'>
+            <td>{$v.date}</td>
+            <td>{$v.regcount}</td>
+            <td>{$v.actcount}</td>
+            <td>{$v.income|numberformat=###,3}</td>
+            <td>{$v.output|numberformat=###,3}</td>
+            <td>{$v.profit|numberformat=###,3}</td>
+            <td>{$v.bo|numberformat=###,3}%</td> 
+        </tr>
+    </foreach>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

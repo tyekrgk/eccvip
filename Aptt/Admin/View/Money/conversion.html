@@ -1,0 +1,43 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">货币转换</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <div class="form-inline definewidth m10" style="padding:10px 0 10px 0">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&un='+document.getElementById('un').value"><br></div>
+    </div>
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>会员编号</th>
+        <th>转换类型</th>
+        <th>转换金额</th>
+        <th>税</th>
+        <th>成功转换金额</th>
+        <th>时间</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'><php>echo gettableinfo("id=".$v["uid"])</php></td>
+            <td align='center'>奖金币-->电子币</td>
+            <td align='center'>{$v.coin}</td>
+            <td align='center'>{$v.shui}</td>
+            <td align='center'><php>echo $v["score"];</php></td>
+            <td align='center'>{$v.date}</td>
+        </tr>
+    </foreach>
+    </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

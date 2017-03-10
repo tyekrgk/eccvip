@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              设置密保问题
+          </div>
+          <div class="panel-body ov">
+                        <form action="{:U('index.php/User/question',array('b'=>'do'))}" method="post" id="fn" class="form-horizontal">
+                            <div class="fma">
+                            <div class="fx1">问题1</div>
+                            <div class="fx2">
+                                    {$q.q1}
+                                </div>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                            <label class="input-group-addon">答案1</label>
+                                    <input type="text" name="a1" id="a1" class="form-control">
+                        </div><br>
+                            <div class="fma">
+                            <div class="fx1">问题2</div>
+                            <div class="fx2">
+                                    {$q.q2}
+                                </div>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                            <label class="input-group-addon">答案2</label>
+                                    <input type="text" name="a2" id="a2" class="form-control">
+                        </div><br>
+                            <div class="fma">
+                            <div class="fx1">问题3</div>
+                            <div class="fx2">
+                                    {$q.q3}
+                                </div>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                            <label class="input-group-addon">答案3</label>
+                                    <input type="text" name="a3" id="a3" class="form-control">
+                        </div><br>
+                            <div class="form-actions">
+                                <button  class="btn btn-primary" type="submit" id="submit">下一步</button>
+                            </div>
+                        </form>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                
+                var a1=$("#a1").val();
+                var a2=$("#a2").val();
+                var a3=$("#a3").val();
+                if(!a1){
+                    alert("答案1不可以为空");
+                    return false;
+                }
+                if(!a2){
+                    alert("答案2不可以为空");
+                    return false;
+                }
+                if(!a3){
+                    alert("答案3不可以为空");
+                    return false;
+                }
+                return true;
+             });
+        });
+    </script>
+    </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/user/index')}">信息更新</a>
+          <a class="list-group-item" href="{:U('index.php/user/password')}">更改密码</a>
+          <br>
+           <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

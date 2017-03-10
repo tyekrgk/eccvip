@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">可用ECF帐户
+                <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/Coin/myzr')}'">充值</button>
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/Coin/accazhuan')}'">转账</button>
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/Coin/myzc')}'">提现</button> 
+                </div>
+            </div>
+            <div class="panel-body ov">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>来源</th>
+                                    <th>金额</th>
+                                    <th>余额</th>
+                                    <th>类型</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr>
+                                    <td class="taskStatus"><span class="pending">{$v.date}</span></td>
+                                    <td class="taskStatus">{$v['uid']|gethistorysrc=$v['toid'],$v['src']}</td>
+                                    <td class="taskStatus">{:numberformat($v['coina'])}</td>
+                                    <td class="taskStatus">{:numberformat($v['scoina'])}</td>
+                                    <td class="taskStatus">{$v.type|prize=###}</td>
+                                    <td class="taskStatus">{$v.info}</td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <ul class="recent-posts">
+                                <li style='text-align:center'>{$page}</li>
+                                
+                            </ul>
+                        </div>
+                        </div>
+        </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/money/bonus')}">我的佣金</a>
+            <a class="list-group-item" href="{:U('index.php/Coin/acca')}">可用ECF帐户</a>
+            <a class="list-group-item" href="{:U('index.php/Coin/accb')}">消费ECF帐户</a>
+            <a class="list-group-item" href="{:U('index.php/Coin/accc')}">复投ECF帐户</a>
+            <a class="list-group-item" href="{:U('index.php/Coin/kuang')}">查看能量</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    </script>
+</body>
+</html>

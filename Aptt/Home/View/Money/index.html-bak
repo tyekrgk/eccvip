@@ -1,0 +1,38 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            奖金明细
+        </div>
+        <div class='main'>
+            <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日 期</th>
+        <th><php>echo prize(101);</php></th>
+        <th><php>echo prize(102);</php></th>
+        <th><php>echo prize(103);</php></th> 
+        <th><php>echo prize(104);</php></th>
+        <th><php>echo prize(105);</php></th>
+        <th><php>echo prize(106);</php></th>        
+        <th>合计<font style='color:red'></font></th>
+        <th width="45">操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr style='text-align:center'>
+            <td>{$v.date}</td>
+            <td>{$v.101}</td>
+            <td>{$v.102}</td>
+            <td>{$v.103}</td>
+            <td>{$v.104}</td>
+            <td>{$v.105}</td>
+            <td>{$v.106}</td>
+            <td>{$v.allin}</td>
+            <td>[<a href='{:U("index.php/Money/degtail",array("date"=>$v["date"]))}'>明细</a>]</td>
+        </tr>
+    </foreach>
+        </table>
+    <div class="inline pull-right pages">{$page}</div>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

@@ -1,0 +1,43 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            推荐记录
+        </div>
+        <div style="width:96%;height:auto;border:1px solid #ccc;padding:1% 1%;margin:0 auto;margin-top:15px;">
+            本周推荐人数:<span style='color:green'>{$weekc}人</span> 
+            本周推荐业绩:<span style='color:red'>{$uinfo.wsum}$</span> 
+            累计推荐人数:<span style='color:green'>{$uinfo.renum}人</span> 
+            累计推荐业绩:<span style='color:red'>{$uinfo.resum}$</span> 
+            本周周日奖:<span style='color:red'><php>echo numberformat($uinfo['resum']*$bonus[$uinfo['utype']]['zrj']/100);</php>$</span>
+            <br>备注:未激活会员不计入统计信息
+        </div>
+        <div class='main'>
+            <table class="table table-bordered table-hover definewidth m10">
+                <thead>
+                <tr>
+                    <th>会员编号</th>
+                    <th>会员级别</th>
+                    <th>昵称</th> 
+                    <th>状态</th>
+                    <th>QQ</th>
+                    <th>注册时间</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name='list' item='v'>
+                <tr>
+                    <td align='center'>{$v.username}</td>
+                    <td align='center'><php>echo $bonus[$v['utype']]['title'];</php></td>
+                    <td align='center'>{$v.nick}</td>
+                    <td align='center'><php>echo $v['status']?"<span style='color:green'>已激活</span>":"<span style='color:red'>未激活</span>";</php></td>
+                    <td align='center'>{$v.qq}</td>
+                    <td align='center'>{$v.regdate}</td>
+                    <td align='center'>无</td>
+                </tr>
+                </foreach>
+            </table>
+            <div class="inline pull-right pages">{$page}</div>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

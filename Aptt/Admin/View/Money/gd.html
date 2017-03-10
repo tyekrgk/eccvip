@@ -1,0 +1,70 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">AD市场调整</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <table class="table table-bordered table-hover definewidth m10" style="font-size:12px;">
+    <thead>
+    <tr>
+        <th>当前价格(元/枚)</th>
+        <th>AD1卖盘</th>
+        <th>卖盘状态</th>
+        <th>AD1买盘</th>
+        <th>买盘状态</th>
+    </tr>
+            <notempty  name="list">
+                <foreach name="list"  item="v">
+                    <tr class='ce'>
+                        <td>
+                            {$v.price}
+                        </td>
+                        <td>
+                            <input type='text' name='number_{$v.id}' id='number_{$v.id}' value='{$v.number}' class='input-xlarge' style='width:80px;' onblur="gtsave({$v.id},'number',{$v.number})">/{$coinset.gdup}
+                        </td>
+                        <td>{:$v['number']>=$coinset['gdup']?"已 挂 满":"未 挂 满"}</td>
+                        <td>
+                            <input type='text' name='donumber_{$v.id}' id='donumber_{$v.id}' value='{$v.donumber}' class='input-xlarge' style='width:80px;' onblur="gtsave({$v.id},'donumber',{$v.donumber})">
+                        </td>
+                        <td>
+                            {:$v['status']==0?"已 售 罄":""}
+                            {:$v['status']==1?($v['number']>=$coinset['gdup']?"可 购 买":"未 开 放"):""}
+                            {:$v['status']==2?"未 开 放":""}
+                        </td>
+                    </tr>
+                </foreach>
+                <else/>
+                <tr>
+                    <td colspan="7">没有找到相关数据。</td>
+                </tr>
+
+            </notempty>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>
+<script type="text/javascript">
+    function gtsave(id,ky,number){
+        var va=$("#"+ky+"_"+id).val();
+        if(va<{$coinset.gdmin} && ky=="number"){
+            alert("数值不可以低于{$coinset.gdmin}");
+            return false;
+        }
+        if(number==va) return false;
+        url="{:U(C('FILE_IN').'/money/gdsave')}";
+        $.post(url, { id:id,ky:ky,va:va}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+</script>          
+   <include file="Footer:index" />

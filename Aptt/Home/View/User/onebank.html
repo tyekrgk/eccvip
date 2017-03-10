@@ -1,0 +1,48 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            银行信息
+        </div>
+        <div class='main'>
+            <php>
+                if($web['banktext']) echo '<div class="txxx">'.$web['banktext'].'</div>';
+            </php>
+            <form action="{:U('index.php/User/onebanksave',array('id'=>$bank['id']))}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td width="10%" class="tableleft">银行名称</td>
+            <td>{$bankstr}</td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">真实姓名</td>
+            <td>{$uinfo.realname}</td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">银行帐号</td>
+            <td><input type="text" name="bankcard" id="bankcard" value="{$bank.bankcard}" style="width:250px"/> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">开户行</td>
+            <td><input type="text" name="bankaddress" id="bankaddress" value="{$bank.bankaddress}" style="width:300px"/></td>
+        </tr>
+        </tr>
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><button  class="btn btn-primary" type="button" id="submit">绑定信息</button></div>
+    
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var bankcard=$("#bankcard").val();
+                if(!bankcard){
+                    alert("银行帐号不可以为空");
+                    return false;
+                }
+                $("#fn").submit();
+             });
+        });
+    </script>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

@@ -1,0 +1,88 @@
+<include file="Header:head" />
+    <div class="def1" style='margin:50px 0 0 0;'>
+        <div class='video'>
+            
+        </div>
+    </div>
+    <div class="content">
+    <div class="convenient">
+        <div class='conven' style="background-image:url('__PUBLIC__/img/1.png'); background-position:top center; background-repeat:no-repeat;"  onclick="window.location.href='{:U("index.php/Money/transfer")}'">货币转换</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/2.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Market/index")}'">交易市场</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/3.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Money/cash")}'">奖金提现</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/4.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Member/zhitui")}'">推荐记录</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/5.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Money/remittance")}'">汇款充值</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/6.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='user.php?a=tg'">推广链接</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/7.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Member/reg")}'">注册会员</div>
+        <div class='conven' style="background-image:url('__PUBLIC__/img/8.png'); background-position:top center; background-repeat:no-repeat;" onclick="window.location.href='{:U("index.php/Message/leave")}'">我要留言</div>
+        <div class='clear'></div>
+    </div>
+        <div class="me_left">
+            <div class="me_left_top"></div>
+            <div class="me_left_center">
+                <div style='width:98%;height:20px;padding:5px 0 5px 0;margin:0 auto;border-bottom:1px solid #ccc;font-size:14px;font-weight:bold;text-indent:30px;background:url(__PUBLIC__/img/al.png) no-repeat left bottom'> 系统公告</div>
+               <ul>
+                <php>
+                    $n=0;
+                    foreach($list as $v){
+                    $n++;
+    echo "<li style='height:20px;line-height:20px; border-bottom:1px solid #ccc;padding:3px 0 3px 0'>".$n.". <a href='".U("index.php/News/view",array("id"=>$v["id"]))."'>".$v['title']." </a>[".$v["date"]."]</li>";
+    }</php>
+</ul>
+
+            </div>
+            <div class="me_left_but"></div>
+        </div>
+        <div class="me_right">
+            <div class="me_right_top"></div>
+            <div class="me_right_center">
+                <div style='width:98%;height:20px;padding:5px 0 5px 0;margin:0 auto;border-bottom:1px solid #ccc;font-size:14px;font-weight:bold;text-indent:30px;background:url(__PUBLIC__/img/al.png) no-repeat left bottom'> 会员信息</div>
+               
+
+    <table id='table3' width='700' align='center'>
+                    <tr>
+                       <td align='center' valign='middle' width='180' height='180'><img src='__PUBLIC__/img/member.png' height='170' width='170' /></td>
+                       <td colspan='4' rowspan='2' align='right' valign='top'>
+                            <table width='100%' border='1' id='table3' style='font-weight:bold'>
+                            <tr>
+                                <td align='right'>信用等级:</td><td align='left' colspan="3">{$uinfo.star|showstar=###}</td>
+                                
+                            </tr>
+                              <tr>
+                                <td align='right' width='100' height='30'>会员编号:</td><td align='left' width='100'><strong>{$uinfo.username}</strong></td>
+                                <td align='right' width='100' height='30'>状态:</td><td align='left' width='150'>
+                                    <php>
+                                        echo $uinfo["status"]?"<strong style='color:green'>已激活</strong>":"<strong style='color:red'>未激活</strong> [<a href='".U('index.php/Member/active')."' target='hidden_frame'>激活帐号</a>]";
+                                    </php>
+                                </td>
+                              </tr>
+                              <tr>
+                                <td align='right' width='100' height='30'>昵称:</td><td align='left' width='100'><strong>{$uinfo.nick}</strong></td>
+                                <td align='right' width='100' height='30'>注册时间:</td><td align='left' width='150'><strong>{$uinfo.regdate}</strong></td>
+                              </tr>
+                              <tr>
+                                <td align='right' width='100'>总收入:</td><td align='left'><strong>{$uinfo.allin}</strong></td>
+                                <td align='right' width='100' height='30'>激活时间:</td><td align='left' width='150'><strong>{$uinfo.actdate}</strong></td>
+                              </tr>
+                              <tr>
+                                
+                                <td align='right' >奖金币:</td><td align='left'><strong>{$uinfo.coin}</strong></td>
+                                <td align='right' width='100' height='30'>报单中心:</td><td align='left' width='150'><php>echo $uinfo["isagent"]?"<span style='color:green'>是</span>":"<span style='color:red'>否</span>";</php></td>
+                              </tr>
+                              <tr>
+                                <td align='right'>电子币:</td><td align='left' colspan="3"><strong>{$uinfo.score} <input type='button' class='btn' onclick="window.location.href='{:U("index.php/Money/remittance")}'" value='充 值'></strong></td>
+                              </tr>
+                              <tr>
+                                <td align='right'>股币:</td><td align='left' colspan="3"><strong>{$uinfo.rebuy}</strong></td>
+                              </tr>
+                              
+                            </table>
+                        </td>
+                    </tr>
+                    
+               </table>
+            </div>
+            <div class="me_right_but"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+    <include file="Footer:index" />

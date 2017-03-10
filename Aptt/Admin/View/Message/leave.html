@@ -1,0 +1,66 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">消息管理</a> <span class="divider">/</span></li>
+            <li class="active">发送消息</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action="{:U(C("FILE_IN").'/Message/leavesave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td width="10%" class="tableleft">留言类型</td>
+            <td>
+                <select name="type" id="type" onChange="var val=this.options[this.selectedIndex].value;if(val==3) $('#dat').css('display','none');if(val==0) $('#dat').css('display','');">
+                    <option value="1">给会员留言</option>
+                </select>
+            </td>
+        </tr>
+        <tr id="dat">
+            <td width="10%" class="tableleft">收件人</td>
+            <td><input type="text" name="date" id="date"/> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">标题</td>
+            <td><input type="text" name="title" id="ttitle"/> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">内容</td>
+            <td><textarea name="content" style="height:50px;width:90%" id="content"></textarea></td>
+        </tr>       
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><button  class="btn btn-primary" type="button" id="submit">保存</button></div>
+    <script>
+        $().ready(function () {       
+            $("#submit").click(function(){
+                var title=$("#ttitle").val();
+                var content=$("#content").val();
+                var type=$("#type").val();
+                var date=$("#date").val();
+                if(!title){
+                    alert("标题不可以为空"+title);
+                    return false;
+                }
+                if(!content){
+                    alert("内容不可以为空");
+                    return false;
+                }
+                if(type==0){
+                    if(!date){
+                        alert("收件人不可以为空");
+                        return false;
+                    }
+                }
+                $("#fn").submit();
+             });
+
+        });
+    </script>
+</div>            
+   <include file="Footer:index" />

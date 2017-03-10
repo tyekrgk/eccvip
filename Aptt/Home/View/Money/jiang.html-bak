@@ -1,0 +1,128 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            领取奖金
+        </div>
+        <div class='main'>
+            <php>
+                if($web['tuitext']) echo '<div  class="txxx">'.$web['tuitext'].'</div>';
+            </php>
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  colspan='2' style="text-align:center;font-size:16px;font-weight:bold;">直推贡献奖</td>
+        </tr>
+        <tr>
+            <td class="tableleft">当前业绩</td>
+            <td>总业绩:{$uinfo.resum} 当前剩余业绩:{$uinfo.reyu}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">领取条件</td>
+            <td>领取一次需要消耗{$coinset.remoney}直推业绩</td>
+        </tr>
+        <tr>
+            <td  class="tableleft"></td>
+            <td><a href="{:U('index.php/Money/fazt')}" id="zt" class='btn' target="hidden_frame">领取一次</a></td>
+        </tr>
+        <tr>
+            <td  colspan='2' style="text-align:center;font-size:16px;font-weight:bold;">终身成就奖</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">领取条件</td>
+            <td>
+                <php>
+                    echo "您当前的级别是".$bonus[$uinfo['utype']]['title'].",会费为:".$bonus[$uinfo['utype']]['money']."$<br>";
+                    for($i=1;$i<7;$i++){
+                        echo "总直推业绩满 ".$coinset['zsmoney'.$i]."倍(".($bonus[$uinfo['utype']]['money']*$coinset['zsmoney'.$i])."$) 会费可领取 ".$coinset['zsj'.$i]."%*会费<br>";
+                    }
+                </php>
+                每个帐号只可以领取一次,不可重复领取
+
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">当前状态</td>
+            <td>
+                <php>
+                    if($k){
+                        echo "您已经领取了终身成就奖,不可以再次领取";
+                    }else{
+                        echo "您当前的直推业绩(".$uinfo['resum']."$)为您的会费(".$bonus[$uinfo['utype']]['money']."$)的".$key."倍<br>您当前可领取奖金".($bonus[$uinfo['utype']]['money']*$zsj/100)."$";
+                    }
+                </php>
+            </td>
+        </tr>
+        <tr>
+            <td  class="tableleft"></td>
+            <td><a href="{:U('index.php/Money/fazs')}" id="zs" class='btn' target="hidden_frame">领取</a></td>
+        </tr>
+    </table>
+    <script>
+        $(function () {       
+            $("#zt").click(function(){
+                if({$coinset.remoney}>{$uinfo.reyu}){
+                    alert("剩余业绩不足，您无法领取奖金，请继续努力，谢谢！");
+                    return false;
+                }
+                return true;
+             });
+            $("#zs").click(function(){
+                if(confirm("确定要领取终身成就奖吗?\n注意:终身成就奖一个帐号只可以领取一次!")){
+                    if(<PHP>echo $bonus[$uinfo['utype']]['money']*$coinset['zsmoney1'];</PHP>>{$uinfo.resum}){
+                        alert("剩余业绩不足，您无法领取奖金，请继续努力，谢谢！");
+                        return false;
+                    }
+                    if({$k}){
+                        alert("终身成就奖已领取，您无法再次领取奖金，谢谢！");
+                        return false;
+                    }
+                    return true;
+                }else{
+                    return false;
+                }
+             });
+        });
+    
+    function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',5000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }   
+    </script>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

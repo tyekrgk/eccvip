@@ -1,0 +1,58 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            挂单交易
+        </div>
+        <div class='main'>
+            <php>
+                if($web['eptext']) echo '<div  class="txxx">'.$web['eptext'].'</div>';
+            </php>
+            <form action='{:U("index.php/Market/guasave")}' method='post' name='ff' id='fn' target='hidden_frame'>
+    <table class='table table-bordered table-hover definewidth m10' id='cndisplay' >
+    
+    <tr><td  class='tableleft'>当前奖金币:</td><td align='left'>{$coin}<font style='color:red'>$</td></tr>
+    <tr><td  class='tableleft'>最小交易量:</td><td align='left'>{$F.epbase}<font style='color:red'>$</font></td></tr>
+    <tr><td  class='tableleft'>最大交易量:</td><td align='left'>{$F.epmax}<font style='color:red'>$</font> </td></tr>
+    <tr><td  class='tableleft'>EP交易税:</td><td align='left'>{$F.epshui}% </td></tr>
+    <tr><td  class='tableleft'>交易额:</td><td align='left'><input type='text' value='{$F.epbase}' name='coin' id='coin' style='width:200px' onkeyup="$('#submit').attr('disabled', true);
+    setTimeout(function(){value=value.replace(/[^0-9]/g,&#39;&#39;);if(value<{$F.epbase}) value={$F.epbase};if(value>{$F.epmax}) value={$F.epmax};document.getElementById('hk').innerHTML=(value-(value*{$F.epshui}/100).toFixed(2));document.getElementById('hkk').innerHTML=((value-(value*{$F.epshui}/100))*{$F.epoutcoin}).toFixed(2);$('#submit').attr('disabled', false);},5000);"><font style='color:red'>$</font></td></tr>
+    <tr><td class='tableleft'>到帐金额:</td><td align='left'><span style='color:Red' id='hk'>{$realcoin|numberformat=###,2}</span>$ 折合<span style='color:Red' id='hkk'><php>echo numberformat($realcoin*$coinset['epoutcoin'],2);</php></span>￥</td></tr>
+    <tr><td  class='tableleft'>提现帐户:</td><td align='left'>{$banklist} [<a href='{:U("index.php/User/bank")}'>管理帐户信息</a>]</td></tr>
+    <tr><td  class='tableleft'>联系方式:</td><td align='left'><input type='text' name='contact' id='contact' style="width:300px;"></td></tr>
+    <tr><td  class='tableleft'></td><td align='left'><input class="btn btn-primary" type="submit" id="submit" value='确定' name='f1'></td></tr>
+    </table></form>
+    <div class="form-inline definewidth m10" style="font-size:18px;font-weight:bold">挂单历史</div>
+    <table class='table table-bordered table-hover definewidth m10'>
+    <tr><th>序列号</th><th>挂单金额</th><th>交易税</th><th>到帐金额<font style='color:red'>$</font></th><th>到帐金额<font style='color:red'>￥</font></th><th>挂单日期</th><th>买家/信用</th><th>买入日期</th><th>状态</th><th>操作</th></tr>
+    <foreach name='list' item="v">
+    <tr class='ce'><td height='20'>{$v.sn}</td><td>{$v.coin}</td><td>{$v.shui}</td><td>{$v.rcoin}</td><td><php>echo numberformat($v['rcoin']*$coinset['epoutcoin'],2)</php></td><td>{$v.addtime}</td><td><php>echo gettableinfo("id=".$v['buyid'])."<br>".showstar(0,$v["buyid"]);</php></td><td>{$v.buytime}</td><td><php>$arr=array(0=>"等待购买",1=>"记录已锁定",2=>"已支付,等待确认",3=>"交易完成",4=>"交易取消");echo $arr[$v['status']];</php></td><td><php>if($v['status']==0) echo '[<a href=\''.U("index.php/Market/cancel",array("id"=>$v["id"])).'\' style="color:Red" target="hidden_frame">取消</a>]';if($v['status']==2) echo '[<a href=\''.U("index.php/Market/collection",array("id"=>$v["id"])).'\' style="color:green" target="hidden_frame">收款确认</a>]';if($v['status']==1||$v['status']>2) echo "<span style='color:#ccc'>不可操作</span>";</php></td></tr>
+    <tr><td colspan='10' height='20'>提现信息:提现银行:{$v.bank} 开户姓名:{$v.bankuser} 银行帐号:{$v.bankcard} 开户行地址:{$v.bankaddress}<br>联系方式:{$v.contact}</td></tr>
+    </foreach>
+            </table>
+            <div class="inline pull-right pages">{$page}</div>
+        </div>
+        <div class="clear"></div>
+        <script>
+        $(function () {       
+            $("#submit").click(function(){
+                if(!confirm("确定进行挂单吗?")) return false;
+                var coin=$("#coin").val();
+                var contact=$("#contact").val();
+                if(coin<{$F.epbase}){
+                    alert("最低金额为{$F.epbase}");
+                    return false;
+                }
+                if(coin>{$F.epmax}){
+                    alert("单笔最高金额{$F.epmax}");
+                    return false;
+                }
+                if(!contact){
+                    alert("请输入您的联系方式");
+                    return false;
+                }
+                return true;
+             });
+        });
+    </script>
+    </div>
+<include file="Footer:index" />

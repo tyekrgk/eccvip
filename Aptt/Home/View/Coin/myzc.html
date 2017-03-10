@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">提现ECF
+            	<div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/Coin/acca')}'">返回可用ECF帐户</button>
+                </div>
+            </div>
+                <div class="panel-body ov">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="well">
+                                <div class="fma center">
+                                        会员编号:{$uinfo.username}
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon" style="color:red;"><empty name="uinfo.qianbaoc"><a href="{:U(C('FILE_IN').'/User/index#qianbaoc')}" style="color:red;">添加ECF地址</a><input type="hidden" id="addr" value="0"/><else/>{$uinfo.qianbaoc}</empty></label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                	<label class="input-group-addon">可提数量:<font color="red">{$uinfo.coina}</font></label>
+                                	<label class="input-group-addon">手续费:<font color="red" id="sx">0</font></label>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;提出数量:</label>
+                                    <input type="text" placeholder="" id="num" name="num" required="" value="" onBlur="var ds=this.value;var va={$coinset.coinatxshui}*ds/100;$('#sx').html(va);"  class="form-control">
+                                </div>
+                                <!-- <div class="input-group input-group-sm">
+	                                <label class="input-group-addon">&nbsp;&nbsp;&nbsp;&nbsp;二级密码:</label>
+	                                <input type="password" placeholder="" id="p" required="" value="" class="form-control">
+	                            </div><br> -->
+                                <if condition="($uinfo['ga'] != '') AND (explode('|', $uinfo['ga'])[2] eq 1)">
+                                <div class="input-group input-group-sm">
+	                                <label class="input-group-addon">谷歌验证码:</label>
+	                                <input type="password" placeholder="" id="gacode" required="" value="" class="form-control">
+	                            </div><br>
+                                <div class="form-actions center">
+		                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+		                        </div>
+                                </if>
+                            </div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="well">
+<p> 提现说明: </p>
+<p> 1.转入是自动的， 转账需要整个网络进行确认，确认后会自动充值到您的账户中  </p>
+<p> 2.此地址是您唯一且独自使用的转入地址，您可以同时进行多次充值， 也可将此地址做为您在矿池的付款地址 </p>
+</div>
+                        </div>
+                    </div><br><br>
+                    <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>转出时间</th>
+                                    <th>接收地址</th>
+                                    <th>转出数量</th>
+                                    <th>转出费用</th>
+                                    <th>实际到账</th>
+                                    <th>状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='vo'>
+                                <tr>
+                                	<td>{$vo.addtime|addtime}</td>
+	                                <td>{$vo.username}</td>
+	                                <td>{$vo['num']|NumToStr}</td>
+	                                <td>{$vo['fee']|NumToStr}</td>
+	                                <td>{$vo['mum']|NumToStr}</td>
+	                                <td>
+	                                    <eq name="vo.status" value="1">
+	                                        <font color="#23a800">转出成功 </font>
+	                                        <else/>
+	                                       	 正在处理
+	                                    </eq>
+	                                </td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="recent-posts">
+                            <li style='text-align:center'>{$page}</li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U(C('FILE_IN').'/Coin/myzr')}">在线充值</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () { 
+        	$("#submit").click(function(){
+                var num = $("#num").val();
+                var gacode = $('#gacode').val();
+                if($("#addr") && $("#addr").val() == 0){
+                    alert("请添加ECF地址");
+                    return false;
+                }
+                if(!num){
+                    alert("请输入转帐金额");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/Coin/upmyzc')}", {num:num,gacode:gacode}, function(data) {
+                    alert(data.info);
+                    if(data.status) 
+                    	window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

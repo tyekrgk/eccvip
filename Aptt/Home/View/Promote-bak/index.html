@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
+<title>{$web.webtitle}</title>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/cnc.js"></script>
+
+</head>
+<body>
+<div class="logincontainer">
+	
+	<div class="topbanner" style='text-align:center;height:100px;'></div>
+	
+	<div class="nc">
+		<div class="ncright" style='width:100%'>
+			
+			<div class="ncrightcontent" style='background: url(__PUBLIC__/img/loginbg.png) no-repeat #fff;height:auto;'>			
+           		
+				<div class="ulogin">
+					<form action="{:U('index.php/Promote/save',array('id'=>$key))}" method="POST" id="fnn">
+    <table class="table table-bordered table-hover definewidth m10">
+        <tr>
+            <td class="tableleft">接点信息:</td>
+            <td>
+                接点人<input type="text" name="fname" id="fname" value="{$fname}" style="width:80px"> 
+                区位<select name="line"><option value="0" <php>echo $line?"":"selected=selected";</php>>左区</option><option value="1"  <php>echo $line?"selected=selected":"";</php>>右区</option></select>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft" width="100">会费:</td>
+            <td>
+                {$coinset.money}
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">注册编号:</td>
+            <td>
+                <input type="text" name="username" id="username"  style="background-color:#f3f3f3" value="{$newname}"> <input type="button" id="chename" value="检测帐号"  class="btn-success btn" > <br><span id="usernotice"></span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">推荐人:</td>
+            <td>
+                <input type="text" name="rname" id="rname" value="{$rname}">
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">报单中心:</td>
+            <td>
+                <input type="text" name="aname" id="aname" value="">
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">登录密码:</td>
+            <td>
+                <input type="text" name="upd1" id="upd1" value=""> 
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">验证登录密码:</td>
+            <td><input type="text"  id="rupd1" value=""> 
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">二级密码:</td>
+            <td>
+                <input type="text" name="upd2" id="upd2" value=""> 
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">验证二级密码:</td>
+            <td><input type="text"  id="rupd2" value=""> 
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">真实姓名:</td>
+            <td>
+                <input type="text" name="realname" id="realname" value="">  <span style="color:red">必填,注册后绑定,不可修改,绑定提现会员编号</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">身份证:</td>
+            <td>
+                <input type="text" name="idcard" id="idcard" value="">  <span style="color:red">必填</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">手机号码:</td>
+            <td>
+                <input type="text" name="tel" id="tel" value="">  <span style="color:red">必填</span>
+            </td>
+        </tr>
+         <tr>
+            <td class="tableleft">昵称:</td>
+            <td>
+                <input type="text" name="nick" id="nick" value=""> <span style="color:red">必填</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="tableleft">QQ:</td>
+            <td>
+                <input type="text" name="qq" id="qq" value="">  <span style="color:red">必填</span>
+            </td>
+        </tr>
+        
+    </table>
+    <div class="form-inline definewidth m10">
+        <input type="submit" id="submit" value="注 册" class="btn-primary btn">
+    </div>
+ </form>
+ <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var username=$("#username").val();
+                var rname=$("#rname").val();
+                var realname=$("#realname").val();
+                var idcard=$("#idcard").val();
+                var aname=$("#aname").val();
+                var upd1=$("#upd1").val();
+                var rupd1=$("#rupd1").val();
+                var upd2=$("#upd2").val();
+                var rupd2=$("#rupd2").val();
+                var nick=$("#nick").val();
+                var qq=$("#qq").val();
+                var tel=$("#tel").val();
+                if(!username){
+                    alert("注册编号不可以为空");
+                    return false;
+                }
+                if(!rname){
+                    alert("推荐人不可以为空");
+                    return false;
+                }
+                if(!realname){
+                    alert("真实姓名不可以为空");
+                    return false;
+                }
+                if(!idcard){
+                    alert("身份证不可以为空");
+                    return false;
+                }
+                if(!upd1){
+                    alert("登录密码不可以为空");
+                    return false;
+                }
+                if(upd1!==rupd1){
+                    alert("两次输入的登录密码不一致");
+                    return false;
+                }
+                if(!upd2){
+                    alert("二级密码不可以为空");
+                    return false;
+                }
+                if(upd2!==rupd2){
+                    alert("两次输入的二级密码不一致");
+                    return false;
+                }
+                if(!nick){
+                    alert("昵称不可以为空");
+                    return false;
+                }
+                if(!qq){
+                    alert("QQ不可以为空");
+                    return false;
+                }
+                if(!tel){
+                    alert("手机号码不可以为空");
+                    return false;
+                }
+             });
+            $("#changname").click(function(){
+                $.post("{:U('index.php/Json/newname')}", { Action: "post",u:""}, function(value) {
+                    $("#username").val(value);
+                 });
+            });
+            $("#chename").click(function(){
+                uc=$("#username").val();
+                $.post("{:U('index.php/Json/checkregname')}", { Action: "post",u:uc}, function(value) {
+                    da="会员编号"+uc+"可以使用";
+                    color="green";
+                    if(value=="no1"){
+                        da="会员编号"+uc+"必须是字母与数字的组合";
+                        color="red";
+                        addnotice("usernotice",da,"red");
+                        return false;
+                    }
+                    if(value=="no"){
+                        da="会员编号"+uc+"长度必须为6~10个字符";
+                        addnotice("usernotice",da,"red");
+                        return false;
+                    }
+                    if(value=="pass"){
+                        da="会员编号"+uc+"已存在";
+                        addnotice("usernotice",da,"red");
+                        return false;
+                    }
+                    addnotice("usernotice",da,"green");
+                    return false;
+                 });
+            });
+        });
+    </script>
+				</div>
+                <div class="clear"></div>
+			</div>
+			 
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+<iframe name='hidden_frame' id="hidden_frame" style='display:none'></iframe>
+</body>
+
+</html>

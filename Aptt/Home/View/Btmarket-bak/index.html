@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading"> CT交易市场</div>
+          <div class="panel-body">
+                <div class="center" style="text-align: center;">                 
+                    <ul class="stat-boxes">
+                        <li class="popover-visits">
+                            <div class="left"><span class="peity_bar_good">2,4,9,7,12,10,12</span><br>+10%</div>
+                            <div class="right">
+                                <strong>{$coinset.bthistory}</strong>
+                                历史成交总量
+                            </div>
+                        </li>
+                        <li class="popover-users">
+                            <div class="left"><span class="peity_bar_good1">20,15,18,14,10,9,9,9</span><br>+7.9%</div>
+                            <div class="right">
+                                <strong>{$coinset.btgua}</strong>
+                                今日CT挂单总量 
+                            </div>
+                        </li>
+                        <li class="popover-orders">
+                            <div class="left"><span class="peity_bar_good2">3,5,9,7,12,20,10</span><br>+8.4%</div>
+                            <div class="right">
+                                <strong>{$coinset.btdeal}</strong>
+                                今日CT出售总量 
+                            </div>
+                        </li>
+                    </ul>
+                    
+                </div>  
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">出售列表</div>
+            <div class="panel-body ov">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>卖家编号</th>
+                        <th>出售数量</th>
+                        <th>信誉等级</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td class="taskStatus"><span class="pending">{$v.uid|gettableinfo='id='.###}</span></td>
+                        <td class="taskStatus">{$v.coin}</td>
+                        <td class="taskStatus">{$v.uid|showstar=1,###}</td>
+                        <td class="taskStatus"><a href='javascript:void(0)' onclick="listbuy({$v.id})" class="btn btn-success btn-mini">直接购买</a></td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">
+                <ul class="recent-posts">
+                    <li style='text-align:center'>{$page}</li>
+					<li style="color:red">提示：买入CT订单后，请务必在半小时内完成付款！如果您不想购买了，或者对方收款信息不正确导致无法支付，请点击取消订单！否则您可能面临投诉被处罚1颗信誉星级！</li>
+                </ul>
+            </div>
+        </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我要买CT（系统匹配）
+                            <div class="pull-right">
+                                <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/buylist')}'">CT购买记录</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="fma">
+                                    <div class="fx1">注意事项:</div>
+                                    <div class="fx2" style="color:red">
+                                            1.购买CT可在列表中“直接购买”或“系统匹配”功能购买,购买成功奖励5%。<br>
+                                            2.下单后务必在30分钟内汇款！否则可能影响您的信誉值。<br>
+                                            3.付款完成后，请拨打卖家电话确认订单。
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon">购买数量:</label>
+                                        <input id="buynumber" type="text" required="" placeholder="" class="form-control">
+                                </div><br>
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon">二级密码:</label>
+                                        <input id="buyp" type="password" required="" placeholder="" class="form-control">
+                                </div><br>
+                                <div class="form-actions center"><input class="btn btn-primary" type="button" value="确认提交" id="btbuy">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我要卖CT
+                            <div class="pull-right">
+                                <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/gualist')}'">CT挂单记录</button> 
+                                <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/deallist')}'">CT成交记录</button>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <form class="form-horizontal">
+                                <div class="fma">
+                                    <div class="fx1">注意事项:</div>
+                                    <div class="fx2" style="color:red">
+                                            完善个人收款账户信息才可提交出售挂单<br>
+  否则交易失败将处罚1颗信誉星级。
+                                    </div>
+                                </div>
+                                <div class="fma">
+                                    <div class="fx1">CT币余额:</div>
+                                    <div class="fx2" style="color:red">{$uinfo.bt}
+                                    </div>
+                                </div>
+                                <div class="fma">
+                                    <div class="fx1">手续费:</div>
+                                    <div class="fx2" style="color:red">{$coinset['btout']}%(额外扣除,取消订单退还)
+                                    </div>
+                                </div>
+
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon">卖出数量:</label>
+                                        <input id="sellnumber" type="text" required="" placeholder="" class="form-control">
+                                </div><br>
+                                <div class="input-group input-group-sm">
+                                    <label class="input-group-addon">二级密码:</label>
+                                        <input id="sellp" type="password" required="" placeholder="" class="form-control">
+                                </div><br>
+                                <div class="form-actions center"><input class="btn btn-primary" type="button" value="确认提交" id="btsell">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/btmarket/index')}">CT市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    function listbuy(id){
+        str="{:U(C('FILE_IN').'/btmarket/lock',array('id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('index.php/btmarket/buylist')}";
+         });
+    }
+    $(document).ready(function(){
+        $('#btbuy').click(function(){
+            var number=$('#buynumber').val();
+            var p=$('#buyp').val();
+            if(!number){
+                alert('请输入购买数量');
+                return false;
+            }
+            if(!p){
+                alert('请输入二级密码');
+                return false;
+            }
+            $.post("{:U('index.php/btmarket/buysave')}", { number:number,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) location.href="{:U('index.php/btmarket/buylist')}";
+             });
+        });
+        $('#btsell').click(function(){
+            var number=$('#sellnumber').val();
+            var p=$('#sellp').val();
+            if(!number){
+                alert('请输入购买数量');
+                return false;
+            }
+            if(!p){
+                alert('请输入二级密码');
+                return false;
+            }
+            $.post("{:U('index.php/btmarket/sellsave')}", { number:number,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) window.location.reload();
+             });
+        });
+    });
+    </script>
+
+    <script type="text/javascript">
+                    $(document).ready(function(){
+                        $(".peity_bar_good").peity("bar", {
+                          fill: ["red"]
+                        })
+                        $(".peity_bar_good1").peity("bar", {
+                          fill: ["green"]
+                        })
+                        $(".peity_bar_good2").peity("bar", {
+                          fill: ["blue"]
+                        })
+                    });
+                    
+                    </script>
+</body>
+</html>

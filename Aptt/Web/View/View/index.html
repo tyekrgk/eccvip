@@ -1,0 +1,67 @@
+ <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.min.js"></script>
+	<link rel="stylesheet" href="__PUBLIC__/css/nav.css" />
+	<style>
+	body{background-color:#fff: }
+	</style>
+	<title>{$index.webtitle}</title>
+</head>
+<body>
+	<div class="header">
+		<table width="90%" height="90" border="0" style="margin:0 auto;">
+			<tr>
+				<td width="33%">
+					<button class="navbar-toggle" data-canvas=".navmenu" data-target="#offcanvas" data-toggle="offcanvas" type="button" onclick="location.href='{:U(C("FILE_IN")."/Index/index")}'">
+					HOME
+					</button>
+				</td>
+				<td style="text-align:center" width="34%"><img src="__ROOT__/Uploads{$web.logo}" style="height:90px;"></td>
+				<td style="text-align:right" width="33%"><button class="navbar-toggle1" data-canvas=".navmenu" data-target="#offcanvas" data-toggle="offcanvas" type="button" onclick="location.href='{:U("index.php/Index/index")}'">
+					会员登录
+					</button></td>
+			</tr>
+		</table>
+	</div>
+	<div class="ltitle">{$ltitle}</div>
+	<div class="container">
+		<div class="left">
+			<script type="text/javascript">
+			$(function () {
+				$(".ny_zblb1 ul li").click(function(){
+					var thisSpan=$(this);
+					$(".ny_zblb1 ul li ul").prev("a").removeClass("cur");
+					$("ul", this).prev("a").addClass("cur");
+					$(this).children("ul").slideDown("fast");
+					$(this).siblings().children("ul").slideUp("fast");
+				})
+			});
+			</script>
+
+			<div class="ny_zb">
+					<div class="ny_zblb1">
+					<ul class="clearfix">
+						<foreach name="menu" item="v">
+							<li>
+								<a href="{$v['id']|dourl=###}" class="{$v.cur}">{$v.title}</a>
+								<ul style="<php> echo $v['cur']=='cur'?'display:block;':'';</php>">
+									<foreach name="v.child" item="k">        
+										<li><a href="{$k['id']|dourl=###}">{$k.title}</a></li>
+									</foreach>
+								</ul>
+							</li>
+						</foreach>	
+					</ul>
+				</div>
+			</div>
+		</div>
+		<div class="right">{$data.content}</div>
+		<div class="clear"></div>
+	</div>
+	<div class="footer">
+		 {$index.copyright}
+	</div>
+</body>
+</html>

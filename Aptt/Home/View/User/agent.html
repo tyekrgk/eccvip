@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              报单中心
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                            <div class="fx1">能量编号:</div>
+                            <div class="fx2">
+                                <span id="cname">{$uinfo.username}</span>
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">直接推荐人数:</div>
+                            <div class="fx2">
+                                {$uinfo.renum}
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">小区业绩:</div>
+                            <div class="fx2">
+                                {$uinfo.areasum}
+                            </div>
+                        </div><br>
+                        <div class="fma">
+                            <div class="fx1">申请条件:</div>
+                            <div class="fx2">
+                                直接推荐人数:<span style="color:red">{$coinset.bdt1}人</span> 小区业绩:<span style="color:red">{$coinset.bdt2}元</span>
+                            </div>
+                        </div><br>
+                        
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="button" id="submit">确定申请</button>
+                        </div>
+                    </form>
+                    </div>
+          <div class="panel-footer" style="color:Red">提示：只有符合条件才可以进行申请,由管理员审核通过后才可以成为报单中心</div>
+        </div>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              申请记录
+          </div>
+          <div class="panel-body ov">
+              <table class="table table-bordered table-striped table-hover">
+                  <thead>
+                  <tr>
+                      <th>申请时间</th>
+                      <th>申请时直推人数</th>
+                      <th>申请时小区业绩</th>
+                      <th>审核结果</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                  <foreach name='list' item='v'>
+                  <tr>
+                      <td class="taskStatus">{$v.date}</td>
+                      <td class="taskStatus">{$v.key1}</td>
+                      <td class="taskStatus">{$v.key2}</td>
+                      <td class="taskStatus">{:$v['status']?($v['status']==1?"<span style='color:green'>审核通过</span>":"<span style='color:red'>审核不通过</span>"):"审核中"}</td>
+                      
+                  </tr>
+                  </foreach>
+                  </tbody>
+              </table>
+          </div>
+          <div class="panel-footer">{$page}</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/user/index')}">信息更新</a>
+          <a class="list-group-item" href="{:U('index.php/user/agent')}">申请报单中心</a>
+          <a class="list-group-item" href="{:U('index.php/user/password')}">更改密码</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                if({$uinfo.isagent}>0){
+                  alert("您已经是报单中心,不可以重复申请");
+                  return false;
+                }
+                if({$coinset.bdt1}>{$uinfo.renum}){
+                  alert("直接推荐人数不足,不可以申请");
+                  return false;
+                }
+                if({$coinset.bdt2}>{$uinfo.areasum}){
+                  alert("小区业绩不足,不可以申请");
+                  return false;
+                }
+                $.post("{:U(C('FILE_IN').'/User/agentsave')}", { utype:1}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">可用ECF帐户转帐
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/Coin/acca')}'">返回可用ECF帐户</button>
+                        </div>
+                    </div>
+                    <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                                <div class="fx1">帐户余额:</div>
+                                <div class="fx2">
+                                {$uinfo.coina|numberformat=###}
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">转入人编号:</label>
+                                <input type="text" placeholder="" id="username" required="" value="" onBlur="cheusername('{:U(C('FILE_IN').'/json/cheuser')}',this.value,'cu')" class="form-control">
+                                <label class="input-group-addon" id="cu"></label>
+                        </div><br>
+                        <!-- <div class="input-group input-group-sm">
+                        		<label class="input-group-addon">转入人编号:</label>
+                        		<select class='form-control' id="username">
+                        		<foreach name='ulist' item='v'>
+                                    <option value="{$v.username}">{$v.username}</option>
+                                </foreach>
+                                </select>
+                            </div><br> -->
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">转帐金额:</label>
+                                <input type="text" placeholder="" id="money" required="" value="" onBlur="var ds=this.value;var va={$coinset.coinashui}*ds/100;$('#sx').html(va);" class="form-control">
+                            </div>
+                        <div class="fma">
+                                <div class="fx1">手续费({$coinset.coinashui}%):</div>
+                                <div class="fx2" id="sx">
+                                0
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">备注:</label>
+                                <input type="text" placeholder="" id="cont" required="" value="" class="form-control">
+                            </div><br>
+                        <!-- <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                <input type="password" placeholder="" id="p" required="" value="" class="form-control">
+                            </div><br> -->
+                        <if condition="($uinfo['ga'] != '') AND (explode('|', $uinfo['ga'])[2] eq 1)">
+                        <div class="input-group input-group-sm">
+                               <label class="input-group-addon">谷歌验证码:</label>
+                               <input type="password" placeholder="" id="gacode" required="" value="" class="form-control">
+                           </div><br>
+                        <div class="form-actions center">
+                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+                        </div>
+                        </if>
+                    </form>
+                    </div>
+            </div>
+        </div>
+        <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/Coin/acca')}">可用ECF帐户</a>
+          	<br>
+          	<include file="Header:uinfo" />
+	    </div>
+      </div>
+
+    </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                var username=$("#username").val();
+                var money=$("#money").val();
+                var type=$("#type").val();
+                var gacode=$("#gacode").val();
+                var content=$("#cont").val();
+                if(!username && type==0){
+                    alert("请输入转入人编号");
+                    return false;
+                }
+                if(!money){
+                    alert("请输入转帐金额");
+                    return false;
+                }
+                if(!gacode){
+                    alert("请输入谷歌验证码");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/Coin/accasave')}", { username:username,money:money,content:content,gacode:gacode,cointype:'coina'}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+        function cheusername(url,username,id){
+            $.post(url, { username:username,id:id}, function(value) {
+                //alert(value);
+                var data = eval("("+value+")");
+                $('#'+id).html(data['info']);
+                color="red";
+                if(data['error']==1) color="green";
+                $('#'+id).css('color',color);
+            });
+        }
+    </script>
+
+</body>
+</html>

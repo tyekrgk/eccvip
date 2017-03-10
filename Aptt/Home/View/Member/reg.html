@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              注册新能量
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">能量编号:</label>
+                                <input type="text" placeholder="" name="username" id="username" value="{:newname()}" class="form-control">
+                                <span class="btn btn-success input-group-addon" id='changname'>换一个</span>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">投资额:</label>
+                                {:bonuslist()}
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">姓名:</label>
+                                <input type="text" placeholder="请认真填写，一旦填写不可修改" id="realname"  required="" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">昵称:</label>
+                                <input type="text" placeholder="" id="nick"  required="" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">性别:</label>
+                                 <select id="sex" class="form-control">
+                                    <option value="0">男</option>
+                                    <option value="1">女</option>
+                                </select>
+                        </div><br>
+						<div class="input-group input-group-sm" style="display:none">
+                            <label class="input-group-addon">证件号码:</label>
+                                <input type="text" placeholder="" id="idcard" required="" value="1" class="form-control">
+                        </div>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">Email:</label>
+                                <input type="email" placeholder="" id="email" required="" class="form-control">
+                        </div><br>
+                        <!-- <div class="input-group input-group-sm">
+                            <label class="input-group-addon">移动电话:</label>
+                                <input type="text" placeholder="" id="tel" required="" class="form-control">
+                        </div><br> -->
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">推荐人编号:</label>
+                                <input type="text" placeholder="" id="rname" required="" value="{$uinfo.username}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">管理人编号:</label>
+                                <input type="text" placeholder="" id="fname" required="" value="{$fname}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">管理人位置:</label>
+                                <select id="line" class="form-control">
+                                    <option value="0" {:$line?"":"selected='selected'"}>左</option>
+                                    <option value="1" {:$line?"selected='selected'":""}>右</option>
+                                </select>
+                        </div><br>
+                        <!-- <div class="input-group input-group-sm">
+                            <label class="input-group-addon">报单中心:</label>
+                                <input type="text" placeholder="" id="aname" required="" value="{$aname}" class="form-control">
+                        </div><br> -->
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">国家:</label>
+                                <select id="country" class="form-control">
+                                    <option value="">不限</option>
+                                        <option value="中国">中国</option>
+                                        <option value="土耳其">土耳其</option>
+                                        <option value="印度尼西亚">印度尼西亚</option>
+                                        <option value="马来西亚">马来西亚</option>
+                                        <option value="韩国">韩国</option>
+                                        <option value="以色列">以色列</option>
+                                        <option value="泰国">泰国</option>
+                                    </select>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">一级密码:</label>
+                                <input type="password" placeholder="" id="p1" required="" minlength='6' maxlength='20' class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">一级密码确认:</label>
+                                <input type="password" placeholder="" id="rp1" required="" minlength='6' maxlength='20' class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">二级密码:</label>
+                                <input type="password" placeholder="" id="p2" required="" minlength='6' maxlength='20' class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">二级密码确认:</label>
+                                <input type="password" placeholder="" id="rp2" required="" minlength='6' maxlength='20' class="form-control">
+                        </div><br>
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="button" id="reg">确定</button>
+                        </div>
+                    </form>
+                          </div>
+          <div class="panel-footer" style="color:Red">提示：每个账户只有两次升级能量级别的机会，一旦两次升级机会使用完毕，该账户将不能再进行账户升级操作，请合理安排升级计划！</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Member/reg')}">注册新能量</a>
+          <a class="list-group-item" href="{:U('index.php/User/update')}">升级帐户</a>
+          <a class="list-group-item" href="{:U('index.php/User/futou')}">复投帐户</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agent')}">注册审核</a>
+          <a class="list-group-item" href="{:U('index.php/Member/agentlist')}">审核记录</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#changname").click(function(){
+                $.post("{:U(C("FILE_IN").'/Json/newname')}", { Action: "post",u:""}, function(value) {
+                    $("#username").val(value);
+                 });
+            });
+            $("#reg").click(function(){
+                var username=$("#username").val();
+                var utype=$("#utype").val();
+                var realname=$("#realname").val();
+                var nick=$("#nick").val();
+                var sex=$('#sex').val();
+                var idcard=$("#idcard").val();
+                var email=$("#email").val();
+                //var tel=$("#tel").val();
+                //var aname=$("#aname").val();
+                var rname=$("#rname").val();
+                var fname=$("#fname").val();
+                var line=$("#line").val();
+                var country=$("#country").val();
+                var p1=$("#p1").val();
+                var rp1=$("#rp1").val();
+                var p2=$("#p2").val();
+                var rp2=$("#rp2").val();
+                
+                if(!username){
+                    alert("请输入能量编号");
+                    return false;
+                }
+                if(!realname){
+                    alert("请输入姓名");
+                    return false;
+                }
+                if(!nick){
+                    alert("请输入昵称");
+                    return false;
+                }
+                if(!idcard){
+                    alert("请输入证件号码");
+                    return false;
+                }
+                if(!email){
+                    alert("请输入Email");
+                    return false;
+                }
+                /* if(!tel){
+                    alert("请输入移动电话");
+                    return false;
+                } */
+                if(!rname){
+                    alert("请输入推荐人编号");
+                    return false;
+                }
+                /* if(!aname){
+                    alert("请输入报单中心编号");
+                    return false;
+                } */
+                if(!fname){
+                    alert("请输入管理员编号");
+                    return false;
+                }
+                
+                if(!p1){
+                    alert("请输入一级密码");
+                    return false;
+                }
+                if(p1!==rp1){
+                    alert("您两次输入的一级密码不一致");
+                    return false;
+                }
+                if(!p2){
+                    alert("请输入二级密码");
+                    return false;
+                }
+                if(p2!==rp2){
+                    alert("您两次输入的二级密码不一致");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/Member/save')}", { username:username,utype:utype,realname:realname,nick:nick,sex:sex,idcard:idcard,email:email,/* tel:tel, */rname:rname,/* aname:aname, */fname:fname,line:line,country:country,p1:p1,rp1:rp1,p2:p2,rp2:rp2}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) location.href='{:U("index.php/Member/agent")}';
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

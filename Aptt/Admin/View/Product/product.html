@@ -1,0 +1,96 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+                    <li><a href="#">商品管理</a> <span class="divider">/</span></li>
+                    <li class="active">{:$data['id']?"编辑商品":"添加商品"}</li>
+                </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+<script charset="utf-8" src="__PUBLIC__/KindEditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/KindEditor/lang/zh_CN.js"></script>
+
+  <script type="text/javascript">
+      var editor;
+      KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="cont"]', {
+          allowFileManager : true,
+          filterMode :true
+        });
+      });
+
+  </script>                    
+<style>
+    
+</style>
+<div class="row-fluid">
+    <form action="{:U(C("FILE_IN").'/Product/save',array('id'=>$data['id']))}" method="post" id="fn" enctype="multipart/form-data">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td width="10%" class="tableleft">商品名称</td>
+            <td>
+                <input type="text" name="proname" id="proname" value="{$data.proname}"/> 
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">商品类别</td>
+            <td>
+                <select name="ptype" id="ptype">
+                    <foreach name="pt" item="v">
+                    <option value="{$v.id}" {:$v['id']==$data['ptype']?"selected='selected'":""}>{$v.title}</option>
+                    </foreach>
+                </select>
+            </td>
+        </tr>
+        <tr id="dat">
+            <td width="10%" class="tableleft">商品图片</td>
+            <td><input type="file" name='img' id='img' value='' class="input-xlarge" > 
+                <if condition="$data['img']">
+                    <img src='__ROOT__/Uploads{$data.img}' style='height:20px;'> 请按350*350上传图片,显示图片时将会强制规格
+                </if>
+            </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">商品价格</td>
+            <td><div class="input-group"><input type="text" name="money" id="money" class="form-control" value="{$data.money}"/>
+              </div>
+                 </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">商品描述</td>
+            <td><textarea name="discription" style="height:50px;width:60%" id="discription">{$data.discription}</textarea></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">详细介绍</td>
+            <td><textarea name="cont" style="height:100px;width:90%" id="cont">{$data.content}</textarea></td>
+        </tr>       
+    </table>
+    <div class="form-inline definewidth m10"><button  class="btn btn-primary" type="submit" id="submit">保存</button></div>
+    </form>
+    
+    <script>
+        $().ready(function () {       
+            $("#submit").click(function(){
+                var proname=$("#proname").val();
+                var money=$("#money").val();
+                var discription=$("#discription").val();
+                if(!proname){
+                    alert("商品名称不可以为空");
+                    return false;
+                }
+                if(!money){
+                    alert("请输入商品价格");
+                    return false;
+                }
+                if(!discription){
+                    alert("商品描述不可以为空");
+                    return false;
+                }
+                return true;
+             });
+
+        });
+    </script>
+</div>            
+   <include file="Footer:index" />

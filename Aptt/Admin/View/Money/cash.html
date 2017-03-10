@@ -1,0 +1,96 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">会员提现</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <div class="form-inline definewidth m10" style="padding:10px 0 10px 0">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&un='+document.getElementById('un').value"><br></div>
+    </div>
+    <form action="{:U(C("FILE_IN").'/Money/allcash')}" method="POST" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>选择</th>
+        <th>提现会员</th>
+        <th>提奖金额</th>
+        <th>税</th>
+        <th>实发金额</th>
+        <th>提现帐号信息</th>
+        <th>
+            <select name='mm' style='width:120px;' onChange="javascript:window.open(this.options[this.selectedIndex].value,'_self')">
+             <option value='{:U(C("FILE_IN")."/Money/cash",array("mm"=>-1))}' <php>echo $mm==-1?"selected":"";</php>>-=显示全部=-</option>
+             <option value='{:U(C("FILE_IN")."/Money/cash",array("mm"=>0))}' <php>echo $mm==0?"selected":"";</php>>等待审核</option>
+             <option value='{:U(C("FILE_IN")."/Money/cash",array("mm"=>1))}' <php>echo $mm==1?"selected":"";</php>>已审核</option>
+             <option value='{:U(C("FILE_IN")."/Money/cash",array("mm"=>2))}' <php>echo $mm==2?"selected":"";</php>>已退回</option>
+            </select>
+            </th>
+        <th>时间</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>
+                <php>echo $v['status']?"":"<input type='checkbox' name='perm[]' value='".$v['id']."' id='perm_".$v['id']."' class='perm'/>";</php>
+                
+            </td>
+            <td align='center'><php>echo gettableinfo("id=".$v['uid'])</php></td>
+            <td align='center'>{$v.money}</td>
+            <td align='center'>{$v.shui}</td>
+            <td align='center'><php>echo $v["money"]-$v["shui"];</php></td>
+            <td align='center'>{$v.bank}[{$v.bankuser}]<br>{$v.bankcard}<br>{$v.bankaddress}</td>
+            <td align='center'><php>$arr=array(0=>"<span style='color:red'>等待审核...</span>",1=>"<span style='color:green'>已审核</span>",2=>"<span style='color:#999'>已退回</span>");echo $arr[$v["status"]];</php></td>
+            <td align='center'>{$v['date']}</td>
+            <td align='center'>
+                <php>
+                    if($v["status"]){echo "无";}else{
+                </php>
+                [<a href='{:U(C("FILE_IN")."/Money/cashdo",array("id"=>$v["id"]))}' target="hidden_frame">审核</a>] 
+                [<a href='{:U(C("FILE_IN")."/Money/cashcancel",array("id"=>$v["id"]))}' target="hidden_frame">退回</a>]
+                <php>}</php>
+            </td>
+        </tr>
+    </foreach>
+        <tr><td colspan="9"><input type="button" id="checkall" value="全选" /> 
+            <input type="button" id="delcheckall" value="取消全选" /> <input type="submit" class="btn btn-primary" id="submit" value="批量审核"></td></tr>
+
+        </table>
+    </form>
+        <div class="pages">
+          　　{$page}
+        </div>
+        <script>
+        $(function () {       
+            $("#submit").click(function(){
+                if($(".perm:checked").size()==0){
+                    alert("请最少选择一个");
+                    return false;   
+                }
+                if(confirm("确定执行批量审核吗?此操作为不可逆操作")){
+                    return true;
+                }else{
+                    return false;   
+                }
+             });
+             $("#checkall").click(function() { 
+                $("input[name='perm[]']").each(function() { 
+                    $(this).prop("checked", true); 
+                }); 
+            }); 
+            $("#delcheckall").click(function() { 
+                $("input[name='perm[]']").each(function() { 
+                    $(this).attr("checked",false); 
+                });     
+            });
+        });
+    </script>
+
+</div>            
+   <include file="Footer:index" />

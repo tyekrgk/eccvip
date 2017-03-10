@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">走势图
+                            <div class="pull-right">
+                                <select onchange="javascript:window.open(this.options[this.selectedIndex].value,'_self')" style="width:100px;" >
+                                    <option value="{:U('index.php/Gtmarket/index',array('days'=>10))}" {:$days==10?"selected":""}>10天</option>
+                                    <option value="{:U('index.php/Gtmarket/index',array('days'=>20))}" {:$days==20?"selected":""}>20天</option>
+                                    <option value="{:U('index.php/Gtmarket/index',array('days'=>30))}" {:$days==30?"selected":""}>30天</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="panel-body ov">
+                            
+<script type="text/javascript" src="__PUBLIC__/js/highcharts.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/exporting.js"></script>
+<script type="text/javascript">
+$(function () {
+    $('#container').highcharts({
+        title: {
+            text: '',
+            x: -20 //center
+        },
+        subtitle: {
+            text: '',
+            x: -20
+        },
+        xAxis: {
+            categories: [{$date}]
+        },
+        yAxis: {
+            title: {
+                text: 'AC币价格(元)'
+            },
+            plotLines: [{
+                value: 0,
+                width: 1,
+                color: '#808080'
+            }]
+        },
+        tooltip: {
+            valueSuffix: ''
+        },
+        series: [{
+            name: 'AC币价格',
+            data: [{$value}]
+        }]
+    });
+});
+        </script>
+                        <div id='container' style="width:780px;min-width: 310px; height: 200px; margin: 0 auto">
+                            
+                            <div class="clear"></div>
+                        </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">AD出售列表</div>
+                        <div class="panel-body ov">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>当前价格(元/枚)</th>
+                                    <th>AD1卖盘</th>
+                                    <th>卖盘状态</th>
+                                    <th>AD1买盘</th>
+                                    <th>买盘状态</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr>
+                                    <td class="taskStatus"><span class="pending">{$v.price|numberformat=###,2}</span></td>
+                                    <td class="taskStatus">{$v.number}/{$coinset.gdup}</td>
+                                    <td class="taskStatus">{:$v['number']>=$coinset['gdup']?"已 挂 满":"未 挂 满"}</td>
+                                    <td class="taskStatus">{$v.donumber}</td>
+                                    
+                                    <td class="taskStatus">
+                                        {:$v['status']==0?"已 售 罄":""}
+                                        {:$v['status']==1?($v['number']>$v['donumber']&&$v['number']>0?"可 购 买":"无数量可购买"):""}
+                                        {:$v['status']==2?"未 开 放":""}
+                                    </td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="panel-footer">
+                            <ul class="recent-posts">
+                                <li style='text-align:center'>{$page}</li>
+                                
+                            </ul>
+                        </div>
+                    </div>
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我要买入</div>
+                        <div class="panel-body">
+                        <form class="form-horizontal">
+                            
+                            <div class="fma">
+                                <div class="fx1">AT1余额:</div>
+                                <div class="fx2">{$uinfo.gt1|numberformat=###,2}
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">购买价格:</label>
+                                    <select id="gt1price" class="form-control"><option value="{$gdprice}">{$gdprice}元/个</option></select>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">购买数量:</label>
+                                    <input id="gt1number" type="text" required="" placeholder="" onBlur="var va=this.value*{$gdprice};$('#gtallmoney').html(va)" class="form-control">
+                            </div>
+                            <div class="fma">
+                                <div class="fx1">支付金额:</div>
+                                <div class="fx2" id="gtallmoney">0
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                    <input id="gt1p" type="password" required="" placeholder="" class="form-control">
+                            </div><br>
+                            <div class="form-actions center"><input class="btn btn-primary" type="button" value="AT1支付" id="gt1">
+                            </div>
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">我要卖出
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/gtmarket/gd1')}'">我的AD1</button> 
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/gtmarket/gd2')}'">我的AD2</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="fma">
+                                <div class="fx1">AD2余额:</div>
+                                <div class="fx2">{$uinfo.gd2|numberformat=###,1}
+                                </div>
+                            </div>
+                            <div class="fma">
+                                <div class="fx1">收益:</div>
+                                <div class="fx2">{$uinfo.pro}/{:$bonus[$uinfo['utype']]['money']*5}
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">卖出数量:</label>
+                                    <input id="gt2number" type="text" required="" placeholder="" class="form-control">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">卖出价格:</label>
+                                    <select id="gt2price" class="form-control">
+                                        <option>请选择价格(元/个)</option>
+                                        <foreach name='list' item='v'>
+                                            <if condition="$v.status">
+                                            <option value="{$v.price}">{$v.price}</option>
+                                            </if>
+                                        </foreach>
+                                    </select>
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                    <input id="gt2p" type="password" required="" placeholder="" class="form-control">
+                            </div><br>
+                            <div class="form-actions center"><input class="btn btn-primary" type="button" value="确认提交" id="gt2">
+                            </div>
+                        
+                        </form>
+                    </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">能量AC币转入
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/money/kuang')}'">查看能量记录</button>
+                        </div>
+                    </div>
+                    <div class="panel-body">
+                        <form class="form-horizontal">
+                            <div class="fma">
+                                <div class="fx1">拥有能量:</div>
+                                <div class="fx2">{$uinfo.gu}
+                                </div>
+                            </div>
+                            <div class="fma">
+                                <div class="fx1">能量AC币:</div>
+                                <div class="fx2">{$uinfo.gd}
+                                </div>
+                            </div>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">转入数量:</label>
+                                    <input type="text" required="" placeholder="" id="gdnumber" class="form-control">
+                            </div><br>
+                            <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                    <input type="password" required="" placeholder="" id="gdp" class="form-control">
+                            </div><br>
+                            <div class="form-actions center"><input class="btn btn-primary" type="button" value="确认提交" id="gd">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Gtmarket/index')}">AD市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    function agentdel(id){
+        str="{:U(C('FILE_IN').'/member/agent',array('b'=>'del','id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    $(document).ready(function(){
+        $("#gt1").click(function(){
+           var number=$("#gt1number").val();
+           var price=$("#gt1price").val();
+           var p=$("#gt1p").val();
+           if(!number){
+                alert("请输入购买数量");
+                return false;
+           }
+           if(number<0){
+                alert("请输入正确的购买数量");
+                return false;
+           }
+           if(!p){
+                alert("请输入二级密码");
+                return false;
+           }
+           $.post("{:U('index.php/gtmarket/gt1save')}", {number:number,price:price,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) window.location.reload();
+             });
+        });
+        $("#gt2").click(function(){
+           var number=$("#gt2number").val();
+           var price=$("#gt2price").val();
+           var p=$("#gt2p").val();
+           if(!number){
+                alert("请输入卖出AC币数量");
+                return false;
+           }
+           if(number<0){
+                alert("请输入正确的卖出AC币数量");
+                return false;
+           }
+           if(!p){
+                alert("请输入二级密码");
+                return false;
+           }
+           $.post("{:U('index.php/gtmarket/gt2save')}", {number:number,price:price,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) window.location.reload();
+             });
+        });
+        $("#gd").click(function(){
+           var number=$("#gdnumber").val();
+           var p=$("#gdp").val();
+           if(!number){
+                alert("请输入卖出AC币数量");
+                return false;
+           }
+           if(number<0){
+                alert("请输入正确的卖出AC币数量");
+                return false;
+           }
+           if(!p){
+                alert("请输入二级密码");
+                return false;
+           }
+           $.post("{:U('index.php/gtmarket/gdsave')}", {number:number,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) window.location.reload();
+             });
+        });
+    });
+    </script>
+</body>
+</html>

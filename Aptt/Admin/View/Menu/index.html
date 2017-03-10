@@ -1,0 +1,46 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="index.html">官网设置</a> <span class="divider">/</span></li>
+            <li class="active">菜单管理</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid"> 
+    <div class="well">
+        <a class="btn btn-default" href="{:U(C("FILE_IN").'/Menu/edit')}" >添加导航</a>
+    </div> 
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>菜单名称</th>
+        <th>父导航</th>
+        <th>类型</th>
+        <th>排序</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="data" item="v">
+        <tr>
+            <td style='color:green'>{$v.title}</td>
+            <td>{$v.fid|getmenufid=###}</td>
+            <td>{$v.type|getmenutype=###}</td>
+            <td>{$v.sort}</td>
+            <td>[<a href='{:U(C("FILE_IN")."/Menu/edit",array("id"=>$v["id"]))}'>编辑</a>] [<a href='{:U(C("FILE_IN")."/Menu/delete",array("id"=>$v["id"]))}' target="hidden_frame">删除</a>]</td>
+        </tr>
+        <foreach name="v['child']" item="k">
+            <tr>
+                <td>  &nbsp;&nbsp;└{$k.title}</td>
+                <td>{$k.fid|getmenufid=###}</td>
+                <td>{$k.type|getmenutype=###}</td>
+                <td>  &nbsp;&nbsp;└{$k.sort}</td>
+                <td>[<a href='{:U(C("FILE_IN")."/Menu/edit",array("id"=>$k["id"]))}'>编辑</a>] [<a href='{:U(C("FILE_IN")."/Menu/delete",array("id"=>$k["id"]))}' target="hidden_frame">删除</a>]</td>
+            </tr>
+        </foreach>
+    </foreach>
+    </table>
+</div>            
+   <include file="Footer:index" />

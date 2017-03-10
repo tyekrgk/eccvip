@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">CT帐户转帐
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/money/bt')}'">返回CT帐户</button>
+                        </div>
+                    </div>
+                    <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                                <div class="fx1">帐户余额:</div>
+                                <div class="fx2">
+                                {$uinfo.bt|numberformat=###}
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm mt10">
+                                <label class="input-group-addon">转帐类型:</label>
+                                <select name="type" id="type" onchange="va=this.options[this.selectedIndex].value;if(va==1){$('#cn').css('display','none');}else{$('#cn').css('display','block');}" class="form-control">
+                                    <option value="0">小额转帐</option>
+                                    <option value="1">转换为CT1</option>
+                                </select>
+                        </div><br>
+                        <div class="input-group input-group-sm" id="cn">
+                                <label class="input-group-addon">转入人编号:</label>
+                                <input type="text" placeholder="" id="username" required="" value="" onBlur="cheusername('{:U(C('FILE_IN').'/json/cheuser')}',this.value,'cu')" class="form-control"> <span id="cu"></span>
+                        </div><br>
+                        <div class="input-group input-group-sm"  id='cn'>
+                                <label class="input-group-addon">转帐金额:</label>
+                                <input type="text" placeholder="" id="money" required="" value="" onBlur="var ds=this.value;va={$coinset.bt0shui}*ds/100;$('#sx').html(va);" class="form-control">
+                            </div>
+                        <div class="fma">
+                                <div class="fx1">手续费({$coinset.bt0shui}%):</div>
+                                <div class="fx2" id="sx">
+                                0
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">备注:</label>
+                                <input type="text" placeholder="" id="cont" required="" value="" class="form-control">
+                            </div><br>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                <input type="text" placeholder="" id="p" required="" value="" class="form-control">
+                            </div><br>
+                        <div class="form-actions center">
+                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+                        </div>
+                    </form>
+                    </div>
+            </div>
+        </div>
+      </div>
+
+    </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                var username=$("#username").val();
+                var money=$("#money").val();
+                var type=$("#type").val();
+                var p=$("#p").val();
+                var content=$("#cont").val();
+                if(!username && type==0){
+                    alert("请输入转入人编号");
+                    return false;
+                }
+                if(!money){
+                    alert("请输入转帐金额");
+                    return false;
+                }
+                if(!p){
+                    alert("请输入二级密码");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/money/btsave')}", { username:username,money:money,content:content,p:p,type:type}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,132 @@
+<ul>
+			<li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.coina|numberformat=###}
+                  <div class="peity-t">可用ECF</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-1">5,3,9,6,5,9,7,3,5,2</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.coinb|numberformat=###}<div class="peity-t">消费ECF</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-2">5,3,5,7,2,5,9,3,9,6</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.coinc|numberformat=###}<div class="peity-t">复投ECF</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-3">5,9,7,5,3,9,5,2,6,3</span>
+                </div>
+              </div>
+            </li>
+            <!-- 
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.bt|numberformat=###}
+                  <div class="peity-t">CT帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-1">5,3,9,6,5,9,7,3,5,2</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.bt1|numberformat=###}<div class="peity-t">CT1帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-2">5,3,5,7,2,5,9,3,9,6</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.bt2|numberformat=###}<div class="peity-t">CT2帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-3">5,9,7,5,3,9,5,2,6,3</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.gt|numberformat=###}
+                  <div class="peity-t">AT帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-1">5,3,9,6,5,9,7,3,5,2</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.gt1|numberformat=###}<div class="peity-t">AT1帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-2">5,3,5,7,2,5,9,3,9,6</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.ly|numberformat=###}<div class="peity-t">CF帐户</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-3">5,9,7,5,3,9,5,2,6,3</span>
+                </div>
+              </div>
+            </li>
+            <li>
+              <div class="peity-c">
+                <div class="peity-left">
+                  {$uinfo.gu}                  <div class="peity-t">能量</div>
+                </div>
+                <div class="peity-right">
+                  <span class="bar-colours-4">5,3,3,5,2,9,6,5,9,7</span>
+                </div>
+              </div>
+            </li>
+             -->
+          </ul>
+          <script type="text/javascript">
+                    $(document).ready(function(){
+                      $.fn.peity.defaults.bar = {
+                        delimiter: ",",
+                        fill: ["#4d89f9"],
+                        height: 30,
+                        max: null,
+                        min: 0,
+                        padding: 0.1,
+                        width: 60
+                      }
+                       $(".bar-colours-1").peity("bar", {
+                          fill: ["red"]
+                        })
+                       $(".bar-colours-2").peity("bar", {
+                          fill: ["green"]
+                        })
+                       $(".bar-colours-3").peity("bar", {
+                          fill: ["yellow"]
+                        })
+                       $(".bar-colours-4").peity("bar", {
+                          fill: ["#0EADD4"]
+                        })
+                    });
+                    </script>

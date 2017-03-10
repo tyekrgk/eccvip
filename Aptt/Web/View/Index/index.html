@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,  initial-scale=1" />
+	<title>AC COIN</title>
+	<meta name="author" content="Alvaro Trigo Lopez" />
+	<meta name="description" content="fullPage callback function." />
+	<meta name="keywords"  content="fullpage,jquery,demo,callbac,function,event" />
+	<meta name="Resource-type" content="Document" />
+
+
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/jquery.fullPage.css" />
+	<link rel="stylesheet" type="text/css" href="//cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/style.css" />
+	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/layout.css" />
+
+
+	<!--[if IE]>
+		<script type="text/javascript">
+			 var console = { log: function() {} };
+		</script>
+	<![endif]-->
+
+
+	<script src="__PUBLIC__/js/jquery-2.1.3.min.js" ></script>
+	 <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <script src="__PUBLIC__/js/jquery-1.11.3.min.js"></script>	
+
+	<script type="text/javascript" src="__PUBLIC__/js/jquery.fullPage.js"></script>
+	<script type="text/javascript" src="//cdn.bootcss.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$('#fullpage').fullpage({
+				sectionsColor: ['#ddd', '#fff', 'whitesmoke', '#fff', 'whitesmoke'],
+				anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage','5thpage', 'lastPage'],
+				menu: '#menu',
+				scrollingSpeed: 1000
+			});
+		});
+	</script>
+
+	
+
+
+</head>
+<body>
+
+	<header class="navbar-fixed-top header">
+		<nav class="navbar navbar-default" id="redonav">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+					<a class="navbar-brand" href="/" id="redonav_brand">ACCOIN</a>
+				</div>
+
+				<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+					<ul class="nav navbar-nav navbar-right">
+						<li data-menuanchor="firstPage"><a href="#firstPage" id="redonav_brand">{$Think.lang.menu_home}</a></li>
+						<li data-menuanchor="3rdPage"><a href="#3rdPage" id="redonav_brand">{$Think.lang.menu_com}</a></li>
+						<li data-menuanchor="4thpage"><a href="#4thpage" id="redonav_brand">{$Think.lang.menu_des}</a></li>
+						<li data-menuanchor="5thpage"><a href="#5thpage" id="redonav_brand">{$Think.lang.menu_contact}</a></li>
+						<li data-menuanchor="lastPage"><a href="#lastPage" id="redonav_brand">{$Think.lang.menu_atm}</a></li>
+						<li data-menuanchor="plan"><a href="{:U('index.php/login/index')}" target="_new" id="redonav_brand">{$Think.lang.menu_login}</a></li>
+						<li data-menuanchor="c">
+							<div class="btn-group btn-group-sm" style="margin:10px 0 0 0">
+							<a class="btn btn-primary" href="javascript:void(0)">
+								语言
+							</a>
+							<a class="btn btn-primary dropdown-toggle" data-toggle="dropdown" href="?l=zh-cn">
+							<span class="caret"></span>
+							<span class="sr-only">切换下拉菜单</span>
+							</a>
+							<ul class="dropdown-menu" role="menu">
+							<li><a href="?l=zh-cn">中国大陆</a></li>
+							<li><a href="?l=en-us">ENGLISH</a></li>
+							<li><a href="?l=ko">한국</a></li>
+							</ul>
+							</div>
+</li>
+					</ul>
+				</div>
+			</div>
+		</nav>
+	</header>
+	
+
+
+
+
+<div id="fullpage">
+	<div class="section " id="section0">
+		<div class="main_visual">
+			<ul id="main-bg" class="main-banner-zone">
+				<li class="main-banner-1"></li>			
+				<li class="main-banner-2"></li>
+				<li class="main-banner-3"></li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+
+			slide_time		=	7000;
+
+			function slide(){
+
+				width	=	"-"+$("#main-bg li").width();
+
+				clearTimeout(st);
+
+				$("#main-bg").stop().animate({
+					"left"	: width
+				}, 500, function(){
+					$(this).append($(this).children().eq(0)).css("left", "0");
+
+					st	=	setTimeout("slide()", slide_time);
+				});
+			}
+
+			st	=	setTimeout("slide()", slide_time);
+
+		</script>
+		<div class="text-center main-text-box container">
+			<h2>{:$inc["g1".$lang]}</h2>
+			<div>{:$inc["g2".$lang]}
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section1">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center slide">
+					<p><img src="__PUBLIC__/images/perpetual-never-zero.png" alt="" title=""/></p>
+					<h3>{:$inc["h1".$lang]}</h3>
+					<div>{:$inc["i1".$lang]}</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center slide">
+					<p><img src="__PUBLIC__/images/gold-bars.png" alt="" title=""/></p>
+					<h3>{:$inc["h2".$lang]}</h3>
+					<div>{:$inc["i2".$lang]}</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center slide">
+					<p><img src="__PUBLIC__/images/vault.png" alt="" title=""/></p>
+					<h3>{:$inc["h3".$lang]}</h3>
+					<div>{:$inc["i3".$lang]}</div>
+				</div>
+				<div class="col-md-3 col-sm-6 col-xs-12 text-center slide">
+					<p><img src="__PUBLIC__/images/agreement-pen-icon-171x169.png" alt="" title=""/></p>
+					<h3>{:$inc["h4".$lang]}</h3>
+					<div>{:$inc["i4".$lang]}</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section2">
+		<div class="container">
+			<div class="row page-title">
+				ABOUT AC COIN
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12 section-img text-center">
+				<img src="__PUBLIC__/images/accoin.png" title="accoin" alt="accoin"/>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12  section-Box pt20">
+				<h1>{:$inc["j1".$lang]}</h1>		
+				<div class="section-meno">{:$inc["j2".$lang]}</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section3">
+		<div class="container">
+			<div class="row page-title">
+				AC COIN INFOMATION
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12 section-img text-center">
+				<img src="__PUBLIC__/images/accoin.png" title="accoin" alt="accoin"/>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12  section-Box">
+				<h1>{:$inc["k1".$lang]}</h1>		
+				<div class="section-meno">{:$inc["k2".$lang]}</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section4">
+		<div class="container">
+			<div class="row page-title">
+				CONTACT US
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12  text-center section-img">
+				<img src="__PUBLIC__/images/m-wallet2.png" title="accoin" alt="accoin"/>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12   section-Box ">
+				<h1>{:$inc["l1".$lang]}</h1>		
+				<div class="section-meno">{:$inc["l2".$lang]}</div>
+			</div>
+		</div>
+	</div>
+	<div class="section" id="section5">
+		<div class="container">
+			<div class="row page-title">
+				AC COIN ATM
+			</div>
+			<div class="col-md-4 col-sm-4 col-xs-12 text-center section-img">
+				<img src="__PUBLIC__/images/atm.png" title="accoin" alt="accoin"/>
+			</div>
+			<div class="col-md-8 col-sm-8 col-xs-12   section-Box ">
+				<h1>{:$inc["m1".$lang]}</h1>		
+				<div class="section-meno">{:$inc["m2".$lang]}</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+	
+<footer class="footer navbar-fixed-bottom text-right">
+	<div class="container">
+		Copyright © 2016 AC COIN Inc. 
+	</div>
+</footer>
+</body>
+</html>

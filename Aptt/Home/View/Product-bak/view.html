@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"> AC商城</div>
+
+            <div class="panel-body ov">
+              <div class="productlist">
+                <div class="col-sm-12">
+                  <div class="col-sm-6 center">
+                    <img src="__ROOT__/Uploads/{$data.img}" style="width:300px;height:300px;padding:10px 10px;" title="{$data.discription}" alt="{$data.discription}">
+                  </div>
+                  <div class="col-sm-6 ppmng">
+                    <h4>{$data.proname}</h4>
+                    <dl>
+                      <dd>商品描述:<p style="color:red">{$data.discription}</p></dd>
+                      <dd>商品类别:{$data.ptype|gettableinfo='id='.###,'title','ptype'}</dd>
+                      <dd>商品价格:{$data.money}</dd>
+                      <dd><span style="float:left">购买数量:</span><span style="float:left"><div class="input-group  input-group-sm addon" style="width:120px;">
+                                     <span class="input-group-addon" id="addon-low"><i class="fa fa-minus"></i></span>
+                                     <input type="text" class="form-control" id="number" value="1" style="text-align:center;" onblur="doproductnumber(0)">
+                                     <span class="input-group-addon" id="addon-add"><i class="fa fa-plus"></i></span>
+                                  </div>
+                                </span>
+                      </dd>
+                      <dd style="margin:10px 0 0 0;"><a href="javascript:void(0)" class="btn btn-sm btn-danger" id="addcart"><i class="fa fa-shopping-cart"></i> 加入购物车</a></dd>
+                    </dl>
+                  </div>
+                </div>
+
+                <div class="col-sm-12" style="border-bottom:1px solid #ccc"><h4>商品详情</h4></div>
+                <div class="col-sm-12" style="padding:15px 0;">{$data.content}</div>
+              </div>
+            </div>
+        </div>
+       </div>
+       <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">收货地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+  <script type="text/javascript">
+      $(document).ready(function(){
+          $("#addon-low").click(function(){
+            doproductnumber(1);
+          });
+          $("#addon-add").click(function(){
+            doproductnumber(2);
+          });
+          $("#addcart").click(function(){
+            url="{:U('index.php/product/addcart')}";
+            number=$("#number").val();
+            id={$data.id};
+            $.post(url, { id:id,nb:number}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+             });
+          });
+      });
+      function doproductnumber(type){
+          val=$("#number").val();
+          val=parseInt(val);
+          if(val=="NaN") val=1;
+          if(val<1) val=1;
+          if(val>9999) val=9999;
+          if(type==1){
+            val--;
+            if(val<1) val=1;
+            if(val>9999) val=9999;
+          }
+          if(type==2){
+            val++;
+            if(val<1) val=1;
+            if(val>9999) val=9999;
+          }
+          $("#number").val(val);
+      }
+  </script>
+</body>
+</html>

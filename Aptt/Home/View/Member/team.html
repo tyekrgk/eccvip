@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">组织图谱
+              <div class="pull-right">
+                <form action="{:U('index.php/Member/team')}" method="post"><input id='un' value='{$un}' name='un' style='width:70px; height:24px;' type='text'> <input type='submit'  value='查询'   class='btn-success btn btn-xs' style=""> <php>echo $st?"<a href='".U('index.php/Member/team',array('id'=>$uinfo["id"]))."' class='btn btn-xs btn-success'  style=''>返回顶部</a>":"";</php></form>
+
+              </div></div>
+            <div class="panel-body" style="overflow-x:auto;">
+              <div style="width:100%;min-width:700px;height:auto;">
+              <link rel="stylesheet" href="__PUBLIC__/css/team.css" />
+          	  {$teamstr2}
+                <br>
+				</div>
+            </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Member/team')}">组织图谱</a>
+          <a class="list-group-item" href="{:U('index.php/Member/recommand')}">推荐图谱</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            购买记录
+        </div>
+        <div class='main'>
+            <div style='width:98%;height:auto;border:1px solid #ccc;padding:1% 1%'>备注:<br>1.请在超时时间到达前点击[确认支付],否则记录将自动还原;<br>2.点击记录空白的地方可以查看或收起支付信息</div>
+    <table class='table table-bordered table-hover definewidth m10'>
+        <tr><th height='20'>订单编号</th><th>挂单金额</th><th>交易税</th><th>(实付/到帐)金额<font style='color:red'>$</font></th><th>(实付/到帐)金额<font style='color:red'>￥</font></th><th>卖家/信用</th><th>挂单时间</th><th>超时时间</th><th>状态</th></tr>
+    <foreach name="list" item="v">
+        <tr class='ce' title='点击空白地方查看银行卡号和联系方式' style='cursor:pointer' onclick="var a=document.getElementById('hid_{$v.id}').style.display;document.getElementById('hid_{$v.id}').style.display=(a=='none'?'':'none')"><td height='20'>{$v.sn}</td><td>{$v.coin}</td><td>{$v.shui}</td><td>{$v.rcoin}</td><td><php>echo numberformat($v['rcoin']*$coinset['epoutcoin'],2)</php></td><td><php>echo gettableinfo("id=".$v['uid'])."<br>".showstar(0,$v["uid"]);</php></td><td>{$v.addtime}</td><td>{$v.lockdate}</td><td><php>
+            $arr=array(
+            1=>'[<a href=\''.U("index.php/Market/lockpay",array("id"=>$v["id"])).'\' target="hidden_frame">支付确认</a>] [<a href=\''.U("index.php/Market/lockcancel",array("id"=>$v["id"])).'\'  target="hidden_frame">取消</a>]',
+            2=>'<span style="color:#ccc">等待确认收款</span>',
+            3=>'<span style="color:green">交易完成</span>');
+            echo $arr[$v['status']];
+
+        </php></td></tr>
+        <tr id='hid_{$v.id}' style='display:none'><td colspan='9'>卖家帐户:<b style='color:red'>提现银行</b>:{$v.bank} <b style='color:red'>开户姓名</b>:{$v.bankuser} <b style='color:red'>银行帐号</b>:{$v.bankcard} <b style='color:red'>开户行地址</b>:{$v.bankaddress}<br>联系方式:{$v.contact}</td></tr>
+    </foreach>
+    </table>
+            <div class="inline pull-right pages">{$page}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

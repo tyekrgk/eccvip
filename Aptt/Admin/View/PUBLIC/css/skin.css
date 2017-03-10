@@ -1,0 +1,257 @@
+.login_top_bg {
+	background-image: url(../images/login-top-bg.gif);
+	background-repeat: repeat-x;
+}
+.login-buttom-txt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #ABCAD3;
+	text-decoration: none;
+	line-height: 20px;
+}
+.login_txt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	color: #333333;
+}
+.Submit {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #629DAE;
+	text-decoration: none;
+	background-image: url(../images/Submit_bg.gif);
+	background-repeat: repeat-x;
+}
+.login_bg {
+	background-image: url(../images/login_bg.jpg);
+	background-repeat: repeat-x;
+}
+.login_bg2 {
+	background-image: url(../images/login-content-bg.gif);
+	background-repeat: no-repeat;
+	background-position: right;
+}
+
+
+.login_txt_bt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	line-height: 25px;
+	color: #666666;
+	font-weight: bold;
+}
+.body {
+	background-color: #EEF2FB;
+	left: 0px;
+	top: 0px;
+	right: 0px;
+	bottom: 0px;
+}
+
+.admin_txt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #FFFFFF;
+	text-decoration: none;
+	height: 38px;
+	width: 100%;
+	position: 固定;
+	line-height: 38px;
+}
+
+.admin_topbg {
+	background-image: url(../images/top-right.gif);
+	background-repeat: repeat-x;
+}
+.txt_bt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: bold;
+	color: #000000;
+	text-decoration: none;
+}
+.left_topbg {
+	background-image: url(../images/content-bg.gif);
+	background-repeat: repeat-x;
+}
+.admin_toptxt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	color: #4A8091;
+	height: 18px;
+	width: 100%;
+	overflow: hidden;
+	position: 固定;
+}
+
+.left_bt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 14px;
+	font-weight: bold;
+	color: #395a7b;
+}
+.left_bt2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: bold;
+	color: #333333;
+}
+.titlebt {
+	font-size: 12px;
+	line-height: 26px;
+	font-weight: bold;
+	color: #000000;
+	background-image: url(../images/top_bt.jpg);
+	background-repeat: no-repeat;
+	display: block;
+	text-indent: 15px;
+	padding-top: 5px;
+}
+
+.left_txt {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	color: #666666;
+}
+.left_txt2 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	color: #000000;
+}
+.nowtable {
+	background-color: #e1e5ee;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-top-color: #bfc4ca;
+	border-right-color: #bfc4ca;
+	border-bottom-color: #bfc4ca;
+	border-left-color: #bfc4ca;
+}
+.left_txt3 {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	color: #003366;
+	text-decoration: none;
+}
+
+
+
+.left_ts {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	font-weight: bold;
+	color: #FF6600;
+}
+.line_table {
+	border: 1px solid #CCCCCC;
+}
+.sec1 {
+	CURSOR: hand;
+	COLOR: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	border: 1px solid #B5D0D9;
+	background-image: url(../images/right_smbg.jpg);
+	background-repeat: repeat-x;
+}
+.sec2 {
+	FONT-WEIGHT: bold;
+	CURSOR: hand;
+	COLOR: #000000;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 25px;
+	background-color: #e2e7ed;
+	border: 1px solid #e2e7ed;
+}
+.main_tab {
+	COLOR: #000000;
+	BACKGROUND-COLOR: #e2e7ed;
+	border: 1px solid #e2e7ed;
+}
+.MM a {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #666666;
+	background-image: url(../images/menu_bg.gif);
+	background-repeat: no-repeat;
+	list-style-type: none;
+	list-style-image: none;
+}
+a:link {
+	font-size: 12px;
+	line-height: 25px;
+	color: #333333;
+	text-decoration: none;
+}
+a:hover {
+	font-size: 12px;
+	line-height: 25px;
+	color: #666666;
+	text-decoration: none;
+}
+a:visited {
+	font-size: 12px;
+	line-height: 25px;
+	color: #333333;
+	text-decoration: none;
+}
+
+
+.MM a:link {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	line-height: 26px;
+	color: #666666;
+	background-image: url(../images/menu_bg.gif);
+	background-repeat: no-repeat;
+	list-style-type: none;
+	list-style-image: none;
+}
+
+/****表格样式1********/
+.table{width:100%;}
+.table,.table td{border:solid 1px #ccc;border-collapse: collapse;background:#fff;}
+.table th,.table td{border:solid 1px #ccc;width:100px;text-align: center;padding:8px 8px;}
+.table thead tr td{background: #eee;color:#333;padding:8px 8px;}
+
+
+#table{width:100%;}
+#table,#table td{border:solid 1px #ccc;border-collapse: collapse;background:#fff;font-size:12px;}
+#table th,#table td{border:solid 1px #ccc;width:100px;padding:8px 8px;}
+#table thead tr td{background: #eee;color:#333;padding:8px 8px;}
+
+#table1{width:100%;margin:0 auto;}
+#table1,#table1 td{border:solid 1px #ccc;border-collapse: collapse;background:#fff;font-size:12px;}
+#table1 th,#table1 td{border:solid 1px #ccc;width:100px;padding:1px 1px;}
+#table1 th{padding:8px 8px;}
+#table1 thead tr td{background: #eee;color:#333;padding:1px 1px;}
+
+#table2{width:100%;margin:0 auto;}
+#table2,#table2 td{border:solid 1px #ccc;border-collapse: collapse;background:#fff;font-size:12px;}
+#table2 th,#table2 td{border:solid 1px #ccc;padding:1px 1px;}
+#table2 th{padding:8px 8px;}
+#table2 thead tr td{background: #eee;color:#333;padding:1px 1px;}
+
+#table3{width:100%;margin:0 auto;}
+#table3,#table3 td{border:solid 1px #ccc;border-collapse: collapse;background:#fff;font-size:12px;}
+#table3 th,#table3 td{border:solid 1px #ccc;padding:1px 1px;text-align: center}
+#table3 th{padding:8px 8px;}
+#table3 thead tr td{background: #eee;color:#333;padding:1px 1px;}
+
+.fpage{font-size:12px;line-height:12px;}
+.fpage .hk{padding:3px 3px 3px 3px;border:1px solid #ccc; background-color:#eee;margin:0 3px 0 3px;}
+.fpage .current{padding:3px 3px 3px 3px;border:1px solid #ccc; background-color:#B8BF95;margin:0 3px 0 3px;}
+.ch_en{width:100%;height:24px;padding:3px 3px;text-indent: 20px;line-height:24px;}

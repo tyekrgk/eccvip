@@ -1,0 +1,57 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">管理员管理</a> <span class="divider">/</span></li>
+            <li class="active">添加管理员</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action="{:U(C("FILE_IN").'/Access/do_user')}" method="post" id="fn">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr id="dat">
+            <td width="10%" class="tableleft">名称</td>
+            <td><input type="text" class="form-control" name="username" id="username" value="{$data['username']}"></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">密码</td>
+            <td><input type="text" class="form-control" name="password" id="password"> <php>echo $data['id']?"如不修改请留空":"";</php></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">角色</td>
+            <td><select class="form-control" name="role_id">
+                        <foreach name="role" item="v">
+                            <option value="{$v['id']}" <if condition="$v['id'] eq $role_id">selected="selected"</if>>{$v['name']}</option>
+                        </foreach>
+                    </select></td>
+        </tr>       
+    </table>
+    <div class="form-inline definewidth m10"><input type="hidden" name="user_id" id="user_id" value="{$data['id']}"><button  class="btn btn-primary" type="submit" id="submit">保存</button></div>
+    </form>
+    
+    <script>
+        $().ready(function () {       
+            $("#submit").click(function(){
+                var title=$("#username").val();
+                var p=$("#password").val();
+                var uid=$("#user_id").val();
+                if(!title){
+                    alert("名称不可以为空");
+                    return false;
+                }
+                if(!p&&!uid)){
+                    alert("密码不可以为空");
+                    return false;
+                }
+               
+                $("#fn").submit();
+             });
+
+        });
+    </script>
+</div>            
+   <include file="Footer:index" />

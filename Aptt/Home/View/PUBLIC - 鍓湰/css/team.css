@@ -1,0 +1,12 @@
+/*网络图谱*/
+.team{width:100%;height:auto;text-align:center;font-size:14px;}
+.box{width:150px;height:auto;margin:0 auto;}
+#table th,#table td{    border-top: 1px solid #dddddd;
+    line-height: 20px;
+    padding: 2px;
+    vertical-align: top;
+    text-align:center;
+}
+.mc{width:50%;height:20px;margin:0 auto;margin-top:10px;border:1px solid #999;border-bottom: none;}
+.team .L{width:49.5%;border: none;float:left;}
+.team .R{width:49.5%;border: none;float:right;}

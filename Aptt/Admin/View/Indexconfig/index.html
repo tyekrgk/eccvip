@@ -1,0 +1,342 @@
+
+    <include file="Header:index" />
+    <div class="content">
+         
+        
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">官网设置</a> <span class="divider">/</span></li>
+            <li class="active">首页设置</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+<script charset="utf-8" src="__PUBLIC__/KindEditor/kindeditor-min.js"></script>
+    <script charset="utf-8" src="__PUBLIC__/KindEditor/lang/zh_CN.js"></script>
+
+  <script type="text/javascript">
+      var editor;
+      KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="u1"]', {
+          allowFileManager : true,
+          filterMode :true
+        });
+      });
+      var editor1;
+      KindEditor.ready(function(K) {
+        editor1 = K.create('textarea[name="u2"]', {
+          allowFileManager : true,
+          filterMode :true
+        });
+      });
+      var editor2;
+      KindEditor.ready(function(K) {
+        editor = K.create('textarea[name="u3"]', {
+          allowFileManager : true,
+          filterMode :true
+        });
+      });
+      var editor3;
+      KindEditor.ready(function(K) {
+        editor1 = K.create('textarea[name="u4"]', {
+          allowFileManager : true,
+          filterMode :true
+        });
+      });
+
+  </script>    
+            <div class="well">
+              <form id='f' method='POST' action="{:U(C("FILE_IN").'/Indexconfig/save')}" enctype="multipart/form-data" target='hidden_frame'>
+              <table class="table table-bordered table-hover definewidth m10"> 
+                <tbody>
+                  
+                  <tr>
+                    <td align='right' width='150'>标题1</td>
+                    <td><input type="text" name='g11' id='g11' value='{$web.g11}' class="input-xlarge" >
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>标题1(英文版)</td>
+                    <td><input type="text" name='g12' id='g12' value='{$web.g12}' class="input-xlarge" >
+                      </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>标题1(韩文版)</td>
+                    <td><input type="text" name='g13' id='g13' value='{$web.g13}' class="input-xlarge" >
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>描述</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='g21' name='g21' style="width:50%">{$web.g21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>描述(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='g22' name='g22' style="width:50%">{$web.g22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>描述(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='g23' name='g23' style="width:50%">{$web.g23}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1标题</td>
+                    <td><input type="text" name='h11' id='h11' value='{$web.h11}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1标题(英文版)</td>
+                    <td><input type="text" name='h12' id='h12' value='{$web.h12}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1标题(韩文版)</td>
+                    <td><input type="text" name='h13' id='h13' value='{$web.h13}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i11' name='i11' style="width:50%">{$web.i11}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i12' name='i12' style="width:50%">{$web.i12}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块1内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i13' name='i13' style="width:50%">{$web.i13}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2标题</td>
+                    <td><input type="text" name='h21' id='h21' value='{$web.h21}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2标题(英文版)</td>
+                    <td><input type="text" name='h22' id='h22' value='{$web.h22}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2标题(韩文版)</td>
+                    <td><input type="text" name='h23' id='h23' value='{$web.h23}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i21' name='i21' style="width:50%">{$web.i21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i22' name='i22' style="width:50%">{$web.i22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块2内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i23' name='i23' style="width:50%">{$web.i23}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3标题</td>
+                    <td><input type="text" name='h31' id='h31' value='{$web.h31}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3标题(英文版)</td>
+                    <td><input type="text" name='h32' id='h32' value='{$web.h32}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3标题(韩文版)</td>
+                    <td><input type="text" name='h33' id='h33' value='{$web.h33}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i31' name='i31' style="width:50%">{$web.i31}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i32' name='i32' style="width:50%">{$web.i32}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块3内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i33' name='i33' style="width:50%">{$web.i33}</textarea>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td align='right' width='150'>版块4标题</td>
+                    <td><input type="text" name='h41' id='h41' value='{$web.h41}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块4标题(英文版)</td>
+                    <td><input type="text" name='h42' id='h42' value='{$web.h42}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块4标题(韩文版)</td>
+                    <td><input type="text" name='h43' id='h43' value='{$web.h43}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块4内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i41' name='i41' style="width:50%">{$web.i41}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块4内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i42' name='i42' style="width:50%">{$web.i42}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>版块4内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='i43' name='i43' style="width:50%">{$web.i43}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1标题</td>
+                    <td><input type="text" name='j11' id='j11' value='{$web.j11}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1标题(英文版)</td>
+                    <td><input type="text" name='j12' id='j12' value='{$web.j12}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1标题(韩文版)</td>
+                    <td><input type="text" name='j13' id='j13' value='{$web.j13}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='j21' name='j21' style="width:50%">{$web.j21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='j22' name='j22' style="width:50%">{$web.j22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP1内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='j23' name='j23' style="width:50%">{$web.j23}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2标题</td>
+                    <td><input type="text" name='k11' id='k11' value='{$web.k11}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2标题(英文版)</td>
+                    <td><input type="text" name='k12' id='k12' value='{$web.k12}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2标题(韩文版)</td>
+                    <td><input type="text" name='k13' id='k13' value='{$web.k13}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='k21' name='k21' style="width:50%">{$web.k21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='k22' name='k22' style="width:50%">{$web.k22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP2内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='k23' name='k23' style="width:50%">{$web.k23}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3标题</td>
+                    <td><input type="text" name='l11' id='l11' value='{$web.l11}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3标题(英文版)</td>
+                    <td><input type="text" name='l12' id='l12' value='{$web.l12}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3标题(韩文版)</td>
+                    <td><input type="text" name='l13' id='l13' value='{$web.l13}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='l21' name='l21' style="width:50%">{$web.l21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='l22' name='l22' style="width:50%">{$web.l22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP3内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='l23' name='l23' style="width:50%">{$web.l23}</textarea>
+                    </td>
+                  </tr>
+
+                  <tr>
+                    <td align='right' width='150'>STEP4标题</td>
+                    <td><input type="text" name='m11' id='m11' value='{$web.m11}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP4标题(英文版)</td>
+                    <td><input type="text" name='m12' id='m12' value='{$web.m12}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP4标题(韩文版)</td>
+                    <td><input type="text" name='m13' id='m13' value='{$web.m13}' class="input-xlarge" ></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP4内容</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='m21' name='m21' style="width:50%">{$web.m21}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP4内容(英文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='m22' name='m22' style="width:50%">{$web.m22}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>STEP4内容(韩文版)</td>
+                    <td>
+                      <textarea class="input-xlarge" rows="3" id='m23' name='m23' style="width:50%">{$web.m23}</textarea>
+                    </td>
+                  </tr>
+                   <tr>
+                    <td align='right' width='150'></td>
+                    <td><input type="submit" id="button" value='提 交'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+          
+</div>            
+   <include file="Footer:index" />

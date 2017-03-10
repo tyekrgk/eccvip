@@ -1,0 +1,47 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+                    <li><a href="#">商品管理</a> <span class="divider">/</span></li>
+                    <li class="active">{:$data['id']?"编辑商品":"添加商品"}</li>
+                </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="row-fluid">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>商品名称</th>
+                                    <th>商品类别</th>
+                                    <th>商品价格</th>
+                                    <th>商品图片</th>
+                                    <th>添加时间</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr class='ce'>
+                                    <td class="taskStatus"><span class="pending">{$v.proname}</span></td>
+                                    <td class="taskStatus">{:$pdata[$v['ptype']]}</td>
+                                    <td class="taskStatus">{$v.money}</td>
+                                    <td class="taskStatus"><img src="__ROOT__/Uploads{$v.img}" style="height:50px;margin:5px 0"></td>
+                                    <td class="taskStatus">{$v.date}</td>
+                                    <td class="taskStatus">
+                                        [<a href="{:U(C('FILE_IN').'/Product/product',array('id'=>$v['id']))}">编辑</a>] 
+                                        [<a href="{:U(C('FILE_IN').'/Product/del',array('id'=>$v['id']))}" target='hidden_frame'>删除</a>]
+                                    </td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                            <ul class="recent-posts">
+                                <li style="text-align:center">
+                                <div>
+                                <span class="rows">{$page}</span>
+                                </div>
+                                </li>
+                            </ul>
+</div>            
+   <include file="Footer:index" />

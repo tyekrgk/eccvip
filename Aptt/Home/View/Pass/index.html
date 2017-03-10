@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">验证二级密码</div>
+        <div class="panel-body ov">
+            <div class="pass">
+              <form action="{:U('index.php/Pass/save',array('mm'=>$mm,'cc'=>$cc,'aa'=>$aa))}" method="POST">    <div class="input-group input-group-sm">
+                      <label class="input-group-addon">请输入二级密码:</label>
+                          <input type="password" required="" placeholder="" id="upd2" name="upd2" class="form-control">
+                  </div><br>
+                  <div class="form-actions center">
+                      <input class="btn btn-primary" type="submit" value="提 交" id="dd">
+                  </div></form>
+            </div>
+            
+                <script>
+                $(function () {       
+                    $("#dd").click(function(){
+                        var upd2=$("#upd2").val();
+                        if(!upd2){
+                            alert("请输入二级密码");
+                            return false;
+                        }
+                        return true;
+                     });
+                });
+                </script>
+        </div>
+        </div>
+    </div>
+    <div class="col-sm-3">
+          
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

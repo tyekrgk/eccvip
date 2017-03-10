@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
+<title>{$web.webtitle}</title>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/cnc.js"></script>
+<script type="text/javascript">
+	var VerifyUrl='{:U("admin.php/Login/verify")}';
+	var pub="__PUBLIC__";
+	$(document).ready(function(){
+		$("#verify").click(function(){
+			$("#verify").attr("src",VerifyUrl+'?rand='+Math.random());
+		});
+		$("#submit").click(function(){
+			var username=$("#username").val();
+			var code=$("#code").val();
+			if(!username){
+				alert("会员编号不可以为空");
+				return false;
+			}
+			if(!code){
+				alert("请填写验证码");
+				return false;
+			}      
+			
+		 });
+	});
+
+</script>
+
+</head>
+<body>
+<div class="logincontainer">
+	
+	<div class="topbanner" style='text-align:center;height:100px;'></div>
+	
+	<div class="nc">
+		<div class="ncright" style='width:100%'>
+			
+			<div class="ncrightcontent" style='background: url(__PUBLIC__/img/loginbg.png) no-repeat #fff;'>			
+           		<div class="loginadv"></div>
+					<div class="login">
+					
+					<dd>
+						<dt style="font-size:24px;font-weight:bold;border-bottom:1px solid #999;margin:0 0 15px 0;">找回密码--成功</dt>
+						<dt>用 户 名:{$username}</dt>
+						<dt>一级密码:{$up}</dt>
+						<dt>二级密码:{$up}</dt>
+						<dt style="line-height:18px;">您的密码已成功重置,请您牢记您的新密码,并尽快登录系统进行修改!! [<a href="{:U('index.php/Login/index')}" style="color:green">现在登录</a>]</dt>
+					</dd>
+				</div>
+                <div class="clear"></div>
+			</div>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+</body>
+
+</html>

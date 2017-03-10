@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row"> 
+        <!-- 
+        <div class="col-sm-12 center" style="text-align: center;">         
+              <ul class="stat-boxes">
+                <li class="popover-visits">
+                  <a href='{:U("index.php/btmarket/index")}'><div class="left" style='padding: 11px 5px 7px 0;  line-height:47px;  font-size:16px;'>进入CT交易市场</div></a>
+                  <div class="left"><span class="peity_bar_good">2,4,9,7,12,10,12</span><br>+10%</div>
+                  <div class="right">
+                    <strong>{$coinset.bthistory}</strong>
+                    交易量
+                  </div>
+                </li>
+                <li class="popover-users">
+                  <a href='{:U("index.php/gtmarket/index")}'><div class="left" style='padding: 11px 5px 7px 0;  line-height:47px;  font-size:16px;'>进入AD交易市场</div></a>
+                  <div class="left"><span class="peity_bar_good">20,15,18,14,10,9,9,9</span><br>+8%</div>
+                  <div class="right">
+                    <strong>{$coinset.gdhistory}</strong>
+                    交易量
+                  </div>
+                </li>
+              </ul><br>
+       </div> 
+       --> 
+
+        <!-- <div class="col-sm-12">
+          <div class="panel panel-default">
+           <div class="panel-heading">
+              我的应用
+              <span class="pull-right" style="display:none">充值种子币 充值激活码 游戏娱乐专区</span>
+           </div>
+           <div class="panel-body">
+              <div class="row">
+                <div class="col-sm-3 ying yingb1" onclick="location.href='{:U('index.php/User/index')}'">
+                  <i class="fa fa-tachometer"></i><span>个人信息</span>
+                </div>
+                <div class="col-sm-3 ying yingb2" onclick="location.href='{:U('index.php/User/update')}'">
+                  <i class="fa fa-heart-o"></i><span>升级帐户</span>
+                </div>
+                <div class="col-sm-4 ying yingb3" id="bangzhu" onclick="location.href='{:U('index.php/btmarket/index')}'">
+                  <i class="fa fa-line-chart"></i><span>CT交易</span>
+                </div>
+                <div class="col-sm-3 ying yingb4" onclick="location.href='{:U('index.php/Member/recommand')}'">
+                  <i class="fa fa-bars"></i><span>我的团队</span>
+                </div>
+                <div class="col-sm-3 ying yingb5" id='qiandao' onclick="location.href='{:U('index.php/Money/bonus')}'">
+                  <i class="fa fa-briefcase"></i><span>我的佣金</span>
+                </div>
+                <div class="col-sm-3 ying yingb2" onclick="location.href='{:U('index.php/Member/agent')}'">
+                  <i class="fa fa-picture-o"></i><span>注册审核</span>
+                </div>
+                <div class="col-sm-3 ying yingb4" onclick="location.href='{:U('index.php/Coin/kuang')}'">
+                  <i class="fa fa-calendar-o"></i><span>查看能量</span>
+                </div>
+                <div class="col-sm-4 ying yingb5" id="xuqiu" onclick="location.href='{:U('index.php/Gtmarket/index')}'">
+                  <i class="fa fa-table"></i><span>AD交易</span>
+                </div>
+                <div class="col-sm-3 ying yingb3" onclick="location.href='{:U('index.php/Message/index')}'">
+                  <i class="fa fa-bell"></i><span>站内邮件</span>
+                </div>
+                <div class="col-sm-3 ying yingb6" onclick="location.href='{:U('index.php/Coin/myzr')}'">
+                  <i class="fa fa-plane fa-flip-horizontal"></i><span>在线充值</span>
+                </div>
+              </div>
+           </div>
+        </div>
+      </div> -->
+
+
+             
+        </div>
+        
+        <!--交易量_end-->
+        <!--走势图,能量_start-->
+        <div class="row">
+            <div class="col-sm-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">走势图</div>
+                <div class="panel-body ov">
+                  <script type="text/javascript" src="__PUBLIC__/js/highcharts.js"></script>
+                  <script type="text/javascript" src="__PUBLIC__/js/exporting.js"></script>
+                  <script type="text/javascript">
+                  $(function () {
+                      $('#container').highcharts({
+                          title: {
+                              text: '',
+                              x: -20 //center
+                          },
+                          subtitle: {
+                              text: '',
+                              x: -20
+                          },
+                          xAxis: {
+                              categories: [{$date}]
+                          },
+                          yAxis: {
+                              title: {
+                                  text: 'ECF价格($)'
+                              },
+                              plotLines: [{
+                                  value: 0,
+                                  width: 1,
+                                  color: '#808080'
+                              }]
+                          },
+                          tooltip: {
+                              valueSuffix: ''
+                          },
+                          series: [{
+                              name: 'ECF价格',
+                              data: [{$value}]
+                          }]
+                      });
+
+                      $.fn.peity.defaults.bar = {
+                        delimiter: ",",
+                        fill: ["#4d89f9"],
+                        height: 30,
+                        max: null,
+                        min: 0,
+                        padding: 0.1,
+                        width: 60
+                      }
+                       $(".peity_bar_good").peity("bar", {
+                          fill: ["green"]
+                        })
+                  });
+                  </script>
+                        <div id='container' style="width:685px; height: 225px; margin: 0 auto">
+                            
+                            <div class="clear"></div>
+                        </div>
+
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="panel panel-default">
+                <div class="panel-heading">能量状态</div>
+                <div class="panel-body ov textcenter"  id="nopadding">
+                  <div style='width:100%;height:auto;border-bottom:1px solid #ddd;padding:10px 0;margin:0 0 5px 0'>
+                    <img src="__PUBLIC__/images/nengliang.gif" alt="" style='width:210px;height:210px;'>
+                  </div>
+                  <div class="row-fluid">
+                    <div class="col-xs-3" id="nopadding">状态：<span style='color:red'>{$kuang['status']==0?'过期':'正常'}</span></div>
+                    <div class="col-xs-6" id="nopadding">昨日产量：<span style='color:red'>{$kuang['yesterday']}</span></div>
+                    <div class="col-xs-3" id="nopadding">剩余：<span style='color:red'>{$kuang['resdays']}</span>天</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+        <!--走势图,能量_end-->
+        <!--基本信息,能量_start-->
+        <div class="row">
+            <div class="col-sm-8">
+              <div class="panel panel-default">
+                <div class="panel-heading">基本信息</div>
+                <div class="panel-body" id="nopadding">
+                  <table class="table table-bordered table-hover">
+                    <tr>
+                      <td id="nopadding">
+                        <ul id="formtable">
+                          <li class='ri'>用户编号:</li>
+                          <li class='le'>{$uinfo.username}</li>
+                          <li class='ri'>姓名:</li>
+                          <li class='le'>{$uinfo.realname}</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="nopadding">
+                        <ul id="formtable">
+                          <li class='ri'>能量级别:</li>
+                          <li class='le'>{$bonus[$uinfo['utype']]['title']}</li>
+                          <li class='ri'>注册日期:</li>
+                          <li class='le'>{$uinfo.regdate}</li>
+                          <!-- <li class='ri'>荣誉星级:</li>
+                          <li class='le'>
+                            <for start="0" end="$uinfo.star"><img src="__PUBLIC__/images/xingxing.png"></for>
+                          </li> -->
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="nopadding">
+                        <ul id="formtable">
+                          <li class='ri'>可用ECF帐户:</li>
+                          <li class='le'>{$uinfo.coina|numberformat=###}</li>
+                          <li class='ri'>消费ECF帐户:</li>
+                          <li class='le'>{$uinfo.coinb|numberformat=###}</li>
+                        </ul>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td id="nopadding">
+                        <ul id="formtable">
+                          <li class='ri'>复投ECF帐户:</li>
+                          <li class='le'>{$uinfo.coinc|numberformat=###}</li>
+                          <li class='ri'></li>
+                          <li class='le'></li>
+                        </ul>
+                      </td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-4">
+              <div class="panel-group" id="accordion">
+                 <div class="panel panel-default">
+                    <div class="panel-heading">
+                       <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" 
+                             href="#collapseOne">系统公告
+                          </a>
+                       </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body" id="nopadding">
+                            <ul class="indexlist">
+                            <foreach name='list' item='v'>
+                                <li>
+                                    <a href='{:U("index.php/News/view",array("id"=>$v["id"]))}' target="_new">{$v.title|cut_str=###,14}</a>
+                                    <span><php>$str=explode(" ",$v['date']);echo $str[0];</php></span>
+                                    <div class="clear"></div>
+                                </li>
+                            </foreach>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel-heading" style="border-top:1px solid #ddd">
+                       <h4 class="panel-title">
+                          <a data-toggle="collapse" data-parent="#accordion" 
+                             href="#collapseOne">站内邮件
+                          </a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <ul class="indexlist" id="nopadding">
+                            <foreach name='message' item='v'>
+                                <li>
+                                    <a href='{:U('index.php/message/view',array('id'=>$v['id']))}' target="_new">{$v.title|cut_str=###,14}</a>
+                                    <span><php>$str=explode(" ",$v['date']);echo $str[0];</php></span>
+                                    <div class="clear"></div>
+                                </li>
+                            </foreach>
+                            </ul>
+                        </div>
+                    </div> 
+                </div>
+              </div>
+            </div>
+        </div>
+
+
+      </div>
+    </div> 
+    <!--<script src="__PUBLIC__/js/unicorn.dashboard.js"></script>-->
+    <script type="text/javascript">
+                    $(document).ready(function(){
+                        unicorn.peity();
+                    });
+                    unicorn = {
+                            // === Peity charts === //
+                            peity: function(){      
+                                $.fn.peity.defaults.line = {
+                                    strokeWidth: 1,
+                                    delimeter: ",",
+                                    height: 24,
+                                    max: null,
+                                    min: 0,
+                                    width: 50
+                                };
+                                $.fn.peity.defaults.bar = {
+                                    delimeter: ",",
+                                    height: 24,
+                                    max: null,
+                                    min: 0,
+                                    width: 50
+                                };
+                                $(".peity_line_good span").peity("line", {
+                                    colour: "#B1FFA9",
+                                    strokeColour: "#459D1C"
+                                });
+                                $(".peity_line_bad span").peity("line", {
+                                    colour: "#FFC4C7",
+                                    strokeColour: "#BA1E20"
+                                }); 
+                                $(".peity_line_neutral span").peity("line", {
+                                    colour: "#CCCCCC",
+                                    strokeColour: "#757575"
+                                });
+                                $(".peity_bar_good span").peity("bar", {
+                                    colour: "#459D1C"
+                                });
+                                $(".peity_bar_bad span").peity("bar", {
+                                    colour: "#BA1E20"
+                                }); 
+                                $(".peity_bar_neutral span").peity("bar", {
+                                    colour: "#757575"
+                                });
+                            },
+
+                            // === Tooltip for flot charts === //
+                            flot_tooltip: function(x, y, contents) {
+                                
+                                $('<div id="tooltip">' + contents + '</div>').css( {
+                                    top: y + 5,
+                                    left: x + 5
+                                }).appendTo("body").fadeIn(200);
+                            }
+                    }
+                    </script>
+  </body>
+</html>

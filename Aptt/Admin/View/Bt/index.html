@@ -1,0 +1,57 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">CT交易</a> <span class="divider">/</span></li>
+            <li class="active">会员挂单</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        会员查询:<input type="text" id="un" value="{$un}" title="模糊查询会员编号和真实姓名" alt="模糊查询会员编号和真实姓名"> <input type="button" value="查询" onclick="var url='{:U(C('FILE_IN').'/bt/index',array('t'=>$t,'p'=>$p,'un'=>'uxx'))}';url=url.replace('uxx',document.getElementById('un').value);location.href=url;"> 如需要对订单进行操作,请点击会员编号进入会员帐号进行操作
+    </div>
+    <table class="table table-bordered table-hover definewidth m10" style="font-size:12px;">
+    <thead>
+    <tr>
+        <th>出售会员编号</th>
+        <th>出售数量</th>
+        <th>信誉等级</th>
+        <th>购买会员编号</th>
+        <th>信誉等级</th>
+        <th>订单状态</th>
+        <th>操作</th>
+    </tr>
+            <notempty  name="list">
+                <foreach name="list"  item="v">
+                    <tr class='ce'>
+                        <td><a href="{:U(C("FILE_IN").'/Member/indexredirect',array('id'=>$v['id']))}" title="进入会员帐号" alt="进入会员帐号" target='_bland' style='color:<php>echo $v["isagent"]?"red":"";</php>'>{$v.uid|gettableinfo="id=".###}</a></td>
+                        <td>{$v.coin}</td>
+                        <td>{$v.uid|showstar=1,###}</td>
+                        <td>
+                            <if condition="$v.buyid">
+                            <a href="{:U(C("FILE_IN").'/Member/indexredirect',array('id'=>$v['buyid']))}" title="进入会员帐号" alt="进入会员帐号" target='_bland' style='color:<php>echo $v["isagent"]?"red":"";</php>'>{$v.buyid|gettableinfo="id=".###}</a>
+                            </if>
+                        </td>
+                        <td>{:$v['buyid']?showstar(1,$v['buyid']):""}</td>
+                        <td>{:$status[$v['status']]}</td>
+                        <td>
+                            无
+                        </td>
+                    </tr>
+                </foreach>
+                <else/>
+                <tr>
+                    <td colspan="7">没有找到相关数据。</td>
+                </tr>
+
+            </notempty>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

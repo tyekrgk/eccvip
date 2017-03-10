@@ -1,0 +1,72 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">商品管理</a> <span class="divider">/</span></li>
+            <li class="active">订单列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well" style="display:none">
+        会员查询:<input type="text" id="un" value="{$un}" title="模糊查询会员编号和真实姓名" alt="模糊查询会员编号和真实姓名"> <input type="button" value="查询" onclick="var url='{:U(\C("FILE_IN").'/Member/agent\',array('t'=>$t,'p'=>$p,'un'=>'uxx'))}';url=url.replace('uxx',document.getElementById('un').value);location.href=url;">
+    </div>
+    <table class="table table-bordered table-hover definewidth m10" style="font-size:12px;">
+    <thead>
+    <tr>
+        <th>会员编号</th>
+        <th>商品列表</th>
+        <th>订单总额</th>
+        <th>
+            <select id="select2" style="border:#CCC 1px solid;" name="select" onchange="javascript:window.open(this.options[this.selectedIndex].value,'_self')">
+                <option selected="selected" value="?t=0" {:$t==0?"selected=selected":""}>全部订单</option>
+                <option value="?t=1" {:$t==1?"selected=selected":""}>未支付订单</option>
+                <option value="?t=2" {:$t==2?"selected=selected":""}>已支付订单</option>
+                <option value="?t=3" {:$t==3?"selected=selected":""}>已发货订单</option>
+                <option value="?t=4" {:$t==4?"selected=selected":""}>已完成订单</option>
+            </select>
+        </th>
+        <th>操作</th>
+    </tr>
+    </thead>
+    <tbody>
+    <notempty  name="list">
+        <foreach name="list"  item="v">
+            <tr>
+                <td colspan="5">订单编号:<span style="color:red;font-weight:bold">{$v.ordersn}</span><span class="pull-right">生成订单时间:{$v.date|date="Y-m-d H:i:s",###}</span></td>
+            </tr>
+            <tr class="ce">
+                <td class="taskStatus">{$v.uid|gettableinfo="id=".###}</td>
+                <td class="taskStatus">
+                    <php>
+                        $plist=M("orderlist")->where("orderid=".$v['id'])->select();
+                        foreach($plist as $vv){
+                    </php>
+<a href="{:U('index.php/product/view',array("id"=>$vv['id']))}" target="_bland"><img src="__ROOT__/Uploads{$vv.img}" style="height:50px;padding:5px 5px;border:1px solid #ccc;backgroup:#fff;margin:5px 5px;" alt="{$vv.proname}" title="{$vv.proname}">
+                <php>
+                    }
+                    </php>
+                    </td>
+                <td class="taskStatus">{$v.total|numberformat=###,2}</td>
+                <td class="taskStatus">{:$status[$v['status']]}</td>
+                <td class="taskStatus">
+                    
+                     <a href="{:U('admin.php/product/orderview',array('id'=>$v['id']))}" class="btn btn-xs btn-danger" target="_bland">查看详情</a>  
+                 </td>
+            </tr>
+        </foreach>
+        <else/>
+        <tr>
+            <td colspan="5">没有找到相关数据。</td>
+        </tr>
+
+    </notempty>
+</table>
+<div class="pages">
+  　　{$page}
+</div>
+</div>            
+   <include file="Footer:index" />

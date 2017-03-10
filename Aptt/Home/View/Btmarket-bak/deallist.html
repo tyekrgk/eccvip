@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">CT交易记录
+                <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/index')}'">返回交易市场</button>
+                </div>
+            </div>
+            <div class="panel-body ov">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>                   
+                                    <th>时间</th>
+                                    <th>出售数量</th>
+                                    <th>单价</th>
+                                    <th>交易总额＄</th>
+                                    <th>买家编号</th>
+                                    <th>汇款金额￥</th>
+                                    <th>状态</th>
+                                    <th style="width:220px;">操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr>
+                                    <td class="taskStatus">
+                                            {$v.addtime|date="Y-m-d H:i:s",###}
+                                    </td>
+                                    <td class="taskStatus">{$v.coin}</td>
+                                    <td class="taskStatus">1</td>
+                                    <td class="taskStatus">{$v.coin}</td>
+                                    <td class="taskStatus">{$v.buyid|gettableinfo="id=".###}</td>
+                                    <td class="taskStatus">{$v.coin}</td>
+                                    <td class="taskStatus">{:$status[$v['status']]}<if condition="$v.complain eq 1"><br>卖家已投诉</if></td>
+                                    <td class="taskStatus">
+                                        <a href='{:U('index.php/btmarket/guaview',array('id'=>$v['id']))}' class="btn btn-danger btn-xs btn-mini" target="_new">查看详情</a>
+                                    </td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+						<div class="panel-footer">
+                            <ul class="recent-posts">
+                                <li style="color:red">
+                                    提示： 1：当订单状态为“待付”，买家已经拍下订单，当超过2小时买家仍然没有付款，操作栏会出现“撤销”功能，您可以撤销该订单。<br>
+2：当订单状态为：“已付”，请您确认是否已经收到汇款（银行卡转账有延迟最长24小时），如果已经收到款项，请点击“确认收款”。如果超过2小时未收到汇款，您可以点击“查看详情”查看对方联系电话联系确认。<br>
+3：如果超过24小时仍然没有收到汇款，请让电话联络买家提供汇款凭据确认对方是否转账，如果对方没有转账请点击“申请仲裁”。
+                                </li>
+                            </ul>
+                        </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/btmarket/index')}">CT市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    function btunlock(id){
+        str="{:U(C('FILE_IN').'/btmarket/btunlock')}";
+        url=str;
+        $.post(url, { id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+
+    function complain(id){
+        str="{:U(C('FILE_IN').'/btmarket/complain')}";
+        url=str;
+        $.post(url, { id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+
+    function guaconfirm(id){
+        str="{:U(C('FILE_IN').'/btmarket/guaconfirm',array('id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    function guacancel(id){
+        str="{:U(C('FILE_IN').'/btmarket/guacancel',array('id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    </script>
+</body>
+</html>

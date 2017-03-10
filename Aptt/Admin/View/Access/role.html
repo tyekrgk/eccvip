@@ -1,0 +1,40 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">管理员管理</a> <span class="divider">/</span></li>
+            <li class="active">角色</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        <a class="btn btn-default" href="{:U(C("FILE_IN").'/Access/add_role')}" >添加角色</a>
+    </div>
+    <div class="well">
+        <table class="table table-hover">
+            <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>描述</th>
+                    <th>操作</th>
+                </tr>
+                <foreach name="data" item="v">
+                    <tr class='ce'>
+                        <td>{$v['id']}</td>
+                        <td>{$v['name']}</td>
+                        <td>{$v['remark']}</td>
+                        <td>
+                            <a href="{:U(C("FILE_IN").'/Access/access',array('id'=>$v['id']))}">权限配置</a>
+                            <a href="{:U(C("FILE_IN").'/Access/del_role',array('id'=>$v['id']))}" target="hidden_frame">删除</a>
+                        </td>
+                    </tr>
+                </foreach>
+        </table>
+
+    </div>
+</div>            
+   <include file="Footer:index" />

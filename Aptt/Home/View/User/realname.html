@@ -1,0 +1,59 @@
+<include file="Header:index" />
+   <!-- <div class="def">
+        
+    </div>-->
+    
+	<!--<div style='width:100%;height:40px;line-height:50px;padding:10px 0 0 0;text-align:center'><a href='index.php?a=qiandao'><img src='./img/qiandao.png'></a></div>-->
+	</div>
+            
+            <div class='left_att'>
+                绑定真实姓名
+            </div>
+            <div class='left_am'>
+			<ul>
+                <li id=l1><a href='{:U("index.php/User/index")}'>会员信息</a></li>
+                <li id=l2><a href='{:U("index.php/User/password")}'>修改密码</a></li>
+                <li id=l3><a href='{:U("index.php/User/bank")}'>银行信息</a></li>
+				<li id=l3><a href='{:U("index.php/User/promote")}'>推广链接</a></li>		
+				
+            </ul>
+	</div>
+            <div class='left_ab'></div>
+            
+        </div>
+        <div class="right">
+            <div class="right_top"></div>
+            <div class="right_center">
+                <br>
+            <form action="{:U('index.php/User/realnamesave')}" method="post" id="fn">
+            <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+                <tr>
+                    <td width="10%" class="tableleft">真实姓名</td>
+                    <td><input type="text" name="realname" id="realname" value=""/></td>
+                </tr>
+                <tr>
+                    <td width="10%" class="tableleft">备注信息</td>
+                    <td style="color:red">添加提现信息前请绑定真实姓名，保存后无法修改，绑定提现开户名。</td>
+                </tr>
+            </table>
+            <div class="form-inline definewidth m10"><button  class="btn btn-primary" type="submit" id="submit">确认绑定</button></div>
+            </form>
+            
+            <script>
+                $(function () {       
+                    $("#submit").click(function(){
+                        var realname=$("#realname").val();
+                        if(!realname){
+                            alert("真实姓名不可以为空");
+                            return false;
+                        }
+                        return true;
+                     });
+                });
+            </script>
+            </div>
+            <div class="right_but"></div>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

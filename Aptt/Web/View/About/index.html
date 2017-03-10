@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<title>{:lecho($web['webtitle'],$web['enwebtitle'])}</title>
+		<link href="__PUBLIC__/css/style.css" rel="stylesheet" type="text/css"  media="all" />
+		<link href='http://fonts.useso.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+        <script src="__PUBLIC__/js/jquery-1.8.3.min.js"></script>
+	</head>
+	<body>
+		<!---start-wrap-->
+		<div style="width:100%;height:auto;background-color:#0EADD4">
+        <div class="wrap">
+            <!--start-header-->
+            <div class="header">
+                <!---start-logo-->
+                <div class="logo">
+                    <a href="index.html"><img src="__ROOT__/Uploads/{$web.logo}" style="height:70px;"/></a>
+                </div>
+                <!---start-logo-->
+                <!---start-top-nav-->
+                <div class="top-nav">
+                    <div style="width:100%;height:30px;text-align:right;margin:0 0 5px 0">
+              <a class="btn btn-warning btn-xs" href='?l=zh-cn'>中文版</a>
+              <a class="btn btn-warning btn-xs" href='?l=en-us'>English</a></div>
+                    <ul>
+                        <li><a href="{:U('web.php/index/index')}">{$Think.lang.menu_home}</a></li>
+                        <li><a href="{:U('web.php/about/index')}">{$Think.lang.menu_des}</a></li>
+                        <li><a href="{:U('web.php/Contact/index')}">{$Think.lang.menu_contact}</a></li>
+                        <li><a href="{:U('index.php/Promote/index')}"  target='_bland'>{$Think.lang.menu_reg}</a></li>
+                        <li><a href="{:U('index.php/login/index')}">{$Think.lang.menu_login}</a></li>
+                    </ul>
+                </div>
+                <div class="clear"> </div>
+                <!---End-top-nav-->
+            </div>
+        </div>
+    </div>
+			<!---End-header-->
+		<!---start-content-->
+		<div class="wrap">
+		<div class="content">
+			<div class="clear"> </div>
+			<div class="contact">
+				<div class="project-top-patination">
+								<ul>
+									<li><a href="index.html">{$Think.lang.menu_home}</a></li>
+									<li><p>{$Think.lang.menu_des}</p></li>
+								</ul>
+							</div>
+				<div class="section group">				
+				<div class="col span_1_of_3" style="width:100%;">
+					
+      			<div class="company_address">
+				     	{:lecho($index['u1'],$index['u2'])}
+				   </div>
+				</div>		
+			  </div>
+			</div>
+			<div class="clear"> </div>
+			<div class="footer">
+				<div class="footer-left">
+					<a href="index.html"><img src="__ROOT__/Uploads/{$web.logo}" title="logo"  style="height:45px"/></a>
+				</div>
+				<div class="footer-right">
+					<p>Copyright &copy; 2016.{:lecho($web['webtitle'],$web['enwebtitle'])} All rights reserved.</p>
+				</div>
+				<div class="clear"> </div>
+			</div>
+		</div>
+		<!---End-content-->
+		</div>
+		<!---start-wrap-->
+	</body>
+</html>
+

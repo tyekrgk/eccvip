@@ -1,0 +1,47 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">管理员管理</a> <span class="divider">/</span></li>
+            <li class="active">管理员列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        <a class="btn btn-default" href="{:U(C("FILE_IN").'/Access/add_user')}" >添加会员</a>
+    </div>
+    <div class="well">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名称</th>
+                    <th>角色</th>
+                    <th>时间</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                <foreach name="data" item="v">
+                    <tr class="ce">
+                        <td>{$v['id']}</td>
+                        <td>{$v['username']}</td>
+                        <td><php>echo $v['id']==1?"超级管理员":$v['role'];</php></td>
+                        <td>{$v['time']|date="Y-m-d",###}</td>
+                        <td>
+                            <php>if($v['id']==1){}else{</php>
+                            <a href="{:U(C("FILE_IN").'/Access/add_user',array('user_id'=>$v['id'],'role_id'=>$v['role_id']))}">编辑</a>
+                            <a href="{:U(C("FILE_IN").'/Access/del_user',array('id'=>$v['id']))}" target="hidden_frame">删除</a>
+                            <php>}</php>
+                        </td>
+                    </tr>
+                </foreach>
+            </tbody>
+        </table>
+    </div>
+</div>            
+   <include file="Footer:index" />

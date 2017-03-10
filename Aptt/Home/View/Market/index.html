@@ -1,0 +1,17 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            交易市场
+        </div>
+        <div class='main'>
+            <table class='table table-bordered table-hover definewidth m10'>
+				<tr><th>序列号</td><th>卖方信用</td><th>提现银行</td><th>挂单金额</th><th>税</th><th>实付/到帐金额<font style='color:red'>$</font></th><th>实付/到帐金额<font style='color:red'>￥</font></th><th>挂单日期</td><th>操　作</td></tr>
+				<foreach name="list" item="v">
+					<tr class='ce' ><td>{$v.sn}</td><td>{$v.uid|showstar=1,###}</td><td>{$v.bank}</td><td>{$v.coin}</td><td>{$v.shui}</td><td>{$v.rcoin}</td><td><php>echo numberformat($v['rcoin']*$coinset['epoutcoin'],2);</php></td><td>{$v.addtime}</td><td>[<a href='{:U("index.php/Market/lock",array("id"=>$v["id"]))}'>购买</a>]</td></tr>
+				</foreach>
+			</table>
+            <div class="inline pull-right pages">{$page}</div>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

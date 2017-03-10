@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">购物车</div>
+            <div class="panel-body ov">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>商品名称</th>
+                        <th>商品图片</th>
+                        <th>商品价格</th>
+                        <th>购买数量</th>
+                        <th>小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td class="taskStatus"><span class="pending"><a href="{:U('index.php/product/view',array("id"=>$v['id']))}" target="_bland">{$v.proname}</a></span></td>
+                        <td class="taskStatus"><a href="{:U('index.php/product/view',array("id"=>$v['id']))}" target="_bland"><img src="__ROOT__/Uploads{$v.img}" style="height:50px;padding:5px 5px;border:1px solid #ccc;backgroup:#fff"></a></td>
+                        <td class="taskStatus">{$v.money|numberformat=###,2}</td>
+                        <td class="taskStatus">
+                             <input type="text" class="redoinput" id="number_{$v.id}" value="{$v.number}" style="text-align:center;width:50px;" onblur="addonlow({$v.id})"> <input type="button" value="修改" class="btn btn-sm btn-danger" onclick="changenumber({$v.id})">
+                         </td>
+                        <td class="taskStatus">{$v.total|numberformat=###,2}</td>
+                    </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan="5" align="right">
+                            数量:<span style="color:red">{$cart.number}</span> 
+                            合计:<span style="color:red">{$cart.total|numberformat=###,2}</span> 
+                            <a href="{:U('index.php/product/index')}" class="btn btn-danger"><i class="fa fa-angle-left"></i> 继续购物</a> 
+                            <a href="{:U('index.php/product/step1')}" class="btn btn-danger">去结算 <i class="fa fa-angle-right"></i></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">收货地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+  <script>
+  function addonlow(id){
+        val=$("#number"+id).val();
+        val=parseInt(val);
+        if(val=="NaN") val=1;
+        if(val<1) val=1;
+        if(val>9999) val=9999;
+        $("#number"+id).val(val);
+  }
+
+  function changenumber(id){
+    val=$("#number_"+id).val();
+    val=parseInt(val);
+    if(val=="NaN") val=0;
+    if(val<0){
+        alert("请输入正确的数量");
+        return false;
+    }
+    url="{:U('index.php/product/changenumber')}";
+    $.post(url, { id:id,nb:val}, function(value) {
+        var data = eval("("+value+")");
+        alert(data['info']);
+        if(data['error']==1) location.href="{:U('index.php/product/cart')}";
+     });
+  }
+  </script>
+</body>
+</html>

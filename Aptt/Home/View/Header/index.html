@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{$web.webtitle}</title>
+    <script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+    
+<script type="text/javascript" src="__PUBLIC__/js/cnc.js"></script>
+    <link rel="stylesheet" href="__PUBLIC__/css/css1.css" />
+    
+</head>
+<body>
+    <div class="header">
+      <div class="topcon">
+        <div class="topright" >
+          <a href="{:U("index.php/Money/cash")}"><img src="__PUBLIC__/img/con1.png" width="145" height="35"> </a> 
+           <a href="{:U("index.php/User/bank")}"><img src="__PUBLIC__/img/tl-al6.png" width="135" height="35"> </a> 
+           <a href="{:U('index.php/Index/logout')}"><img src="__PUBLIC__/img/tl-al7.png" width="90" height="35"> </a> 
+           <a href="{:U("index.php/News/index")}" class="top_f">
+            <marquee width="100%" scrollamount="2" scrolldelay="30">
+              {$web.zongtext}
+            </marquee>
+            </a> <a href="{:U("index.php/News/index")}"><img src="__PUBLIC__/img/tl9.png" width="90" height="35"> </a> 
+            <a href="{:U("index.php/Message/leave")}"><img src="__PUBLIC__/img/tl10.png" width="90" height="35"> </a>
+            <div class="clear"></div>
+        </div>
+      </div>
+        <div class="logo">
+          <img src='__ROOT__/Uploads{$web.logo}' border='0' height='70' style="float:left">
+          <div class="logomenu">
+            <a href="{:U('index.php/Index/index')}">首 页</a> | <a href='{:U("index.php/Member/reg")}'>注册会员</a> | <a href='{:U("index.php/Money/index")}'>奖金明细</a> | <a href='{:U("index.php/Money/online")}'>在线充值</a> | <a href='{:U("index.php/Money/cash")}'>奖金提现</a> | <a href='{:U("index.php/Member/agent")}'>报单中心</a>
+
+          </div>
+          <div class="clear"></div>
+        </div>
+    </div>
+<div class="nx">
+  <div class="nxinfo">
+    欢迎回来!! {$uinfo.username}<br>[<a href="{:U('index.php/Index/logout')}">安全退出</a>]
+  </div>
+</div>
+<div class="index_container">
+<div class="left">
+   <div class="operate">
+     <ul id="J_navlist">
+          <li >
+            <h4 class="subg1"><a class="sub">会员管理</a></h4>
+            <div class="list-item none">
+              <p class="rgtop mt5"><a href='{:U("index.php/Member/reg")}'>注册会员</a></p>
+              <p class="rgbg"><a href='{:U("index.php/User/index")}'>会员信息</a></p>
+              <p class="rgbg"><a href='{:U("index.php/User/password")}'>修改密码</a></p>
+              <p class="rgbg"><a href='{:U("index.php/Member/agent")}'>激活会员</a></p>
+              <p class="rgbt"><a href='{:U("index.php/User/promote")}'>推广链接</a></p>
+            </div>
+          </li>
+          <li >
+            <h4 class="subg3"><a class="sub">报单中心</a></h4>
+            <div class="list-item none">
+             
+              <p class="rgbt"><a href='{:U("index.php/Member/apply")}'>报单中心</a></p>
+            </div>
+          </li>
+          <li >
+            <h4 class="subg2"><a class="sub">推荐图谱</a></h4>
+            <div class="list-item none">
+              <p class="rgtop mt5"><a href='{:U("index.php/Member/team")}'>网络图谱</a></p>
+              <p class="rgbt"><a href='{:U("index.php/Member/recommand")}'>推荐图谱</a></p>
+            </div>
+          </li>
+          <li >
+            <h4 class="subg6"><a class="sub">财务管理</a></h4>
+            <div class="list-item none">
+              <p class="rgtop mt5"><a href='{:U("index.php/Money/index")}'>奖金明细</a></p>
+              <p class="rgbg"><a href='{:U("index.php/Money/cash")}'>奖金提现</a></p>
+              <p class="rgbg"><a href='{:U("index.php/Money/remittance")}'>汇款充值</a></p>
+              <p class="rgbt"><a href='{:U("index.php/Money/online")}'>在线充值</a></p> 
+              
+            </div>
+          </li>
+          <li >
+            <h4 class="subg7"><a class="sub">货币管理</a></h4>
+            <div class="list-item none">
+             <p class="rgtop mt5"><a href='{:U("index.php/Money/transfer")}'>货币转账</a></p>
+              <p class="rgbt"><a href='{:U("index.php/Money/conversion")}'>货币转换</a></p>
+              
+
+            </div>
+          </li>
+          <li >
+            <h4 class="subg8"><a class="sub">银行信息</a></h4>
+            <div class="list-item none">
+              <p class="rgbt mt5"><a href='{:U("index.php/User/bank")}'>银行信息</a></p>
+            </div>
+          </li>
+          <li >
+            <h4 class="subg4"><a class="sub">留言管理</a></h4>
+            <div class="list-item none">
+              <p class="rgtop mt5"><a href='{:U("index.php/Message/leave")}'>发送信息</a></p>
+              <p class="rgbg"><a href='{:U("index.php/Message/index")}'>发件箱</a></p>
+              <p class="rgbt"><a href='{:U("index.php/Message/index",array("t"=>1))}'>收件箱</a></p>
+            </div>
+          </li>
+          <li >
+            <h4 class="subg9"><a class="sub">系统公告</a></h4>
+            <div class="list-item none">
+             
+              <p class="rgbt"><a href='{:U("index.php/News/index")}'>公告列表</a></p>
+            </div>
+          </li>
+        </ul>
+        <script type="text/javascript" language="javascript">
+      navList(12);
+    </script>
+
+   </div>
+</div> 

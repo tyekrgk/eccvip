@@ -1,0 +1,93 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            申请报单中心
+        </div>
+        <div class='main'>
+                <form action="{:U('index.php/Member/applysave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft" width="15%">会员编号</td>
+            <td>{$uinfo.username}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">会费</td>
+            <td>{$uinfo.money}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">申请条件</td>
+            <td>小区业绩<php>echo $uinfo['lsum']+$uinfo['rsum'];</php>/{$coinset.bdt}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft"></td>
+            <td>
+                <php>
+                if($uinfo['isagent']){
+                echo "您已经是报单中心";
+            }else{
+                    if($k){echo "您已提交申请,请耐心等待管理员审核!";}else{
+                </php>
+                <input class="btn btn-primary" type="submit" id="submit" value="提交申请"></td>
+           <php>}}</php>
+        </tr>
+    </table>
+    </form>
+    
+    <script>
+       $(function () {       
+            $("#submit").click(function(){
+                if({$uinfo.isagent}){
+                    alert("您已是报单中心!");
+                    return false;
+                }
+                if({$coinset.bdt}><php>echo $uinfo['lsum']+$uinfo['rsum'];</php>){
+                    alert("小区业绩不足,不可以申请报单中心!");
+                    return false;
+                }
+                $("#fn").submit();
+             });
+        }); 
+    
+    function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',5000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }   
+    </script>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

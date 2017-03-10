@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+
+    
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">在线充值</div>
+                <div class="panel-body ov">
+                    <div class="row">
+                        <div class="col-sm-6"> 
+                            <form  class="form-horizontal" action="{:U(C('FILE_IN').'/Pay/onlineredirect')}" method="post" id="fn" target="_blank">
+                                <div class="fma">
+                                        <div class="fx1">会员编号:</div>
+                                        <div class="fx2">
+                                        {$uinfo.username}
+                                    </div>
+                                </div>
+                                <div class="fma">
+                                        <div class="fx1">充值金额:</div>
+                                        <div class="fx2">
+                                        {$money}
+                                    </div>
+                                </div>
+                                <div class="fma">
+                                        <div class="fx1">支付金额:</div>
+                                        <div class="fx2">
+                                        {$money}<input type="hidden" placeholder="" id="money" name="money" required="" value="{$money}">
+                                    </div>
+                                </div>
+                                <div class="form-actions">
+                                    <button class="btn btn-primary" type="submit" id="submit">确定</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-sm-6">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U(C('FILE_IN').'/money/online')}">在线充值</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var coin=$("#money").val();
+                if(!coin){
+                    alert("请填写充值金额");
+                    return false;
+                }
+                if(coin<=0){
+                    alert("请填写充值金额");
+                    return false;
+                }
+                $('#myModal').modal('show');
+                return true;
+             });
+            $("#close").click(function(){
+                $('#myModal').modal('hide');
+                location.href="{:U(C('FILE_IN').'/Money/online')}";
+            });
+        });
+
+    </script>
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" 
+   aria-labelledby="myModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" 
+               aria-hidden="true">×
+            </button>
+            <h4 class="modal-title" id="myModalLabel">
+               在线充值提示
+            </h4>
+         </div>
+         <div class="modal-body">
+            如果支付成功却没有成功增加相应注册币，请通过客服或是留言方式通知管理人员
+         </div>
+         <div class="modal-footer">
+            <button type="button" class="btn btn-default" 
+             id="close" >关闭
+            </button>
+         </div>
+      </div><!-- /.modal-content -->
+   </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+</body>
+</html>
+

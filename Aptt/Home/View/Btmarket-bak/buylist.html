@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">CT交易记录
+                <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/btmarket/index')}'">返回交易市场</button>
+                </div>
+            </div>
+            <div class="panel-body ov">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>                   
+                        <th>卖家编号</th>
+                        <th>交易数量</th>
+                        <th>交易总额</th>
+                        <th>汇款金额</th>
+                        <th>状态</th>
+                        <th style="width:220px;">操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td class="taskStatus">
+                            <php>
+                                if($v['uid']){
+                                    echo gettableinfo('id='.$v['uid']);
+                                }else{
+                                    echo "系统匹配";
+                                }
+                            </php>
+                        </td>
+                        <td class="taskStatus">{$v.coin}</td>
+                        <td class="taskStatus">{$v.coin}</td>
+                        <td class="taskStatus">{$v.coin}</td>
+                        <td class="taskStatus">{:$status[$v['status']]}<if condition="$v.complain eq 1"><br>卖家已投诉</if></td>
+                        <td class="taskStatus">
+                            <a href='{:U('index.php/btmarket/buyview',array('id'=>$v['id']))}' class="btn btn-danger btn-xs btn-mini" target="_new">查看详情</a>
+                            <if condition="$v.status eq 1">
+                            <button class="btn btn-danger btn-xs btn-mini" onclick="btpay({$v.id})">确认付款</button>
+                                <php>
+                                    if(time()<$v['lockdate']){
+                                </php>
+                                <button class="btn btn-danger btn-xs btn-mini" onclick="btcancel({$v.id})">取消购买</button>
+                                <php>}</php>
+                            </if>
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Gtmarket/index')}">AD市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    function btpay(id){
+        str="{:U(C('FILE_IN').'/btmarket/btpay',array('id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    function btcancel(id){
+        str="{:U(C('FILE_IN').'/btmarket/btcancel',array('id'=>'MMM'))}";
+        url=str.replace("MMM",id);
+        $.post(url, { Action: "post",u:""}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    </script>
+</body>
+</html>

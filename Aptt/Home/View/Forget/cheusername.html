@@ -1,0 +1,74 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="__PUBLIC__/css/css.css" rel="stylesheet" type="text/css">
+<title>{$web.webtitle}</title>
+<script type="text/javascript" src="__PUBLIC__/Js/jquery.js"></script>
+<script type="text/javascript" src="__PUBLIC__/js/cnc.js"></script>
+<script type="text/javascript">
+	var VerifyUrl='{:U("admin.php/Login/verify")}';
+	var pub="__PUBLIC__";
+	$(document).ready(function(){
+		$("#verify").click(function(){
+			$("#verify").attr("src",VerifyUrl+'?rand='+Math.random());
+		});
+		$("#submit").click(function(){
+			var a1=$("#a1").val();
+			var a2=$("#a2").val();
+			var a3=$("#a3").val();
+			if(!a1){
+				alert("答案1不可以为空");
+				return false;
+			}
+			if(!a2){
+				alert("答案2不可以为空");
+				return false;
+			}
+			if(!a3){
+				alert("答案3不可以为空");
+				return false;
+			}
+		 });
+	});
+
+</script>
+
+</head>
+<body>
+<div class="logincontainer">
+	
+	<div class="topbanner" style='text-align:center;height:100px;'></div>
+	
+	<div class="nc">
+		<div class="ncright" style='width:100%'>
+			
+			<div class="ncrightcontent" style='background: url(__PUBLIC__/img/loginbg.png) no-repeat #fff;'>			
+           		
+					<div class="ulogin">
+					<form action="{:U('index.php/Forget/next')}" method='POST' id='fn'>
+					<dd>
+						<dt style="font-size:24px;font-weight:bold;border-bottom:1px solid #999;margin:0 0 15px 0;">找回密码--验证问题</dt>
+						<dt>会员编号:{$username}<input type="hidden" name="username" value="{$username}"></dt>
+						<dt>问题1:{$info.q1}</dt>
+						<dt>答案1:<input type="text" name="a1" id="a1"></dt>
+						<dt>问题2:{$info.q2}</dt>
+						<dt>答案2:<input type="text" name="a2" id="a2"></dt>
+						<dt>问题3:{$info.q3}</dt>
+						<dt>答案3:<input type="text" name="a3" id="a3"></dt>
+						<dt style='text-indent:60px;'><input type='submit' id='submit' value='下一步' class='btn-primary btn'></dt>
+					</dd>
+				</form>
+				</div>
+                <div class="clear"></div>
+			</div>
+			
+		</div>
+		<div class="clear"></div>
+	</div>
+	
+	<div class="clear"></div>
+</div>
+</body>
+
+</html>

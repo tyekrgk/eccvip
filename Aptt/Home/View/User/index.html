@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              信息更新
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                            <div class="fx1">能量编号:</div>
+                            <div class="fx2">{$uinfo.username}</div>
+                        </div>
+                        <div class="fma">
+                            <div class="fx1">能量级别:</div>
+                            <div class="fx2">
+                                {:$bonus[$uinfo['utype']]['title']} <a href="{:U('index.php/user/update')}">【升级账户】</a>
+                            </div>
+                        </div>
+						
+                        <div class="fma">
+                            <div class="fx1">密保状态:</div>
+                            <div class="fx2">
+                                <php>
+                                echo $uinfo['q']?"<span style='color:green'>已设置</span> [<a href='".U(C("FILE_IN")."/User/answer")."'>重新设置</a>]":"<span style='color:red'>未设置</span> [<a href='".U(C("FILE_IN")."/User/question")."'>设置</a>]";
+                                </php>
+                            </div>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">昵称:</label>
+                                <input type="text" placeholder="" id="nick"  required="" value="{$uinfo.nick}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">性别:</label>
+                                <select id="sex" class="form-control">
+                                    <option value="0" {:($uinfo['sex']?'':'checked=""')}>男</option>
+                                    <option value="1" {:($uinfo['sex']?'checked=""':'')}>女</option>
+                                </select>
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">证件号码:</label>
+                                <input type="text" placeholder="" id="idcard" required="" value="{$uinfo.idcard}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">Email:</label>
+                                <input type="email" placeholder="" id="email" required="" value="{$uinfo.email}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">移动电话:</label>
+                                <input type="text" placeholder="" id="tel" required="" value="{$uinfo.tel}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">国家:</label>
+                                <select class='form-control' id="country">
+                                    <option value="" {:($uinfo['country']==''?'selected':'')}>不限</option>
+                                    <option value="中国" {:($uinfo['country']=='中国'?'selected':'')}>中国</option>
+                                    <option value="土耳其" {:($uinfo['country']=='土耳其'?'selected':'')}>土耳其</option>
+                                    <option value="印度尼西亚" {:($uinfo['country']=='印度尼西亚'?'selected':'')}>印度尼西亚</option>
+                                    <option value="马来西亚" {:($uinfo['country']=='马来西亚'?'selected':'')}>马来西亚</option>
+                                    <option value="韩国" {:($uinfo['country']=='韩国'?'selected':'')}>韩国</option>
+                                    <option value="以色列" {:($uinfo['country']=='以色列'?'selected':'')}>以色列</option>
+                                    <option value="泰国" {:($uinfo['country']=='泰国'?'selected':'')}>泰国</option>
+                                </select>
+                        </div><br>
+                        <!-- <div class="input-group input-group-sm">
+                            <label class="input-group-addon">开户银行:</label>
+                                {$bank}
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">开户名:</label>
+                                <input type="text" placeholder="" id="bankuser" required="" value="{$uinfo.bankuser}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">银行卡号:</label>
+                                <input type="text" placeholder="" id="bankcard" required="" value="{$uinfo.bankcard}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">开户分行:</label>
+                                <input type="text" placeholder="" id="bankaddress" required="" value="{$uinfo.bankaddress}" class="form-control">
+                        </div><br>
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">支付宝帐号:</label>
+                                <input type="text" placeholder="" id="epay" required="" value="{$uinfo.epay}" class="form-control">
+                        </div><br> -->
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">ECF地址:</label>
+                                <input type="text" placeholder="" id="qianbaoc" required="" value="{$uinfo.qianbaoc}" class="form-control">
+                        </div><br>
+                        <div class="form-actions">
+                            <button class="btn btn-primary" type="button" id="reg">确定</button>
+                        </div>
+                    </form>
+                </div>
+          <div class="panel-footer" style="color:Red">请必须填写正确的ECF地址，才能正常取现，请一定完善上述资料并提交“确定”保存！</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/user/index')}">信息更新</a>
+          <a class="list-group-item" href="{:U('index.php/user/ga')}">双重验证</a>
+          <!-- <a class="list-group-item" href="{:U('index.php/user/agent')}">申请报单中心</a> -->
+          <a class="list-group-item" href="{:U('index.php/user/password')}">更改密码</a>
+          <br>
+           <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#reg").click(function(){
+                var nick=$("#nick").val();
+                var sex=$('#sex').val();
+                var idcard=$("#idcard").val();
+                var email=$("#email").val();
+                var tel=$("#tel").val();
+                var country=$("#country").val();
+                var qianbaoc=$("#qianbaoc").val();
+                
+
+                if(!nick){
+                    alert("请输入昵称");
+                    return false;
+                }
+                if(!idcard){
+                    alert("请输入证件号码");
+                    return false;
+                }
+                if(!tel){
+                    alert("请输入移动电话");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/User/save')}", { nick:nick,sex:sex,idcard:idcard,email:email,tel:tel,country:country,qianbaoc:qianbaoc}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

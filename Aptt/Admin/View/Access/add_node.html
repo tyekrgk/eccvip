@@ -1,0 +1,48 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">管理员管理</a> <span class="divider">/</span></li>
+            <li class="active">添加节点</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action="{:U(C("FILE_IN").'/Access/do_node')}" method="post" id="fn">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr id="dat">
+            <td width="10%" class="tableleft">{$view}</td>
+            <td><input type="text" class="form-control" name="name" id="name"> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">描述</td>
+            <td><input type="text" name="title" id="title"/> </td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">排序</td>
+            <td><input type="text" class="form-control" value="100" name="sort">
+		      		<input type="hidden" name="level" value="{$level}">
+		      		<input type="hidden" name="pid" value="{$pid}"></td>
+        </tr>       
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><button  class="btn btn-primary" type="submit" id="submit">保存</button></div>
+    <script>
+        $().ready(function () {       
+            $("#submit").click(function(){
+                var title=$("#name").val();
+                if(!title){
+                    alert("{$view}不可以为空"+title);
+                    return false;
+                }
+               
+                $("#fn").submit();
+             });
+
+        });
+    </script>
+</div>            
+   <include file="Footer:index" />

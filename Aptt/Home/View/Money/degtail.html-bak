@@ -1,0 +1,28 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            奖金明细
+        </div>
+        <div class='main'>
+            <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>类型</th>
+        <th>合计</th>
+        <th>备注信息</th>
+        <th>时间</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'><php>echo prize($v["type"]);</php></td>
+            <td align='center'>{$v.allin}</td>
+            <td align='center'>{$v.info}</td>
+            <td align='center'>{$v.date}</td>
+    </foreach>        
+        </tr>
+        </table>
+    <div class="inline pull-right pages">{$page}</div>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

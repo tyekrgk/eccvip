@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"> AC商城</div>
+
+            <div class="panel-body ov">
+              <div class="well well-sm">
+                <foreach name="pt" item="v">
+                  <input type="button" class="btn btn-xs {:$v['id']==$ptype?'btn-success':'btn-default'}" value="{$v.title}" onclick="location.href='?ptype={$v.id}'">&nbsp;&nbsp;
+                </foreach>
+              </div>
+                <div class="productlist">
+                  <foreach name='list' item='v'>
+                    <div class="col-sm-4 center">
+                      <div class="col-xs-12 pohover">
+                        <a href="{:U('index.php/product/view',array('id'=>$v['id']))}"><img src="__ROOT__/Uploads/{$v.img}" style="width:200px;height:200px;padding:10px 10px;" title="{$v.discription}" alt="{$v.discription}"></a>
+                        <div class="col-xs-12" style="text-align:left;font-weight:bold;color:red;margin:10px 0 0 0">￥{$v.money|numberformat=###,2} <a href="" class="btn btn-xs btn-danger pull-right"><i class="fa fa-shopping-cart"></i> 加入购物车</a></div>
+                        <div class="col-xs-12" style="height:24px;text-align:left;margin:10px 0 0 0"><a href="{:U('index.php/product/view',array('id'=>$v['id']))}" class="namehover">{$v.proname}</a></div>
+                      </div>
+                    </div>
+                  </foreach>
+                </div>
+            </div>
+            <div class="panel-footer">
+                <ul class="recent-posts">
+                    <li style="text-align:center">
+                    <div>
+                    <span class="rows">{$page}</span>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       </div>
+       <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">我的地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

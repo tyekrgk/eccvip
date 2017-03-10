@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">在线充值</div>
+                <div class="panel-body ov">
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div class="well">
+                            <form  class="form-horizontal" action="{:U(C('FILE_IN').'/Money/onlineche')}" method="post" id="fn">
+                                <div class="fma">
+                                        <div class="fx1">会员编号:</div>
+                                        <div class="fx2">
+                                        {$uinfo.username}
+                                    </div>
+                                </div>
+                                <div class="input-group input-group-sm">
+                                        <label class="input-group-addon">充值金额:</label>
+                                        <input type="text" placeholder="" id="money" name="money" required="" value=""  class="form-control">
+                                    </div>
+                                <div class="fma">
+                                        <div class="fx1"></div>
+                                        <div class="fx2">
+                                        <button class="btn btn-primary" type="submit" id="submit">确定</button>
+                                    </div>
+                                </div>
+                            </form></div>
+                        </div>
+                        <div class="col-sm-6">
+                            <div class="well">
+<p> 提示信息: </p>
+<p> 1.请耐心等待从第三方返回系统 </p>
+<p> 2.如果充值成功注册币却没有到帐,请联系管理员 </p>
+<p> 3.如果银行转帐成功却提示充值失败,请联系系统管理员 </p>
+</div>
+                        </div>
+                    </div><br><br>
+                    <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>充值编号</th>
+                                    <th>充值金额</th>
+                                    <th>支付金额</th>
+                                    <th>状态</th>
+                                    <th>支付订单号</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr>
+                                    <td align='taskStatus'>{$v.date}</td>
+                                    <td align='taskStatus'>{$v.sn}</td>
+                                    <td align='taskStatus'>{$v.money}</td>
+                                    <td align='taskStatus'>{$v.money}</td>
+                                    <td align='taskStatus'><php>echo $v["status"]?"<span style='color:green'>充值成功</span>":"<span style='color:#ccc'>充值失败</span>";</php></td>
+                                    <td align='taskStatus' style='white-space:normal;word-wrap : break-word ;'>{$v.info}</td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                    </div>
+                    <div class="panel-footer">
+                        <ul class="recent-posts">
+                            <li style='text-align:center'>{$page}</li>
+                        </ul>
+                    </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U(C('FILE_IN').'/money/online')}">在线充值</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var coin=$("#money").val();
+                if(!coin){
+                    alert("请填写充值金额");
+                    return false;
+                }
+                if(coin<=0){
+                    alert("请填写充值金额");
+                    return false;
+                }
+                return true;
+             });
+        });
+
+    </script>
+
+</body>
+</html>

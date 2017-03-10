@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">CT2转CT1
+                        <div class="pull-right">
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/money/bt2')}'">返回CT2帐户</button>
+                        </div>
+                    </div>
+                    <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="fma">
+                                <div class="fx1">帐户余额:</div>
+                                <div class="fx2">
+                                {$uinfo.bt2|numberformat=###}
+                            </div>
+                        </div>
+                        <div class="fma">
+                                <div class="fx1">转帐类型:</div>
+                                <div class="fx2">
+                                CT2转CT1
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">转帐金额:</label>
+                                <input type="text" placeholder="" id="money" required="" value="" onBlur="var ds=this.value;va={$coinset.bt2shui}*ds/100;$('#sx').html(va);" class="form-control">
+                            </div><br>
+                        <div class="fma">
+                                <div class="fx1">手续费({$coinset.bt2shui}%):</div>
+                                <div class="fx2" id="sx">
+                                
+                            </div>
+                        </div>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">备注:</label>
+                                <input type="text" placeholder="" id="cont" required="" value="" class="form-control">
+                            </div><br>
+                        <div class="input-group input-group-sm">
+                                <label class="input-group-addon">二级密码:</label>
+                                <input type="text" placeholder="" id="p" required="" value="" class="form-control">
+                            </div><br>
+                        <div class="form-actions center">
+                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+                        </div>
+                    </form>
+                    </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/money/bonus')}">我的佣金</a>
+            <a class="list-group-item" href="{:U('index.php/money/bt')}">CT帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/bt1')}">CT1帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/bt2')}">CT2帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/gt')}">AT帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/gt1')}">AT1帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/ly')}">CF帐户</a>
+            <a class="list-group-item" href="{:U('index.php/money/kuang')}">查看矿机</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                var username=$("#username").val();
+                var money=$("#money").val();
+                var p=$("#p").val();
+                var content=$("#cont").val();
+                if(!money){
+                    alert("请输入转帐金额");
+                    return false;
+                }
+                if(!p){
+                    alert("请输入二级密码");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/money/bt2save')}", { money:money,content:content,p:p}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

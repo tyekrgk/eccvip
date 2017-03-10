@@ -1,0 +1,53 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">发放日分红</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action="#" method="post" id="fn" target='hidden_frame'>
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft" width="10%">说明</td>
+            <td>此操作仅分红奖发放方式被设置为[ 手动 ]时可操作,操作时请检查当天是否已发放,发放后不可撤销<br>发放统计数值仅作为参考值,一切以真实发放数据为准</td>
+        </tr>
+        <tr>
+            <td  class="tableleft" width="10%">上次发放时间</td>
+            <td>{$date}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft" width="10%">预计发放总额</td>
+            <td>{$fanum|numberformat=###} </td>
+        </tr>
+        <tr>
+            <td  class="tableleft"></td>
+            <td><input class="btn btn-primary" type="submit" id="submit" value="开始发放"></td>
+        </tr>
+    </table>
+    </form>
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日期</th>
+        <th>执行时间</th>
+        <th>奖金总额</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.da}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>{$v.allin}</td>
+            <td align='center'>[<a href="{:U(C("FILE_IN").'/Money/rfhlist',array('id'=>$v['id']))}">详情</a>]</td>
+        </tr>
+    </foreach>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

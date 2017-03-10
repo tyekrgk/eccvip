@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading"> 系统公告</div>
+
+            <div class="panel-body ov">
+                <ul class="newslist">
+                    <foreach name='list' item='v'>
+                    <li>
+                        <a href='{:U("index.php/News/view",array("id"=>$v["id"]))}'>{$v.title}</a>
+                        <span>{$v.date}</span>
+                        <div class="clear"></div>
+                    </li>
+                </foreach>
+                </ul>
+            </div>
+            <div class="panel-footer">
+                <ul class="recent-posts">
+                    <li style="text-align:center">
+                    <div>
+                    <span class="rows">{$page}</span>
+                    </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+       </div>
+       <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/message/index')}">站内邮件</a>
+          <a class="list-group-item" href="{:U('index.php/News/index')}">系统公告</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

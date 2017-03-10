@@ -1,0 +1,49 @@
+
+    <include file="Header:index" />
+    <div class="content">
+         
+        
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">网站设置</a> <span class="divider">/</span></li>
+            <li class="active">重置网站数据</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    
+            <div class="well">
+              <form action="{:U(C("FILE_IN").'/Clear/save')}" method="post" id="fn" target="hidden_frame">
+  <table class="table table-bordered table-hover definewidth m10">
+      <tr>
+          <td colspan="2">请在下面文本框中输入"<span style="color:red">确认清除</span>",此操作将会清除会员的所有奖金以及奖金记录,为防止出现不可预计的错误,执行此操作前请对数据进行备份</td>
+          
+      </tr>
+       <tr>
+          <td width="10%" class="tableleft">输入信息</td>
+          <td><input type="text" id="prodo"></td>
+      </tr> 
+  </table>
+  <div class="form-inline definewidth m20">
+  <button  class="btn btn-primary" type="submit" id="submit">清除信息</button></div>
+  </form>
+  
+  <script>
+    $(function () { 
+           
+      $("#submit").click(function(){
+        var prodo=$("#prodo").val();
+        if(prodo!=="确认清除"){
+          alert("请输入信息");
+          return false;
+        }
+       });
+      });
+  </script>
+          </div>
+          
+</div>            
+   <include file="Footer:index" />

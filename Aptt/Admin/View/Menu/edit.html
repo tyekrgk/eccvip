@@ -1,0 +1,67 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="index.html">官网设置</a> <span class="divider">/</span></li>
+            <li class="active">菜单管理</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid"> 
+    
+     <form  action="{:U(C("FILE_IN").'/Menu/save')}" method="post" id="fn">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td width="10%" class="tableleft">标题</td>
+            <td><input type="text" name="title" value="{$data.title}"/></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">父导航</td>
+            <td><php>echo fidlist($data['fid']);</php></td>
+        </tr>
+        <tr>
+            <td width="10%" class="tableleft">排序</td>
+            <td><input type="text" name="sort" value="{$data.sort}"/></td>
+        </tr>
+        <tr id="typekey">
+            <td class="tableleft">类型</td>
+            <td><php>echo menutype($data['type']);</php></td>
+        </tr>
+        <php>
+            $didtype=didtype($data['id']);
+            echo $didtype[3];
+        </php>
+    </table>
+   
+    <div class="form-inline definewidth m20">
+        <input type="hidden" name="id" value="{$data.id}">
+    <button  class="btn btn-primary" type="submit" id="submit">保存</button> <a class="btn btn-default" href="{:U(C("FILE_IN").'/Menu/index')}" >返回</a></div> </form>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                    $("#fn").submit();
+             });
+            
+            $("#type").change(function(){
+                urlstr="<php>echo $didtype[0];</php>";
+                danstr="<php>echo $didtype[1];</php>";
+                typestr="<php>echo $didtype[2];</php>";
+                var p1=$(this).children("option:selected").val();//这就是selected的值
+                $("#typelist").remove();
+                if(p1==0){
+                    $("#typekey").after(urlstr);
+                }
+                if(p1==1){
+                    $("#typekey").after(danstr);
+                }
+                if(p1==2){
+                    $("#typekey").after(typestr);
+                }
+            }); 
+        });
+    </script>
+</div>            
+   <include file="Footer:index" />

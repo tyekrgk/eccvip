@@ -1,0 +1,122 @@
+﻿<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            股权大厅
+        </div>
+        <div class='main'>
+            <php>
+                if($web['kuaitext']) echo '<div class="txxx">'.$web['kuaitext'].'</div>';
+            </php>
+                <form action="{:U('index.php/member/financialsave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft" width="15%">会员编号</td>
+            <td>{$uinfo.username}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">电子币</td>
+            <td>{$uinfo.score}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">购买金额</td>
+            <td>{$coinset.price|numberformat=###,3}/个</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">购买数量</td>
+            <td><input type='text' name='number' id='number' value='1'></td>
+        </tr>
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><input class="btn btn-primary" type="button" id="submit" value="确定购买"></div>
+    
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>编号</th>
+        <th>购买时间</th>
+        <th>购买价格</th>
+        <th>购买数量</th>
+        <th>可分红天数</th>
+        <th>分红额度/天</th>
+        <th>已分红天数</th>
+        <th>已分红总额</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.sn}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>{$v.price}</td>
+            <td align='center'>{$v.number}</td>
+            <td align='center'>{$v.days}</td>
+            <td align='center'>{$v.money|floor=###}%</td>
+            <td align='center'>{$v.doneday}</td>
+            <td align='center'>{$v.total}</td>
+            <td align='center'>
+                <php>
+                    echo $v['doneday']==$v['days']?"<span style='color:red'>已结束</span>":"<span style='color:green'>分红中...</span>";
+                </php>
+            </td>
+            <td align='center'>
+                无
+            </td>    
+        </tr>
+    </foreach>
+    </table>
+    <div class="inline pull-right pages">{$page}</div>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                number=$('#number').val();
+                if({$coinset.price}*number>{$uinfo.score}){
+                    alert("电子币不足!");
+                    return false;
+                }
+                $("#fn").submit();
+             });
+        });
+    
+    function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',5000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }   
+    </script>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

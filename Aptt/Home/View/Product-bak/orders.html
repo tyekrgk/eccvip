@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">订单列表</div>
+            <div class="panel-body ov">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>商品列表</th>
+                        <th>订单总额</th>
+                        <th>
+                        	<select id="select2" style="border:#CCC 1px solid;" name="select" onchange="javascript:window.open(this.options[this.selectedIndex].value,'_self')">
+								<option selected="selected" value="?t=0" {:$t==0?"selected=selected":""}>全部订单</option>
+								<option value="?t=1" {:$t==1?"selected=selected":""}>未支付订单</option>
+								<option value="?t=2" {:$t==2?"selected=selected":""}>已支付订单</option>
+								<option value="?t=3" {:$t==3?"selected=selected":""}>已发货订单</option>
+								<option value="?t=4" {:$t==4?"selected=selected":""}>已完成订单</option>
+							</select>
+                        </th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td colspan="4">订单编号:<span style="color:red;font-weight:bold">{$v.ordersn}</span><span class="pull-right">生成订单时间:{$v.date|date="Y-m-d H:i:s",###}</span></td>
+                    </tr>
+                    <tr>
+                        <td class="taskStatus">
+							<php>
+								$plist=M("orderlist")->where("orderid=".$v['id'])->select();
+								foreach($plist as $vv){
+							</php>
+<a href="{:U('index.php/product/view',array("id"=>$vv['id']))}" target="_bland"><img src="__ROOT__/Uploads{$vv.img}" style="height:50px;padding:5px 5px;border:1px solid #ccc;backgroup:#fff;margin:5px 5px;" alt="{$vv.proname}" title="{$vv.proname}">
+						<php>
+							}
+							</php>
+                        	</td>
+                        <td class="taskStatus">{$v.total|numberformat=###,2}</td>
+                        <td class="taskStatus">{:$status[$v['status']]}</td>
+                        <td class="taskStatus">
+                            <if condition="$v.status eq 0">
+                             <a href="{:U('index.php/product/orderpay',array('id'=>$v['id']))}" class="btn btn-xs btn-danger">现在付款</a>
+                           </if>
+                           <if condition="$v.status eq 2">
+                             <a href="javascript:void(0)" class="btn btn-xs btn-danger" onclick="orderconfirm({$v.id})">确认收货</a>
+                             </if>
+                             <a href="{:U('index.php/product/orderview',array('id'=>$v['id']))}" class="btn btn-xs btn-danger">查看详情</a>  
+                         </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="panel-footer">{$page}</div>
+        </div>
+    </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">收货地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+  <script>
+  function orderconfirm(id){
+    url="{:U('index.php/product/orderconfirm')}";
+        $.post(url, {id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('index.php/product/orders')}";
+         });
+  }
+  </script>
+</body>
+</html>

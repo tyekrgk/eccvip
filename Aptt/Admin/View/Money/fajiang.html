@@ -1,0 +1,39 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">会员[{$un}]产生奖金记录</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日期</th>
+        <th>会员编号</th>
+        <th>类型</th>
+        <th>合计</th>
+        <th>备注信息</th>
+        <th>时间</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>{$v.uid|gettableinfo="id=".###}</td>
+            <td align='center'><php>echo prize($v["type"]);</php></td>
+            <td align='center'>{$v.allin}</td>
+            <td align='center'>{$v.info}</td>
+            <td align='center'>{$v.date}</td>
+    </foreach>        
+        </tr>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

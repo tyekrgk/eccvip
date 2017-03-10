@@ -1,0 +1,46 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">快速奖明细</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>周数</th>
+        <th>会员编号</th>
+        <th>推荐人数</th>
+        <th>推荐编号</th>
+        <th>金额</th>
+        <th>状态</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>第{$cid}周</td>
+            <td align='center'>{$v.id|gettableinfo="id=".###}</td>
+            <td align='center'>{$v.renum}</td>
+            <td align='center' style="width:60%;white-space:normal;word-wrap : break-word ;">{$v.namelist|join=",",###}</td>
+            <td align='center'>{$v.coin}</td>
+            <td align='center'>
+                <php>
+                    echo $v['status']?"<span style='color:green'>已发放</span>":"<span style='color:red'>未发放</span>";
+                </php>
+            </td>
+            <td align='center'>
+                <php>
+                    echo $v['status']?"无":"[<a href='".U(C("FILE_IN")."/Money/ksjsingle",array("cid"=>$cid,"id"=>$v["id"],"renum"=>$v["renum"]))."' target='hidden_frame'>发放奖金</a>]";
+                </php>
+            </td>
+    </foreach>        
+        </tr>
+        </table>
+</div>            
+   <include file="Footer:index" />

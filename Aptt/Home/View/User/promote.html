@@ -1,0 +1,42 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            推广链接
+        </div>
+        <div class='main'>
+    <table class='table table-bordered table-hover definewidth m10'>
+        <tr>
+            <td class='tableleft'>推广链接</td>
+            <td id="cliphtml">
+                {:U("index.php/Promote/index",array("id"=>$uid),"html",$_SERVER['HTTP_HOST'])}
+            </td>
+        </tr>
+        <tr style="display:none">
+            <td class='tableleft'></td>
+            <td>
+                <input type='button' class='copy-input' value='点击复制' style='color:#000'/>
+            </td>
+        </tr>
+        </table>
+        <script type="text/javascript" src="__PUBLIC__/zclip/jquery.zclip.js"></script>
+        <script type="text/javascript">
+            $(document).ready(function(){
+            /* 定义所有class为copy-input标签，点击后可复制class为input的文本 */
+                $(".copy-input").zclip({
+                    alert("asdfsd");
+                    path: "__PUBLIC__/zclip/ZeroClipboard.swf",
+                    copy: function(){
+                    return $("#cliphtml").html();
+                    },
+                    afterCopy:function(){/* 复制成功后的操作 */
+                        var $copysuc = $("<div class='copy-tips'><div class='copy-tips-wrap'>复制成功</div></div>");
+                        $("body").find(".copy-tips").remove().end().append($copysuc);
+                        $(".copy-tips").fadeOut(3000);
+                    }
+                });
+            });
+            </script>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

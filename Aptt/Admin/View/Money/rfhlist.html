@@ -1,0 +1,39 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">分红奖详情</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <div class="form-inline definewidth m10" style="padding:10px 0 10px 0">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&un='+document.getElementById('un').value"><br></div>
+    </div>
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>会员编号</th>
+        <th>奖金币</th>
+        <th>发放时间</th>
+        <th>详情</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.uid|gettableinfo="id=".###}</td>
+            <td align='center'>{$v.coin}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>{$v.info}</td>
+        </tr>
+    </foreach>
+    </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

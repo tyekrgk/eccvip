@@ -1,0 +1,30 @@
+.clear{font-size:0; height:0; clear:both;}
+#formtable{width:100%;list-style: outside none none;}
+#formtable li{float: left; height: 30px; line-height: 30px; margin: 0; padding: 5px 0; border:none;}
+#formtable .ri{width:20%;text-align:right;}
+#formtable .le{width:30%;}
+/**补充*/
+.padding10{padding:0 10px;}
+.textcenter{text-align:center;}
+#font12{font-size:12px;}
+#nopadding{padding:0 0 0 0;}
+.newslist{width:100%;padding:0;margin:0;}
+.newslist li{width:100%;padding:10px 0px;list-style: none;border-bottom: 1px solid #eee;height:auto;text-indent:15px;}
+.newslist li:hover{background: #f5f5f5;}
+.newslist li a{font-weight:bold;color:#333;}
+.newslist li a:hover{color:#444;}
+.newslist li span{float:right;padding:0 20px 0 0;}
+.indexlist{width:100%;padding:0;margin:0;}
+.indexlist li{width:100%;padding:5px 0px;list-style: none;border-bottom: 1px solid #eee;height:auto;text-indent:15px;}
+.indexlist li:hover{background: #f5f5f5;}
+.indexlist li a{color:#333;}
+.indexlist li a:hover{color:#444;}
+.indexlist li span{float:right;padding:0 20px 0 0;}
+@media (max-width: 480px) {
+	#formtable .ri{width:40%;text-align:right;}
+#formtable .le{width:60%;}
+}
+@media (min-width: 481px) and (max-width: 767px) {
+	#formtable .ri{width:20%;text-align:right;}
+	#formtable .le{width:30%;}
+}

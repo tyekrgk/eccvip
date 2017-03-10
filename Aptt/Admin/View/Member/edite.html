@@ -1,0 +1,95 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">会员管理</a> <span class="divider">/</span></li>
+            <li class="active">会员编辑</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">  
+    <form id='f' method='POST' action="{:U(C("FILE_IN").'/Member/save',array('id'=>$info['id'],'t'=>2,'p'=>$p))}" target='hidden_frame' >
+    <table class="table table-bordered table-hover definewidth m10"> 
+      <tr>
+        <td align='right' width='150'>会员编号</td>
+        <td>{$info.username}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>会员级别</td>
+        <td>
+          <select name="utype">
+            <foreach name="bonus" item="v">
+              <option value="{$v.id}" {:$v['id']==$info['utype']?"selected='selected'":""}>{$v.title}</option>
+            </foreach>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>推荐人编号</td>
+        <td>{$info.rid|gettableinfo='id='.###}</td>
+      </tr>.
+      <tr>
+        <td align='right' width='150'>注册结点</td>
+        <td>管理人:{$info.fid|gettableinfo='id='.###} 管理区位:<php>echo $info['line']?"左":"右";</php>区</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>可用ECF帐户</td>
+        <td>{$info.coina}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>消费ECF帐户</td>
+        <td>{$info.coinb}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>复投ECF帐户</td>
+        <td>{$info.coinc}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>注册时间</td>
+        <td>{$info.regdate}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>激活时间</td>
+        <td>{$info.actdate}</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>登录密码</td>
+        <td><input type="text" name='upd1' id='upd1' value='' class="input-xlarge">如不修改请留空</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>二级密码</td>
+        <td><input type="text" name='upd2' id='upd2' value='' class="input-xlarge">如不修改请留空</td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>真实姓名</td>
+        <td><input type="text" name='realname' id='realname' value='{$info.realname}' class="input-xlarge"></td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>证件号码:</td>
+        <td><input type="text" name='idcard' id='idcard' value='{$info.idcard}' class="input-xlarge"></td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>会员昵称</td>
+        <td><input type="text" name='nick' id='nick' value='{$info.nick}' class="input-xlarge"></td>
+      </tr>
+      <tr>
+        <td align='right' width='150'>email</td>
+        <td><input type="text" name='email' id='email' value='{$info.email}' class="input-xlarge"></td>
+      </tr>
+      <tr style="display:none">
+        <td align='right' width='150'>手机号码</td>
+        <td><input type="text" name='tel' id='tel' value='{$info.tel}' class="input-xlarge"></td>
+      </tr>
+      <tr>
+        <td align='right' width='150'></td>
+        <td><input type="submit" id="button" class='btn btn-primary' value='提 交'></td>
+      </tr>
+    </table>
+    </form>
+    </div>
+</div>            
+   <include file="Footer:index" />

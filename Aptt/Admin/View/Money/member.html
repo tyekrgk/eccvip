@@ -1,0 +1,45 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">会员奖金明细</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        <div class="form-inline definewidth m10">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?un='+document.getElementById('un').value"> <br>
+    </div>
+    <div class="form-inline definewidth m10">
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日 期</th>
+        <th>会员编号</th>
+        <th><php>echo prize(101);</php></th>
+        <th><php>echo prize(103);</php></th> 
+        <th><php>echo prize(1003);</php></th>
+        <th>合计</th>
+        <th width="45">操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr style='text-align:center'>
+            <td>{$v.date}</td>
+            <td><php>echo gettableinfo("id=".$v['uid']);</php></td>
+            <td>{$v.101}</td>
+            <td>{$v.103}</td>
+            <td>{$v.1003}</td>
+            <td>{$v.allin}</td>
+            <td>[<a href='{:U(C("FILE_IN")."/Money/degtail",array("date"=>$v["date"],"uid"=>$v["uid"]))}'>明细</a>]</td>
+        </tr>
+    </foreach>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

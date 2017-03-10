@@ -1,0 +1,104 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">系统充值</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    <form action="{:U(C("FILE_IN").'/Money/congsave')}" method="post" id="fn" target='hidden_frame'>
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft" width="10%">会员编号</td>
+            <td><input type="text" name="username" id="username" style="width:100px;"></td>
+        </tr>
+        <tr>
+            <td  class="tableleft">充值类型</td>
+            <td>
+            <select name="key1" style="width:100px;">
+                <!-- 
+                <if condition="0">
+                <option value="1">CT</option>
+                <option value="2">CT1</option>
+                <option value="3">CT2</option>
+                <option value="4">AT</option>
+                <option value="5">AT1</option>
+                <option value="6">AD</option>
+                <option value="7">AD1</option>
+                <option value="8">AD2</option>
+                <option value="9">CF</option>
+                </if> 
+                -->
+                <option value="20">可用ECF</option>
+                <option value="21">消费ECF</option>
+                <option value="22">复投ECF</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td  class="tableleft">操作类型</td>
+            <td>
+            <select name="type" style="width:100px;">
+                <option value="0">增加</option>
+                <option value="1">减少</option>
+            </select>
+            </td>
+        </tr>
+        <tr>
+            <td  class="tableleft">金额</td>
+            <td><input type="text" name="money" id="money" value="" style="width:70px;"/></td>
+        </tr>
+    </table>
+    </form>
+    <div class="form-inline definewidth "><input class="btn btn-primary" type="button" id="submit" value="提交"></div>
+    <div class="form-inline definewidth m10" style="padding:10px 0 10px 0">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&un='+document.getElementById('un').value"><br></div>
+    </div>
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>会员编号</th>
+        <th>充值类型</th>
+        <th>操作类型</th>
+        <th>金额</th>
+        <th>充值时间</th>
+        <th>操作管理员</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'><php>echo gettableinfo("id=".$v["uid"])</php></td>
+            <td align='center'><php>echo $mbonus[$v["key1"]];</php></td>
+            <td align='center'><php>echo $v['key2']?"减少":"增加";</php></td>
+            <td align='center'>{:$v[$bonu[$v["key1"]]]}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>无</td>
+        </tr>
+    </foreach>
+        </table>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var username=$("#username").val();
+                var coin=$("#money").val();
+                if(!username){
+                    alert("请填写会员编号");
+                    return false;
+                }
+                if(!coin){
+                    alert("请填写充值金额");
+                    return false;
+                }
+                $("#fn").submit();
+             });
+        });
+    </script>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

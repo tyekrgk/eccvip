@@ -1,0 +1,31 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">系统公告</a> <span class="divider">/</span></li>
+            <li class="active">公告列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">  
+       <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>标题</th>
+        <th>添加时间</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+      <tr class="ce">
+        <td>{$v.title}</td>
+        <td>{$v.date}</td>
+        <td>[<a href='{:U(C("FILE_IN")."/News/edit",array("id"=>$v["id"]))}'>编辑</a>][<a href='{:U(C("FILE_IN")."/News/delete",array("id"=>$v["id"]))}'>删除</a>]</td>
+      </tr>
+    </foreach>
+    </table>
+  <div class="inline pull-right pages">{$page}</div>
+</div>            
+   <include file="Footer:index" />

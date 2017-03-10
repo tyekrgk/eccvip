@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              发件箱
+              <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/leave')}'">发送邮件</button> 
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/index')}'">收件箱</button> 
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/fa')}'">发件箱</button>
+                </div>
+          </div>
+          <div class="panel-body ov">
+                            <table class="table table-bordered table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>时间</th>
+                                    <th>收件方</th>
+                                    <th>标题</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <foreach name='list' item='v'>
+                                <tr>
+                                    <td class="taskStatus">{$v.date}</td>
+                                    <td class="taskStatus">{:$v['toid']?gettableinfo("id=".$v['toid']):"系统"}</td>
+                                    <td class="taskStatus"><span class="pending">{$v.title}</span></td>
+                                    <td class="taskStatus">{:$v["type"]?($v['status']?"已查看":"未查看"):($v['status']?"已回复":"未回复")}</td>
+                                    <td class="taskStatus"><a href="{:U('index.php/message/view',array('id'=>$v['id']))}" class="btn btn-danger btn-xs">查看</a></td>
+                                </tr>
+                                </foreach>
+                                </tbody>
+                            </table>
+                        </div>
+          <div class="panel-footer">{$page}</div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/message/index')}">站内邮件</a>
+          <a class="list-group-item" href="{:U('index.php/News/index')}">系统公告</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+</body>
+</html>

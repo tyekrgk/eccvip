@@ -1,0 +1,123 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            货币转帐
+        </div>
+        <div class='main'>
+            <php>
+                if($web['zhtext']) echo '<div  class="txxx">'.$web['zhtext'].'</div>';
+            </php>
+                <form action="{:U('index.php/Money/transfersave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft">会员编号</td>
+            <td>{$uinfo.username}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">电子币余额</td>
+            <td>{$uinfo.score}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">转到会员编号</td>
+            <td><input type="text" name="username" id="username" value=""/></td>
+        </tr> 
+        <tr>
+            <td  class="tableleft">金额</td>
+            <td><input type="text" name="score" id="money" value="{$coinset.zhbase}"/> 最小转帐金额为{$coinset.zhbase} ,税{$coinset.zhshui}% </td>
+        </tr>
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><input class="btn btn-primary" type="button" id="submit" value="提交"></div>
+    
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>类型</th>
+        <th>转出帐号</th>
+        <th>转出金额</th>
+        <th>转入帐号</th>
+        <th>税</th>
+        <th>到帐金额</th>
+        <th>转帐时间</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'><php>echo $v['uid']==$uid?"转出":"转入";</php></td>
+            <td align='center'><span style="color:<php>echo $v['uid']==$uid?'green':'';</php>"><php>echo gettableinfo("id=".$v['uid']);</php></span></td>
+            <td align='center'>-{$v.score}</td>
+            <td align='center'><span style="color:<php>echo $v['key1']==$uid?'green':'';</php>"><php>echo gettableinfo("id=".$v['key1']);</php></span></td>
+            <td align='center'>{$v.shui}</td>
+            <td align='center'><php>echo $v['score']-$v["shui"];</php></td>
+            <td align='center'>{$v.date}</td>
+        </tr>        
+    </foreach>
+    </table>
+    <div class="inline pull-right pages">{$page}</div>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                if(!confirm("确定进行转帐吗?此操作为不可逆操作")) return false;
+                var coin=$("#money").val();
+                var username=$("#username").val();
+                if(!username){
+                    alert("请输入会员编号");
+                    return false;
+                }
+                if(coin<{$coinset.zhbase}){
+                    alert("最低金额为{$coinset.zhbase}");
+                    return false;
+                }
+                if(coin>10000){
+                    alert("单笔最高金额10000");
+                    return false;
+                }
+
+                $("#fn").submit();
+             });
+        });
+    
+    
+    function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',5000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }   
+    </script>
+           
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

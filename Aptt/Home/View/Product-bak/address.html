@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">收货地址</div>
+            <div class="panel-body ov">
+              <div class="well">
+                <form  class="form-horizontal">
+                  <div class="input-group input-group-sm">
+                      <label class="input-group-addon">收货人姓名</label>
+                      <input type="text" placeholder="" id="username" required="" value="{$data.username}" class="form-control">
+                  </div>
+                  <div class="input-group input-group-sm mt10" id="un">
+                      <label class="input-group-addon">联系方式:</label>
+                          <input type="text" placeholder="" id="tel" required="" value="{$data.tel}" class="form-control">
+                  </div>
+                  <div class="input-group input-group-sm mt10" id="un">
+                      <label class="input-group-addon">收货地址:</label>
+                          <input type="text" placeholder="" id="address" required="" value="{$data.address}" class="form-control">
+                  </div>
+                  <div class="input-group input-group-sm mt10" id="un">
+                      <label class="input-group-addon">设为常用:</label>
+                       <span class="form-control" style="width:100px;background-color: rgb(245, 245, 245);">
+                          <input type="radio" name="status" id="status_1" value="1" {:$data['status']?"checked=checked":""}> 是 
+                          <input type="radio" name="status" id="status_0" value="0" {:$data['status']?"":"checked=checked"}> 否
+                       </span>
+                  </div>
+                  <div class="input-group input-group-sm mt10" id="un">
+                      <input type="button" value="保存" id="bn" class="btn btn-danger">
+                  </div>
+                </form>
+              </div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>地址序号</th>
+                        <th>收货人姓名</th>
+                        <th>收货人地址</th>
+                        <th>收货人方式</th>
+                        <th>类型</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <volist name="list" id="v" key="k" >
+                    <tr>
+                        <td class="taskStatus"><span class="pending">{$k}</span></td>
+                        <td class="taskStatus">{$v.username}</td>
+                        <td class="taskStatus">{$v.address}</td>
+                        <td class="taskStatus">{$v.tel}</td>
+                        <td class="taskStatus">{:$v['status']?"常用地址":"无"}</td>
+                        <td class="taskStatus">
+                          <input type="button" value="修改" class="btn btn-xs btn-danger" onclick="location.href='{:U('index.php/product/address',array('id'=>$v['id']))}'"> <input type="button" value="删除" class="btn btn-xs btn-danger" onclick="addressdel({$v.id})">
+                         </td>
+                    </tr>
+                    </volist>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">收货地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+    $("#bn").click(function(){
+      var username=$("#username").val();
+      var tel=$("#tel").val();
+      var address=$("#address").val();
+      var status=$('input[name="status"]:checked').val();
+      var id={$data.id};
+      if(!username){
+        alert("请输入收货人姓名");
+        return false;
+      }
+      if(!tel){
+        alert("请输入联系方式");
+        return false;
+      }
+      if(!address){
+        alert("请输入收货人地址");
+        return false;
+      }
+      url="{:U('index.php/product/addresssave')}";
+      $.post(url, { id:id,username:username,tel:tel,status:status,address:address}, function(value) {
+          var data = eval("("+value+")");
+          alert(data['info']);
+          if(data['error']==1) location.href="{:U('index.php/product/address')}";
+      });
+    });
+  });
+
+  function addressdel(id){
+    url="{:U('index.php/product/addressdel')}";
+    if(confirm("确定要删除这条收货地址吗?")){
+      $.post(url, { id:id}, function(value) {
+          var data = eval("("+value+")");
+          alert(data['info']);
+          if(data['error']==1) location.href="{:U('index.php/product/address')}";
+       });
+    }
+  }
+  </script>
+</body>
+</html>

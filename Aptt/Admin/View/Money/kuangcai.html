@@ -1,0 +1,89 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">AC币拆分</li>
+        </ul>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action="{:U(C('FILE_IN').'/money/caisave')}" method="post" id="fn" target='hidden_frame'>
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft" width="10%">说明</td>
+            <td>只有价格涨到1.99时才可以执行拆分,如1.99的价格未出售完成时,请使用系统帐号购买所有AC币<br>发放统计数值仅作为参考值,一切以真实发放数据为准</td>
+        </tr>
+        <tr>
+            <td  class="tableleft" width="10%">上次发放时间</td>
+            <td>{$date}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft" width="10%">当前发放统计</td>
+            <td>AD帐户总额:{$allgd} AD1帐户总额:{$allgd1}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft" width="10%">预计拆分后统计</td>
+            <td>AD帐户总额:{:$allgd*2} AD1帐户总额:{:$allgd1*2}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft"></td>
+            <td><input class="btn btn-primary" type="button" id="submit" value="开始执行"></td>
+        </tr>
+    </table>
+    </form>
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>日期</th>
+        <th>执行时间</th>
+        <th style="display:none">参与人数</th>
+        <th>AD发放总额</th>
+        <th>AD1发放总额</th>
+        <th style="display:none">操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.da}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center' style="display:none">{$v.key1}</td>
+            <td align='center'>{$v.gd|floor=###}</td>
+            <td align='center'>{$v.gd1|floor=###}</td>
+            <td align='center' style="display:none">[<a href="{:U(C("FILE_IN").'/Money/kuanglist',array('id'=>$v['id']))}">详情</a>]</td>
+        </tr>
+    </foreach>
+        </table>
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>
+<script type="text/javascript">
+    $(function () {
+        $("#submit").click(function(){
+            $('#submit').attr('disabled',"true");
+            $('#submit').val("拆分执行当中,请耐心等待....");
+            var url="{:U(C('FILE_IN').'/money/caisave')}";
+            $.post(url, { id:'id'}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+        });
+    });
+    function docai(id,ky,number){
+        var va=$("#"+ky+"_"+id).val();
+        if(va<{$coinset.gdmin} && ky=="number"){
+            alert("数值不可以低于{$coinset.gdmin}");
+            return false;
+        }
+        if(number==va) return false;
+        url="{:U(C('FILE_IN').'/money/gdsave')}";
+        $.post(url, { id:id,ky:ky,va:va}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+</script>
+   <include file="Footer:index" />

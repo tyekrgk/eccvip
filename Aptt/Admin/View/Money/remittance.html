@@ -1,0 +1,53 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">财务管理</a> <span class="divider">/</span></li>
+            <li class="active">汇款充值</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="form-inline definewidth m10">
+    按会员编号查询:<input type="text" id="un" value="{$un}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&un='+document.getElementById('un').value">  
+    按充值编号查询:<input type="text" id="sn" value="{$sn}" style="width:150px;"><input type="button" value="查询" onclick="location.href='?a=remittance&sn='+document.getElementById('sn').value"><br><br>
+    </div>
+    <table class="table table-bordered table-hover definewidth m10">
+    <tr>
+        <th>充值编号</th>
+        <th>会员编号</th>
+        <th>充值电子币</th>
+        <th>汇款金额</th>
+        <th>状态</th>
+        <th>备注信息</th>
+        <th>时间</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.sn}</td>
+            <td align='center'><php>echo gettableinfo("id=".$v["uid"])</php></td>
+            <td align='center'>{$v.money}</td>
+            <td align='center'>{$v.money}</td>
+            <td align='center'><php>echo $v["status"]?($v["status"]==1?"<span style='color:green'>审核通过</span>":"<span style='color:#ccc'>审核退回</span>"):"<span style='color:red'>审核中...</span>";</php></td>
+            <td align='center' style='white-space:normal;word-wrap : break-word ;'>{$v.info}</td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'>
+                <php>if($v['status']==0){</php>
+                [<a href='{:U(C("FILE_IN")."/Money/remsave",array("b"=>"do","id"=>$v["id"]))}' target="hidden_frame">审核</a>] [<a href='{:U(C("FILE_IN")."/Money/remsave",array("b"=>"no","id"=>$v["id"]))}' target="hidden_frame">退回</a>]
+                <php>}else{echo "无";}</php>
+                
+                
+            </td>
+        </tr>
+    </foreach>
+        </table>
+    
+        <div class="pages">
+          　　{$page}
+        </div>
+</div>            
+   <include file="Footer:index" />

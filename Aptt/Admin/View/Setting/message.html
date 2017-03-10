@@ -1,0 +1,88 @@
+
+    <include file="Header:index" />
+    <div class="content">
+         
+        
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">网站设置</a> <span class="divider">/</span></li>
+            <li class="active">提示信息管理</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+            <div class="well">
+              备注:留空系统前台页面将不会显示
+            </div>
+            <div class="well">
+              <form id='f' method='POST' action="{:U(C("FILE_IN").'/Setting/messagesave')}" target='hidden_frame'>
+              <table class="table table-bordered table-hover definewidth m10"> 
+                <tbody>
+				<tr>
+                    <td align='right' width='150'>顶部滚动信息</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='zongtext' name='zongtext'>{$web.zongtext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>股权大厅</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='kuaitext' name='kuaitext'>{$web.kuaitext}</textarea>
+                    </td>
+                  </tr>
+                  <tr style='display:none'>
+                    <td align='right' width='150'>领取奖金</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='tuitext' name='tuitext'>{$web.tuitext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>奖金提现</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='cashtext' name='cashtext'>{$web.cashtext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>货币转换</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='huantext' name='huantext'>{$web.huantext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>货币转帐</td>
+                    <td>
+                      <textarea style="width:400px" rows="3" id='zhtext' name='zhtext'>{$web.zhtext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>银行信息</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='banktext' name='banktext'>{$web.banktext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>汇款信息</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='huitext' name='huitext'>{$web.huitext}</textarea>
+                    </td>
+                  </tr>
+                  <tr style='display:none'>
+                    <td align='right' width='150'>交易市场</td>
+                    <td>
+                      <textarea  style="width:400px" rows="3" id='eptext' name='eptext'>{$web.eptext}</textarea>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'></td>
+                    <td><input type="submit" id="button" value='提 交'></td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+          
+</div>            
+   <include file="Footer:index" />

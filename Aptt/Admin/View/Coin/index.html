@@ -1,0 +1,354 @@
+
+    <include file="Header:index" />
+    <div class="content">
+         
+        
+        
+                <ul class="breadcrumb">
+            <li><a href="index.html">网站设置</a> <span class="divider">/</span></li>
+            <li class="active">奖金设置</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    
+            <div class="well">
+              <form id='f' method='POST' action="{:U(C("FILE_IN").'/Coin/save')}"  target='hidden_frame'>
+              <table class="table table-bordered table-hover definewidth m10"> 
+                <tbody>
+                  <tr>
+                    <td align='center' colspan=2>通用设置</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>投资额</td>
+                    <td><input type="text" name='money' id='money' value='{$coin.money}' class="input-xlarge" style='width:50px;'>/单</td>
+                  </tr>
+                  <tr style="display:none">
+                    <td align='right' width='150'>汇率</td>
+                    <td><input type="text" name='incoin' id='incoin' value='{$coin.incoin}' class="input-xlarge" style='width:50px;'>￥:1＄</td>
+                  </tr>
+                  <tr style="display:none">
+                    <td align='right' width='150'>出场汇率</td>
+                    <td>1＄:<input type="text" name='outcoin' id='outcoin' value='{$coin.outcoin}' class="input-xlarge" style='width:50px;'>￥</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>注册编号设定</td>
+                    <td>前缀:<input type="text" name='pfx' id='pfx' value='{$coin.pfx}' class="input-xlarge" style='width:50px;'> 数字长度:<input type="text" name='number' id='number' value='{$coin.number}' class="input-xlarge" style='width:50px;'></td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>ECF价值</td>
+                    <td>
+                      <input type="text" name='coinprice' id='coinprice' value='{$coin.coinprice}' class="input-xlarge" style='width:50px;'>/个 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>ECF转帐设置</td>
+                    <td>
+                      基数<input type="text" name='coinabase' id='coinabase' value='{$coin.coinabase}' class="input-xlarge" style='width:50px;'> 
+                      最小值<input type="text" name='coinamin' id='coinamin' value='{$coin.coinamin}' class="input-xlarge" style='width:50px;'> 
+                      手续费<input type="text" name='coinashui' id='coinashui' value='{$coin.coinashui}' class="input-xlarge" style='width:50px;'>% 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>ECF提现设置</td>
+                    <td>
+                      最小值<input type="text" name='coinatxmin' id='coinatxmin' value='{$coin.coinatxmin}' class="input-xlarge" style='width:50px;'> 
+                      最大值<input type="text" name='coinatxmax' id='coinatxmax' value='{$coin.coinatxmax}' class="input-xlarge" style='width:50px;'> 
+                      手续费<input type="text" name='coinatxshui' id='coinatxshui' value='{$coin.coinatxshui}' class="input-xlarge" style='width:50px;'>% 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='center' colspan=2>奖金设置</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>动态分配</td>
+                    <td>
+                      可用ECF<input type="text" name='dcoina' id='dcoina' value='{$coin.dcoina}' class="input-xlarge" style='width:50px;'>% 
+                      消费ECF<input type="text" name='dcoinb' id='dcoinb' value='{$coin.dcoinb}' class="input-xlarge" style='width:50px;'>% 
+                      复投ECF<input type="text" name='dcoinc' id='dcoinc' value='{$coin.dcoinc}' class="input-xlarge" style='width:50px;'>% 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>静态分配</td>
+                    <td>
+                      可用ECF<input type="text" name='stcoina' id='stcoina' value='{$coin.stcoina}' class="input-xlarge" style='width:50px;'>% 
+                      消费ECF<input type="text" name='stcoinb' id='stcoinb' value='{$coin.stcoinb}' class="input-xlarge" style='width:50px;'>% 
+                      复投ECF<input type="text" name='stcoinc' id='stcoinc' value='{$coin.stcoinc}' class="input-xlarge" style='width:50px;'>% 
+                      周期（天）<input type="text" name='stimes' id='stimes' value='{$coin.stimes}' class="input-xlarge" style='width:50px;'> 
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td align='right' width='150'>CT转帐设置</td>
+                    <td>
+                      基数<input type="text" name='bt0base' id='bt0base' value='{$coin.bt0base}' class="input-xlarge" style='width:50px;'> 
+                      最小值<input type="text" name='bt0min' id='bt0min' value='{$coin.bt0min}' class="input-xlarge" style='width:50px;'> 
+                      手续费<input type="text" name='bt0shui' id='bt0shui' value='{$coin.bt0shui}' class="input-xlarge" style='width:50px;'> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>CT1转帐设置</td>
+                    <td>
+                      基数<input type="text" name='bt1base' id='bt1base' value='{$coin.bt1base}' class="input-xlarge" style='width:50px;'> 
+                      最小值<input type="text" name='bt1min' id='bt1min' value='{$coin.bt1min}' class="input-xlarge" style='width:50px;'> 
+                      手续费<input type="text" name='bt1shui' id='bt1shui' value='{$coin.bt1shui}' class="input-xlarge" style='width:50px;'> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>CT2转帐设置</td>
+                    <td>
+                      基数<input type="text" name='bt2base' id='bt2base' value='{$coin.bt2base}' class="input-xlarge" style='width:50px;'> 
+                      最小值<input type="text" name='bt2min' id='bt2min' value='{$coin.bt2min}' class="input-xlarge" style='width:50px;'> 
+                      手续费<input type="text" name='bt2shui' id='bt2shui' value='{$coin.bt2shui}' class="input-xlarge" style='width:50px;'> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AT转帐设置</td>
+                    <td>
+                      最小值<input type="text" name='gtmin' id='gtmin' value='{$coin.gtmin}' class="input-xlarge" style='width:50px;'>
+                      转帐基数<input type="text" name='gtbase' id='gtbase' value='{$coin.gtbase}' class="input-xlarge" style='width:50px;'>
+                      手续费<input type="text" name='gdshui' id='gdshui' value='{$coin.gdshui}' class="input-xlarge" style='width:50px;'>%(扣除手续费,剩余部分按后面设置分配) <br>
+                      CT<input type="text" name='gdgt' id='gdgt' value='{$coin.gdgt}' class="input-xlarge" style='width:50px;'>% 
+                      AT1<input type="text" name='gdgt1' id='gdgt1' value='{$coin.gdgt1}' class="input-xlarge" style='width:50px;'>%  
+                      LY<input type="text" name='gdgt2' id='gdgt2' value='{$coin.gdgt2}' class="input-xlarge" style='width:50px;'>% 
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AT1转LY设置</td>
+                    <td>
+                      最小值<input type="text" name='gt1min' id='gt1min' value='{$coin.gt1min}' class="input-xlarge" style='width:50px;'>
+                      转帐基数<input type="text" name='gt1base' id='gt1base' value='{$coin.gt1base}' class="input-xlarge" style='width:50px;'>
+                      手续费<input type="text" name='gt1shui' id='gt1shui' value='{$coin.gt1shui}' class="input-xlarge" style='width:50px;'>%
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>能量AC币转入设置</td>
+                    <td>
+                      最小值<input type="text" name='kuangmin' id='kuangmin' value='{$coin.kuangmin}' class="input-xlarge" style='width:50px;'>
+                      转帐基数<input type="text" name='kuangbase' id='kuangbase' value='{$coin.kuangbase}' class="input-xlarge" style='width:50px;'>
+                    </td>
+                  </tr> 
+                  <tr>
+                    <td align='right' width='150'>开放CT购买(系统匹配)</td>
+                    <td><input type="radio" name="txstatus" value="0" <php>echo $coin['txstatus']?"":"checked=checked";</php>/>开启
+        <input type="radio" name="txstatus" value="1" <php>echo $coin['txstatus']?"checked=checked":"";</php>/>关闭
+                      
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>商城状态</td>
+                    <td><input type="radio" name="epstatus" value="0" <php>echo $coin['epstatus']?"":"checked=checked";</php>/>开启
+        <input type="radio" name="epstatus" value="1" <php>echo $coin['epstatus']?"checked=checked":"";</php>/>关闭  
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AD交易状态</td>
+                    <td><input type="radio" name="eplock" value="0" <php>echo $coin['eplock']?"":"checked=checked";</php>/>开启
+        <input type="radio" name="eplock" value="1" <php>echo $coin['eplock']?"checked=checked":"";</php>/>关闭  
+                    </td>
+                  </tr>
+
+
+                  
+                  <tr style="display:none">
+                    <td align='right' width='150'>提现设置</td>
+                    <td>状态:  基数:<input type="text" name='txbase' id='txbase' value='{$coin.txbase}' class="input-xlarge" style='width:50px;'> 手续费<input type="text" name='txshui' id='txshui' value='{$coin.txshui}' class="input-xlarge" style='width:50px;'>%</td>
+                  </tr>
+                  <tr style="display:none">
+                    <td align='right' width='150'>转帐设置</td>
+                    <td>
+                      状态:<input type="radio" name="zhstatus" value="0" <php>echo $coin['zhstatus']?"":"checked=checked";</php>/>开启
+        <input type="radio" name="zhstatus" value="1" <php>echo $coin['zhstatus']?"checked=checked":"";</php>/>关闭  
+                      基数:<input type="text" name='zhbase' id='zhbase' value='{$coin.zhbase}' class="input-xlarge" style='width:50px;'> 手续费:<input type="text" name='zhshui' id='zhshui' value='{$coin.zhshui}' class="input-xlarge" style='width:50px;'>%</td>
+                  </tr>
+                  <tr style="display:none">
+                    <td align='right' width='150'>转换设置</td>
+                    <td>
+                      状态:<input type="radio" name="huanstatus" value="0" <php>echo $coin['huanstatus']?"":"checked=checked";</php>/>开启
+        <input type="radio" name="huanstatus" value="1" <php>echo $coin['huanstatus']?"checked=checked":"";</php>/>关闭  
+                      基数:<input type="text" name='huanbase' id='huanbase' value='{$coin.huanbase}' class="input-xlarge" style='width:50px;'> 手续费:<input type="text" name='huanshui' id='huanshui' value='{$coin.huanshui}' class="input-xlarge" style='width:50px;'>%</td>
+                  </tr>
+                  <if condition="0">
+                  <tr style='display:none'>
+                    <td align='right' width='150'>交易市场设置</td>
+                    <td>
+                      基数:<input type="text" name='epbase' id='epbase' value='{$coin.epbase}' class="input-xlarge" style='width:50px;'> 最大值:<input type="text" name='epmax' id='epmax' value='{$coin.epmax}' class="input-xlarge" style='width:50px;'> 手续费:<input type="text" name='epshui' id='epshui' value='{$coin.epshui}' class="input-xlarge" style='width:50px;'>% 锁定记录时间:<input type="text" name='eplock' id='eplock' value='{$coin.eplock}' class="input-xlarge" style='width:50px;'>秒 挂单超时:<input type="text" name='epgua' id='epgua' value='{$coin.epgua}' class="input-xlarge" style='width:50px;'>秒</td>
+                  </tr>
+                </if>
+                  <tr>
+                    <td align='right' width='150'>CT市场设置</td>
+                    <td>
+                      购买/卖出最小值<input type="text" name='btmin' id='btmin' value='{$coin.btmin}' class="input-xlarge" style='width:50px;'>  
+                      购买基数<input type="text" name='btbase' id='btbase' value='{$coin.btbase}' class="input-xlarge" style='width:50px;'> 
+                      支付超时<input type="text" name='btover' id='btover' value='{$coin.btover}' class="input-xlarge" style='width:50px;'>秒
+                      确认超时<input type="text" name='btconfirmover' id='btconfirmover' value='{$coin.btconfirmover}' class="input-xlarge" style='width:50px;'>秒 
+                      挂单扣税<input type="text" name='btout' id='btout' value='{$coin.btout}' class="input-xlarge" style='width:50px;'>%  
+                      购买奖励<input type="text" name='btin' id='btin' value='{$coin.btin}' class="input-xlarge" style='width:50px;'>% 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>CT交易详情</td>
+                    <td>
+                      历史交易总量<input type="text" name='bthistory' id='bthistory' value='{$coin.bthistory}' class="input-xlarge" style='width:50px;'>  
+                      今日挂单总量<input type="text" name='btgua' id='btgua' value='{$coin.btgua}' class="input-xlarge" style='width:50px;'> 
+                      今日成交总量<input type="text" name='btdeal' id='btdeal' value='{$coin.btdeal}' class="input-xlarge" style='width:50px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AD交易详情</td>
+                    <td>
+                      历史交易总量<input type="text" name='gdhistory' id='gdhistory' value='{$coin.gdhistory}' class="input-xlarge" style='width:50px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AD市场设置</td>
+                    <td>
+                      初始价格<input type="text" name='gdprice' id='gdprice' value='{$coin.gdprice}' class="input-xlarge" style='width:50px;'>元/个AC币 
+                      涨幅0.01/<input type="text" name='gdup' id='gdup' value='{$coin.gdup}' class="input-xlarge" style='width:50px;'>枚金币 
+                      出售/买入基数<input type="text" name='gdbase' id='gdbase' value='{$coin.gdbase}' class="input-xlarge" style='width:50px;'> 
+                      出售/买入最小值<input type="text" name='gdmin' id='gdmin' value='{$coin.gdmin}' class="input-xlarge" style='width:50px;'>
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AD市场设置</td>
+                    <td>
+                      最高收益<input type="text" name='gdmax' id='gdmax' value='{$coin.gdmax}' class="input-xlarge" style='width:50px;'>倍 解冻周期<input type="text" name='gddong' id='gddong' value='{$coin.gddong}' class="input-xlarge" style='width:50px;'>天 经<input type="text" name='gdc' id='gdc' value='{$coin.gdc}' class="input-xlarge" style='width:50px;'>次解冻完成,每次解冻订单总额<input type="text" name='gdm' id='gdm' value='{$coin.gdm}' class="input-xlarge" style='width:50px;'>%
+
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>AD市场初始发行量</td>
+                    <td><input type="text" name='gddi' id='gddi' value='{$coin.gddi}' class="input-xlarge" style='width:50px;'>枚/价格 开始发行时会员不可卖出,只可购买,按设定数值挂满所有价格</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>能量设置</td>
+                    <td>
+                      发放方式<input type="radio" name="kau" value="0" <php>echo $coin['kau']?"":"checked=checked";</php>/>自动
+        <input type="radio" name="kau" value="1" <php>echo $coin['kau']?"checked=checked":"";</php>/>手动  
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>报单中心条件</td>
+                    <td>
+                      直推人数<input type="text" name='bdt1' id='bdt1' value='{$coin.bdt1}' class="input-xlarge" style='width:50px;'>人 
+                      总业绩<input type="text" name='bdt2' id='bdt2' value='{$coin.bdt2}' class="input-xlarge" style='width:50px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>奖金分配</td>
+                    <td>
+                      
+                      CT2<input type="text" name='shui' id='shui' value='{$coin.shui}' class="input-xlarge" style='width:50px;'>% 余下部分进入CT帐户
+                    </td>
+                  </tr>   
+                  <tr>
+                    <td align='center' colspan=2>奖金设置</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>推荐佣金</td>
+                    <td>
+                      1代<input type="text" name='tjj1' id='tjj1' value='{$coin.tjj1}' class="input-xlarge" style='width:50px;'>% 
+                      2代<input type="text" name='tjj2' id='tjj2' value='{$coin.tjj2}' class="input-xlarge" style='width:50px;'>% 
+                      3代<input type="text" name='tjj3' id='tjj3' value='{$coin.tjj3}' class="input-xlarge" style='width:50px;'>% 
+                    </td>
+                  </tr>
+                  -->
+                  <tr>
+                    <td align='center' colspan=2>钱包设置</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>钱包服务器ip</td>
+                    <td><input type="text" name='qb_addr' id='qb_addr' value='{$coin.qb_addr}' class="input-xlarge" style='width:150px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>钱包服务器端口</td>
+                    <td><input type="text" name='qb_port' id='qb_port' value='{$coin.qb_port}' class="input-xlarge" style='width:150px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>钱包服务器用户名</td>
+                    <td><input type="text" name='qb_uname' id='qb_uname' value='{$coin.qb_uname}' class="input-xlarge" style="width:150px;"> 
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>钱包服务器密码</td>
+                    <td><input type="password" name='qb_pwd' id='qb_pwd' value='{$coin.qb_pwd}' class="input-xlarge" style="min-width:150px;"> 
+                    </td>
+                  </tr>
+                  <!-- <if condition="0">    
+                  <tr>
+                    <td align='center' colspan=2>第三方支付设置</td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>支付状态</td>
+                    <td><input type="radio" name="mer_status" value="0" <php>echo $coin['mer_status']?"":"checked=checked";</php>/>打开 
+        <input type="radio" name="mer_status" value="1" <php>echo $coin['mer_status']?"checked=checked":"";</php>/>关闭 </td>
+                  </tr>
+                  <tr style="display:none">
+                    <td align='right' width='150'>支付类型</td>
+                    <td><input type="radio" name="mer_test" value="0" <php>echo $coin['mer_test']?"":"checked=checked";</php>/>正式 
+        <input type="radio" name="mer_test" value="1" <php>echo $coin['mer_test']?"checked=checked":"";</php>/>测试 </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>Mo宝支付平台号</td>
+                    <td><input type="text" name='mer_code' id='mer_code' value='{$coin.mer_code}' class="input-xlarge" style='width:150px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>Mo宝商户帐号</td>
+                    <td><input type="text" name='mer_code1' id='mer_code1' value='{$coin.mer_code1}' class="input-xlarge" style='width:150px;'>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td align='right' width='150'>Mo宝支付密钥</td>
+                    <td><input type="text" name='mer_key' id='mer_key' value='{$coin.mer_key}' class="input-xlarge" style="min-width:200px;"> 
+                    </td>
+                  </tr>
+                  </if> -->
+                   <if condition='$kk eq 0'>
+						      <tr>
+                    <td align='right' width='150'></td>
+                    <td colspan='4'><input type="submit" id="button" class='btn btn-primary' value='提 交'></td>
+                  </tr>
+                   </if>
+                </tbody>
+              </table>
+              <if condition='$kk'>
+              <table  class="table table-bordered table-hover definewidth m10">
+              	<tr><td>会员等级</td><td>投资额</td><td>单数</td><!-- <td>报单奖</td> --><td>组织佣金</td><td>领导佣金</td><!-- <td>交易佣金</td><td>见点奖</td> --><td>周期利率</td></tr>
+              	<php>
+					foreach($bonus as $v){
+						echo "<tr>
+						<td><input type='text' name='title_".$v['id']."' id='title_".$v['id']."' value='".$v['title']."' class='input-xlarge' style='width:60px;'></td>
+						<td><input type='text' name='money_".$v['id']."' id='money_".$v['id']."' value='".$v['money']."' class='input-xlarge' style='width:40px;'></td>
+            <td><input type='text' name='dan_".$v['id']."' id='dan_".$v['id']."' value='".$v['dan']."' class='input-xlarge' style='width:40px;'></td>
+            <!-- <td><input type='text' name='bdj_".$v['id']."' id='bdj_".$v['id']."' value='".$v['bdj']."' class='input-xlarge' style='width:40px;'>%</td> -->
+						<td><input type='text' name='dpj_".$v['id']."' id='dpj_".$v['id']."' value='".$v['dpj']."' class='input-xlarge' style='width:40px;'>% 
+              封顶<input type='text' name='dpjtop_".$v['id']."' id='dpjtop_".$v['id']."' value='".$v['dpjtop']."' class='input-xlarge' style='width:40px;'></td>
+						<td><input type='text' name='ldj_".$v['id']."' id='ldj_".$v['id']."' value='".$v['ldj']."' class='input-xlarge' style='width:40px;'>%
+              代数<input type='text' name='ldjd_".$v['id']."' id='ldjd_".$v['id']."' value='".$v['ldjd']."' class='input-xlarge' style='width:40px;'></td>
+            <!-- <td><input type='text' name='jyj_".$v['id']."' id='jyj_".$v['id']."' value='".$v['jyj']."' class='input-xlarge' style='width:40px;'>% 
+              代数<input type='text' name='jyjd_".$v['id']."' id='jyjd_".$v['id']."' value='".$v['jyjd']."' class='input-xlarge' style='width:40px;'></td>
+              <td><input type='text' name='jdj_".$v['id']."' id='jdj_".$v['id']."' value='".$v['jdj']."' class='input-xlarge' style='width:40px;'>% 
+                层数<input type='text' name='jdjc_".$v['id']."' id='jdjc_".$v['id']."' value='".$v['jdjc']."' class='input-xlarge' style='width:40px;'></td> -->
+              <td><input type='text' name='kup_".$v['id']."' id='kup_".$v['id']."' value='".$v['kup']."' class='input-xlarge' style='width:40px;'>%
+              浮动<input type='text' name='fudong_".$v['id']."' id='fudong_".$v['id']."' value='".$v['fudong']."' class='input-xlarge' style='width:40px;'>%</td>
+					</tr>";
+					}
+				</php>
+				<tr>
+                    
+                    <td colspan='7'><input type="submit" id="button" class='btn btn-primary' value='提 交'> 备注:报单奖需要成为报单中心才可以拿到</td>
+                  </tr>
+              </table>
+          </if>
+            </form>
+          </div>
+          
+</div>            
+   <include file="Footer:index" />

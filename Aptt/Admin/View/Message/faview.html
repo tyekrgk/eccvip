@@ -1,0 +1,51 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">消息管理</a> <span class="divider">/</span></li>
+            <li class="active">会员列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <form action='{:U(C("FILE_IN")."/Message/viewsave",array("id"=>$message["id"]))}' method='POST'  target='hidden_frame'>
+    <table class='table'>
+        <tr>
+            <th colspan='2'> 留言信息</th> 
+        </tr>
+        <tr>
+            <td width='' align='right' class='tableleft'>收件人</td>
+            <td><php>$arr=array(0=>gettableinfo("id=".$message["toid"]),3=>"所有人");echo $arr[$message["type"]];</php></td>
+        </tr>
+        <tr>
+            <td width='15%' align='right' class='tableleft'>留言类型</td>
+            <td><php>$arr=array(0=>"系统留言",3=>"系统公告");echo $arr[$message["type"]];</php></td>
+        </tr>
+        <tr>
+            <td width='' align='right' class='tableleft'>留言标题</td>
+            <td>{$message.title}</td>
+        </tr>
+        <tr>
+            <td width='' align='right' class='tableleft'>留言内容</td>
+            <td>{$message.content}</td>
+        </tr>
+        
+        
+    </table>
+    </form>
+    <script>
+    $(function(){
+        $('#submit').click(function(){
+            var hcontent=$('#hcontent').val();
+            if(!hcontent) {
+                alert('请填写回复信息');
+                return false;
+            }
+        });
+    });
+    </script>
+</div>            
+   <include file="Footer:index" />

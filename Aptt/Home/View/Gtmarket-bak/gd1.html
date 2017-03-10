@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">AD1AC币账户列表
+                <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/gtmarket/gd2')}'">我的AD2</button>
+                </div>
+            </div>
+            <div class="panel-body ov">
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>                   
+                        <th>编号</th>
+                        <th>AD1总数</th>
+                        <th>买入成本</th>
+                        <th>收益</th>
+                        <th>可售数量</th>
+                        <th>已售数量</th>
+                        <th>操作</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td class="taskStatus">
+                            <span class="pending">{$v.entype}</span>
+                        </td>
+                        <td class="taskStatus">{:$v['gd1']*pow(2,$v['cai'])}</td>
+                        <td class="taskStatus">{$v.price}</td>
+                        <td class="taskStatus">{$v.key3}/{:$v['gd1']*$v['price']*$coinset['gdmax']}</td>
+                        <td class="taskStatus">
+                            <php>
+                                $days=floor((time()-$v['ti'])/(24*3600*$coinset['gddong']));
+                                if($days>$coinset['gdc']) $days=$coinset['gdc'];
+                                $key=$days-$v['key2'];
+                                if($key<0) $key=0;
+                                echo $key*$v['gd1']*pow(2,$v['cai'])*$coinset['gdm']/100;
+                            </php>
+                        </td>
+                        <td class="taskStatus">{$v.key3}</td>
+                        <td class="taskStatus">
+                            <button class="btn btn-danger btn-xs" onclick="dosave({$v.id})">转入AD2</button>
+                            <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/gtmarket/gd1view',array('id'=>$v['id']))}'">查看</button>
+                        </td>
+                    </tr>
+                    </foreach>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/Gtmarket/index')}">AD市场</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+    function dosave(id){
+        url="{:U(C('FILE_IN').'/gtmarket/gd1togd2')}";
+        $.post(url, { id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) window.location.reload();
+         });
+    }
+    $(document).ready(function(){
+        
+        $("#gt2").click(function(){
+           var number=$("#gt2number").val();
+           var price=$("#gt2price").val();
+           var p=$("#gt2p").val();
+           if(!number){
+                alert("请输入卖出AC币数量");
+                return false;
+           }
+           if(number<0){
+                alert("请输入正确的卖出AC币数量");
+                return false;
+           }
+           if(!p){
+                alert("请输入二级密码");
+                return false;
+           }
+           $.post("{:U('index.php/gtmarket/gt2save')}", {number:number,price:price,p:p}, function(value) {
+                var data = eval("("+value+")");
+                alert(data['info']);
+                if(data['error']==1) window.location.reload();
+             });
+        });
+    });
+    </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="#">商品管理</a> <span class="divider">/</span></li>
+            <li class="active">订单列表</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+            <div class="well">
+                <div class="span6">
+                <div class="panel panel-default">
+                 <div class="panel-body">
+                    <h4>订单编号:<span style="color:Red">{$cart.ordersn}</span></h4>
+                    <p>订单状态:<span style="color:Red">{:$status[$cart['status']]}</span></p>
+                    <if condition="$cart.status eq 1 ">
+                      <p><button class="btn btn-success" id="fahuo">确认发货</button></p>
+                    </if>
+                    <if condition="$cart.status eq 2 ">
+                      <p><button class="btn btn-success" id="orderdone">确认已收货</button></p>
+                    </if>
+                 </div>
+              </div>
+          </div>
+              <div class="span6">
+                <h4>发货详情:</h4>
+                <p><input type="text" id="content" value="{$cart.content}" > <button class="btn btn-success" id="fillin">保存</button></p>
+            </div>
+            <br style="font-size:0; height:0; clear:both;">
+          </div>
+          <div class="well">
+            
+              <div class="panel panel-default">
+                 <div class="panel-body">
+                  <h4>收货地址:</h4>
+                  <p>收货人姓名:{$cart.pun}</p>
+                  <p>联系人手机:{$cart.ptel}</p>
+                  <p>收货人地址:{$cart.padr}</p>
+                 </div>
+               </div>
+           
+
+           </div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>商品名称</th>
+                        <th>商品图片</th>
+                        <th>商品价格</th>
+                        <th>购买数量</th>
+                        <th>小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr class="ce">
+                        <td class="taskStatus"><span class="pending">{$v.proname}</span></td>
+                        <td class="taskStatus"><img src="__ROOT__/Uploads{$v.img}" style="height:50px;padding:5px 5px;border:1px solid #ccc;backgroup:#fff"></td>
+                        <td class="taskStatus">{$v.money|numberformat=###,2}</td>
+                        <td class="taskStatus">{$v.number}</td>
+                        <td class="taskStatus">{$v.total|numberformat=###,2}</td>
+                    </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan="5" align="right">
+                            数量:<span style="color:red">{$cart.number}</span> 
+                            合计:<span style="color:red">{$cart.total|numberformat=###,2}</span> 
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                </table> 
+    
+
+</div> 
+<script>
+  $(document).ready(function(){
+      $("#fahuo").click(function(){
+        url="{:U('admin.php/product/fahuo')}";
+        id={$cart.id};
+        $.post(url, {id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('admin.php/product/orderview',array('id'=>$cart['id']))}";
+         });
+      });
+      $("#orderdone").click(function(){
+        url="{:U('admin.php/product/orderdone')}";
+        id={$cart.id};
+        $.post(url, {id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('admin.php/product/orderview',array('id'=>$cart['id']))}";
+         });
+      });
+      $("#fillin").click(function(){
+        url="{:U('admin.php/product/fillin')}";
+        id={$cart.id};
+        var content=$("#content").val();
+        $.post(url, {id:id,content:content}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('admin.php/product/orders')}";
+         });
+      });
+  });
+  </script>           
+   <include file="Footer:index" />

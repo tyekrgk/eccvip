@@ -1,0 +1,49 @@
+ 
+    <include file="Header:index" />
+    <div class="content">
+                <ul class="breadcrumb">
+            <li><a href="index.html">网站设置</a> <span class="divider">/</span></li>
+            <li class="active">数据库管理</li>
+        </ul>
+
+        <div class="container-fluid">
+            <div class="row-fluid">
+                    
+
+<div class="row-fluid">
+    <div class="well">
+        <a class="btn" href = '{:U(C("FILE_IN").'/Data/index',array("action"=>"backup"))}' target='hidden_frame'>备份添加</a>  备注:系统只能保存5个备份文件,您可以先下载到本地计算机保存再进行删除!
+    </div>
+        <table class="table table-bordered table-hover definewidth m10">
+            <tr>
+                <th>序号</th>
+                <th>文件名</th>
+                <th>备份时间</th>
+                <th>文件大小</th>
+                <th>操作</th>
+            </tr>
+            <notempty  name="lists">
+                <foreach name="lists" key="key" item="row">
+                    <if condition="$key gt 1">
+                        <tr class='ce'>
+                            <td>{$key-1}</td>
+                            <td><a href="{:U(C("FILE_IN").'/Data/index',array('Action'=>'download','file'=>$row))}">{$row}</a></td>
+                            <td>{$row|getfiletime=$datadir}</td>
+                            <td>{$row|getfilesize=$datadir}</td>
+                            <td>
+                                [<a href="{:U(C("FILE_IN").'/Data/index',array('action'=>'download','file'=>$row))}" >下载</a>]
+                                [<a onclick="return confirm('确定将数据库还原到当前备份吗？')"href="{:U(C("FILE_IN").'/Data/index',array('action'=>'RL','file'=>$row))}" target='hidden_frame'>还原</a>]
+                                [<a onclick="return confirm('确定删除该备份文件吗？')"href="{:U(C("FILE_IN").'/Data/index',array('action'=>'Del','file'=>$row))}" target='hidden_frame'>删除</a>]
+                            </td>
+                        </tr>
+                    </if>
+                </foreach>
+                <else/>
+                <tr>
+                    <td colspan="5">没有找到相关数据。</td>
+                </tr>
+
+            </notempty>
+        </table>
+</div>            
+   <include file="Footer:index" />

@@ -1,0 +1,74 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            货币转换
+        </div>
+        <div class='main'>
+            <php>
+                if($web['huantext']) echo '<div  class="txxx">'.$web['huantext'].'</div>';
+            </php>
+                <form action="{:U('index.php/Money/conversionsave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft">会员编号</td>
+            <td>{$uinfo.username}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">奖金币余额</td>
+            <td>{$uinfo.coin}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">转换类型</td>
+            <td><select name="type"><option value="1">奖金币-->电子币</option></select></td>
+        </tr> 
+        <tr>
+            <td  class="tableleft">金额</td>
+            <td><input type="text" name="coin" id="money" value="{$coinset.huanbase}"/> 最小转换金额为{$coinset.huanbase},税{$coinset.huanshui}% </td>
+        </tr> 
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><input class="btn btn-primary" type="button" id="submit" value="提交"></div>
+    
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>转换类型</th>
+        <th>转换金额</th>
+        <th>税</th>
+        <th>实际转换金额</th>
+        <th>时间</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>奖金币->电子币</td>
+            <td align='center'>{$v.coin}</td>
+            <td align='center'>{$v.shui}</td>
+            <td align='center'>{$v.score}</td>
+            <td align='center'>{$v.date}</td>
+        </tr>
+    </foreach>
+        </table>
+    <div class="inline pull-right pages">{$page}</div>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                if(!confirm("确定进行货币转换吗?")) return false;
+                var coin=$("#money").val();
+                
+                if(coin<{$coinset.huanbase}){
+                    alert("最低金额为{$coinset.huanbase}");
+                    return false;
+                }
+                if(coin>10000){
+                    alert("单笔最高金额10000");
+                    return false;
+                }
+
+                $("#fn").submit();
+             });
+        });
+    </script>
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />

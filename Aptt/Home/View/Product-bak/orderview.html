@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+            <div class="panel-heading">查看订单</div>
+            <div class="panel-body ov">
+              <div class="panel panel-default">
+                 <div class="panel-body">
+                    <h4>订单编号:<span style="color:Red">{$cart.ordersn}</span> 
+                      <div class="pull-right">
+                        <if condition="$cart.status eq 0">
+                          <a href="{:U('index.php/product/orderpay',array('id'=>$cart['id']))}" class='btn btn-sm btn-success'>现在付款</a>
+                        </if>
+                        <if condition="$cart.status eq 2">
+                          <a href="javascript:void(0)" class='btn btn-sm btn-success' id="con">确认收货</a>
+                        </if>
+                      </div>
+                    </h4>
+                    <p>订单状态:<span style="color:Red">{:$status[$cart['status']]}</span></p>
+                    <if condition="$cart.status gt 1 ">
+                      <p>发货详情:<span style="color:green">{$cart.content}</span></p>
+                    </if>
+                 </div>
+              </div>
+              <div class="panel panel-default">
+                 <div class="panel-body">
+                  <h4>收货地址:</h4>
+                  <p>收货人姓名:{$cart.pun}</p>
+                  <p>联系人手机:{$cart.ptel}</p>
+                  <p>收货人地址:{$cart.padr}</p>
+                 </div>
+               </div>
+                <table class="table table-bordered table-striped table-hover">
+                    <thead>
+                    <tr>
+                        <th>商品名称</th>
+                        <th>商品图片</th>
+                        <th>商品价格</th>
+                        <th>购买数量</th>
+                        <th>小计</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <foreach name='list' item='v'>
+                    <tr>
+                        <td class="taskStatus"><span class="pending"><a href="{:U('index.php/product/view',array("id"=>$v['id']))}" target="_bland">{$v.proname}</a></span></td>
+                        <td class="taskStatus"><a href="{:U('index.php/product/view',array("id"=>$v['id']))}" target="_bland"><img src="__ROOT__/Uploads{$v.img}" style="height:50px;padding:5px 5px;border:1px solid #ccc;backgroup:#fff"></a></td>
+                        <td class="taskStatus">{$v.money|numberformat=###,2}</td>
+                        <td class="taskStatus">{$v.number}</td>
+                        <td class="taskStatus">{$v.total|numberformat=###,2}</td>
+                    </tr>
+                    </foreach>
+                    <tr>
+                        <td colspan="5" align="right">
+                            数量:<span style="color:red">{$cart.number}</span> 
+                            合计:<span style="color:red">{$cart.total|numberformat=###,2}</span> 
+                            
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+      <div class="col-sm-3">
+            <div class="list-group-item active">快捷导航</div>
+            <a class="list-group-item" href="{:U('index.php/product/index')}">AC商城</a>
+          <a class="list-group-item" href="{:U('index.php/product/cart')}">购物车</a>
+          <a class="list-group-item" href="{:U('index.php/product/orders')}">我的订单</a>
+          <a class="list-group-item" href="{:U('index.php/product/address')}">收货地址</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+  <script>
+  $(document).ready(function(){
+      $("#con").click(function(){
+        url="{:U('index.php/product/orderconfirm')}";
+        id={$cart.id};
+        $.post(url, {id:id}, function(value) {
+            var data = eval("("+value+")");
+            alert(data['info']);
+            if(data['error']==1) location.href="{:U('index.php/product/orders')}";
+         });
+      });
+  });
+  </script>con
+</body>
+</html>

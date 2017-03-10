@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <include file="Header:head" />
+  </head>
+  <body>
+    <include file="Header:menu" />
+<div class="container">
+    <div class="row">
+      <div class="col-sm-9">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+              发送邮件
+              <div class="pull-right">
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/leave')}'">发送邮件</button> 
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/index')}'">收件箱</button> 
+                    <button class="btn btn-danger btn-xs" onclick="location.href='{:U('index.php/message/fa')}'">发件箱</button>
+                </div>
+          </div>
+          <div class="panel-body ov">
+                    <form  class="form-horizontal">
+                        <div class="input-group input-group-sm">
+                            <label class="input-group-addon">类型:</label>
+                            <select id="type" onchange="mny()" class="form-control">
+                              <option value="0">给系统留言</option>
+                              <option value="1">给能量留言</option>
+                              </select>
+                        </div>
+                        <div class="input-group input-group-sm mt10" id="un">
+                            <label class="input-group-addon">能量编号:</label>
+                                <input type="text" placeholder="" id="username" required="" value="" class="form-control">
+                        </div>
+                        <div class="input-group input-group-sm mt10">
+                            <label class="input-group-addon">标题:</label>
+                                <input type="text" placeholder="" id="title" required="" value="" class="form-control">
+                        </div>
+                        <div class="input-group input-group-sm mt10">
+                            <label class="input-group-addon">内容:</label>
+                                <textarea id="cont" style="height:250px;" class="form-control"></textarea>
+                        </div>
+                        <div class="form-actions mt10">
+                            <button class="btn btn-primary" type="button" id="submit">确定</button>
+                        </div>
+                    </form>
+                    </div>
+        </div>
+      </div>
+      <div class="col-sm-3">
+          <div class="list-group-item active">快捷导航</div>
+          <a class="list-group-item" href="{:U('index.php/message/index')}">站内邮件</a>
+          <a class="list-group-item" href="{:U('index.php/News/index')}">系统公告</a>
+          <br>
+          <include file="Header:uinfo" />
+      </div>
+    </div>
+  </div>
+    <script>
+        $(function () {
+            $("#submit").click(function(){
+                var type=$("#type").val();
+                var username=$("#username").val();
+                var title=$("#title").val();
+                var content=$("#cont").val();
+                if(!title){
+                    alert("请输入标题");
+                    return false;
+                }
+                if(type==1){
+                  if(!title){
+                      alert("请输入能量编号");
+                      return false;
+                  }
+                }
+                if(!content){
+                    alert("请输入内容");
+                    return false;
+                }
+                $.post("{:U(C('FILE_IN').'/message/leavesave')}", { type:type,username:username,title:title,content:content}, function(value) {
+                    //alert(value);
+                    var data = eval("("+value+")");
+                    alert(data['info']);
+                    if(data['error']==1) window.location.reload();
+                });
+            });
+            key=$("#type").val();
+            if(key==1){
+              $("#un").css("display","");
+            }else{
+              $("#un").css("display","none");
+            }
+        });
+        function mny(){
+            $("#un").toggle(500);
+          }
+    </script>
+
+</body>
+</html>

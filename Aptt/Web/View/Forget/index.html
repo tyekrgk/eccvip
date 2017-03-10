@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>{$web.webtitle}</title>
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <meta name="author" content="templatemo" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" href="__PUBLIC__/css/top.css" />
+    <!-- animate -->
+    <link rel="stylesheet" href="__PUBLIC__/css/animate.min.css" />
+    <!-- bootstrap -->
+    <link rel="stylesheet" href="__PUBLIC__/css/bootstrap.min.css" />
+    <!-- font-awesome -->
+    <link rel="stylesheet" href="__PUBLIC__/css/font-awesome.min.css" />
+    <!-- google font -->
+    <!--  <link href="http://fonts.useso.com/css?family=Raleway:400,300,700,800" rel="stylesheet" type="text/css" />
+    -->
+    <!-- fullpage -->
+    <link rel="stylesheet" href="__PUBLIC__/css/jquery.fullPage.css" />
+    <!-- custom -->
+    <link rel="stylesheet" href="__PUBLIC__/css/templatemo-style.css" />
+    <link rel="stylesheet" href="__PUBLIC__/css/promote.css" />
+    <script type="text/javascript" src="__PUBLIC__/js/zDrag.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/zDialog.js"></script>
+    
+    <!-- jQuery -->
+    <script src="__PUBLIC__/js/jquery.js"></script>
+    <!-- bootstrap -->
+    <script src="__PUBLIC__/js/bootstrap.min.js"></script>
+    <!-- fullpage -->
+    <script src="__PUBLIC__/js/jquery.fullPage.js"></script>
+    <!-- smoothScroll -->
+    <script src="__PUBLIC__/js/smoothscroll.js"></script>
+    <!-- wow -->
+    <script src="__PUBLIC__/js/wow.min.js"></script>
+    <!-- text rotater -->
+    <script src="__PUBLIC__/js/jquery.simple-text-rotator.js"></script>
+    <!-- custom -->
+    <script src="__PUBLIC__/js/custom.js"></script>
+    <script type="text/javascript" src="__PUBLIC__/js/cnx.js"></script>
+    <!--[if lt IE 10]>
+<script type="text/javascript" src="__PUBLIC__/PIE.js"></script>
+ <script type="text/javascript">
+$(function() {
+if (window.PIE) {
+$('.rounded').each(function() {
+PIE.attach(this);
+});
+}
+});
+    </script>
+<![endif]--> 
+    <script type="text/javascript">
+        function fun1() {
+        }
+        function fun2() {
+            parentDialog.close();
+        }
+        function fun3() {
+            Dialog.alert("'<div>請登錄</div>'");
+        }
+        function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',1000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }
+    </script>
+    <style>
+        .buttonStyle {
+            width: 64px;
+            height: 22px;
+            line-height: 22px;
+            color: #369;
+            text-align: center;
+            background: url(__PUBLIC__/images/buticon.gif) no-repeat left top;
+            border: 0;
+            font-size: 12px;
+        }
+
+            .buttonStyle:hover {
+                background: url(__PUBLIC__/images/buticon.gif) no-repeat left -23px;
+            }
+    </style>
+<script type="text/javascript">
+    var VerifyUrl='{:U("index.php/Login/verify")}';
+    var pub="__PUBLIC__";
+    $(document).ready(function(){
+        $("#verify").click(function(){
+            $("#verify").attr("src",VerifyUrl+'?rand='+Math.random());
+        });
+        $("#verify1").click(function(){
+            $("#verify1").attr("src",VerifyUrl+'?rand='+Math.random());
+        });
+        $("#submit").click(function(){
+            var username=$("#username").val();
+            var code=$("#code").val();
+            if(!username){
+                alert("用户名不可以为空");
+                return false;
+            }
+            if(!code){
+                alert("请填写验证码");
+                return false;
+            }      
+            
+         });
+    });
+
+</script>
+</head>
+<body>
+    <!--頂部固定定位-->
+    
+
+
+<div class="top_box">
+    <div class="top">
+        <div class="logo">
+            <a href="#"> <img src="__ROOT__/Uploads{$web.logo}" /></a>
+        </div>
+        <ul class="function_top">
+            
+                <li class="function_top_li"> <a href="javascript:bodytojt('ArticleBody')" class="function_top_two">简体中文</a></li>
+                <li class="function_top_li"> <a href="javascript:bodytoft('ArticleBody')" class="function_top_two">繁体中文</a> </li>
+            
+            <li class="function_top_li"><a class="function_top_two" href="{:U(C('FILE_IN').'/promote/index')}">注册帐号</a></li>
+            <li class="function_top_li">
+                <a class="function_top_three">登录</a>
+                <form action="{:U('index.php/Login/login')}" method='POST' id='fn'>
+                <ul class="function_two">
+                    <li class="margin_top"> <p>登录地区:</p> 
+                        <select name="area" class="long shan">
+                            <option value='ch'>中国地区</option>
+                            <option value='hk'>香港地区</option>
+                            <option value='us'>欧美地区</option>
+                            <option value='ea'>东亚地区</option>
+                            <option value='sg'>新加坡地区</option>
+                            <option value='al'>爱尔兰地区</option>
+                            <option value='el'>其它地区</option>
+                        </select>
+                         </li>
+                    <li> <p>登录编号:</p> <input type="text" id="username" name="username" class="long shan" /> </li>
+                    <li> <p>登录密码 :</p> <input type="password" id="password" name="password" class="long" /> </li>
+                    <li> <p>验证码 :</p> <input type="text" id="code" name="code" class="long" /> </li>
+                    <li> <p></p> <img src="{:U('index.php/Login/verify')}" alt="" id='verify' style='margin:0 0 0 10px'/></li>
+                    <li>  <p></p> <input type='submit' id='submit' class='login_btn' value='登 录' class='btn-primary btn'> </li>
+                    <li>  <p></p> <a href='{:U('web.php/Forget/index')}'>忘记密码?</a></li>
+                </ul>
+            </form>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<div id='ArticleBody'>
+<div class="panel-body">
+                        <form method="post" id="loginForm" action="{:U(C("FILE_IN").'/Forget/cheusername')}">
+                            <div style='padding:20px 20px 20px 20px;margin:10px 0 20px 0;border:1px solid #eee;border-radius: 4px;font-size:16px;'>找回密码--验证用户名</div>
+                            <div class="row">
+                             <div class="form-group col-lg-12">
+                                <label>用 户 名</label>
+                                <input type="" required="" maxlength="20" name="username" class="form-control" id="username">
+                            </div>
+                            <div class="form-group col-lg-12">
+                               <label>验 证 码</label>
+                                <input type="" required="" maxlength="13" name="code" class="form-control" id="">
+                            </div>
+                            <div class="form-group col-lg-12">
+                               <label></label>
+                                <img src="{:U('index.php/Login/verify')}" alt="" id='verify1' style='margin:0 0 -10px 0'/>
+                            </div>
+                            <div class="text-center">
+                                <button class="btn btn-success" style='width:100px'>下一步</button>
+                                <!--<button class="btn btn-default">取消</button>-->
+                                <input type="text" style="display:none;" id="ip" name="ip">
+                            </div>
+
+                        </form>
+ 
+                </div>
+</div>    
+</body>
+</html>

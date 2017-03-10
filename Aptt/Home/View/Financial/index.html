@@ -1,0 +1,112 @@
+<include file="Header:index" />
+<div class="content">
+        <div class="content_top">
+            注册会员
+        </div>
+        <div class='main'>
+                <form action="{:U('index.php/Money/cashsave')}" method="post" id="fn" target="hidden_frame">
+    <table class="table table-bordered table-hover definewidth m10" id="cndisplay" style="display:">
+        <tr>
+            <td  class="tableleft">会员编号</td>
+            <td>{$uinfo.username}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">奖金币余额</td>
+            <td>{$uinfo.coin}</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">提现到帐号</td>
+            <td>{$banklist} [<a href="{:U('index.php/User/bank')}">管理帐号</a>]</td>
+        </tr>
+        <tr>
+            <td  class="tableleft">金额</td>
+            <td><input type="text" name="money" id="money" value="{$coinset.txbase}"/>最小提现金额为{$coinset.txbase},税{$coinset.txshui}% </td>
+        </tr>
+    </table>
+    </form>
+    <div class="form-inline definewidth m10"><input class="btn btn-primary" type="button" id="submit" value="提交"></div>
+    
+    <table class="table table-bordered table-hover definewidth m10">
+    <thead>
+    <tr>
+        <th>提奖金额</th>
+        <th>税</th>
+        <th>实发金额</th>
+        <th>提现帐号信息</th>
+        <th>状态</th>
+        <th>时间</th>
+        <th>操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td align='center'>{$v.money}</td>
+            <td align='center'>{$v.shui}</td>
+            <td align='center'><php>echo $v["money"]-$v["shui"];</php></td>
+            <td align='center'>{$v.bank} {$v.bankuser|cut_str=###}<br>{$v.bankcard}</td>
+            <td align='center'><php>$arr=array(0=>"<span style='color:red'>等待审核...</span>",1=>"<span style='color:green'>已审核</span>",2=>"<span style='color:#999'>已退回</span>",3=>"<span style='color:#999'>取消</span>");echo $arr[$v["status"]];</php></td>
+            <td align='center'>{$v.date}</td>
+            <td align='center'><php>echo $v["status"]?"无":"[<a href='".U("index.php/Money/cashcancel",array("id"=>$v["id"]))."' target='hidden_frame'>取消</a>]";</php></td>
+        </tr>
+    </foreach>
+    </table>
+    <script>
+        $(function () {       
+            $("#submit").click(function(){
+                var coin=$("#money").val();
+                if(coin<20){
+                    alert("最低提现金额为{$coinset.txbase}");
+                    return false;
+                }
+                if(coin>10000){
+                    alert("单笔最高提现金额10000");
+                    return false;
+                }
+
+                $("#fn").submit();
+             });
+        });
+    
+    function get_mobile_code(){
+        $.post('./sms/sms.php', {mobile:0,send_code:0}, function(msg) {
+            alert(jQuery.trim(unescape(msg)));
+            if(msg=='提交成功'){
+                RemainTime();
+            }
+        });
+    };
+    var iTime = 179;
+    var Account;
+    function RemainTime(){
+        document.getElementById('zphone').disabled = true;
+        var iSecond,sSecond='',sTime='';
+        if (iTime >= 0){
+            iSecond = parseInt(iTime%60);
+            iMinute = parseInt(iTime/60)
+            if (iSecond >= 0){
+                if(iMinute>0){
+                    sSecond = iMinute + '分' + iSecond + '秒';
+                }else{
+                    sSecond = iSecond + '秒';
+                }
+            }
+            sTime=sSecond;
+            if(iTime==0){
+                clearTimeout(Account);
+                sTime='获取手机验证码';
+                iTime = 179;
+                document.getElementById('zphone').disabled = false;
+            }else{
+                Account = setTimeout('RemainTime()',5000);
+                iTime=iTime-1;
+            }
+        }else{
+            sTime='没有倒计时';
+        }
+        document.getElementById('zphone').value = sTime;
+    }   
+    </script>
+            
+        </div>
+        <div class="clear"></div>
+    </div>
+<include file="Footer:index" />
